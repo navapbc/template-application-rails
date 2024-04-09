@@ -1,5 +1,8 @@
 require "active_support/core_ext/integer/time"
 
+# Custom setting: set the default url.
+Rails.application.default_url_options = { host: ENV["APP_HOST"], port: ENV["APP_PORT"]}
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

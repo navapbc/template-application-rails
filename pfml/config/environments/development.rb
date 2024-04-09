@@ -1,5 +1,8 @@
 require "active_support/core_ext/integer/time"
 
+# Custom setting: set the default url.
+Rails.application.default_url_options = { host: ENV["APP_HOST"], port: ENV["APP_PORT"]}
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -35,6 +38,9 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
+
+  # Custom setting: Use letter opener gem for local mail delivery.
+  config.action_mailer.delivery_method = :letter_opener
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
