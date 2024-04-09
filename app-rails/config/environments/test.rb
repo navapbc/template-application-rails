@@ -5,6 +5,9 @@ require "active_support/core_ext/integer/time"
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
 
+# Custom setting: set the default url.
+Rails.application.default_url_options[:host] = "localhost"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
