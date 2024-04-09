@@ -1,7 +1,7 @@
 require "active_support/core_ext/integer/time"
 
 # Custom setting: set the default url.
-Rails.application.default_url_options = { host: ENV["APP_HOST"], port: ENV["APP_PORT"]}
+Rails.application.default_url_options = { host: ENV["APP_HOST"], port: ENV["APP_PORT"] }
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -36,11 +36,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = if ENV["BUCKET_NAME"] then :amazon else :local end
 
-  # Custom setting: Use letter opener gem for local mail delivery.
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = if ENV["SES_EMAIL"] then :sesv2 else :letter_opener end
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -78,5 +76,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Raise error when a before_action's only/except options reference missing actions
-  config.action_controller.raise_on_missing_callback_actions = true
+  # config.action_controller.raise_on_missing_callback_actions = true
 end

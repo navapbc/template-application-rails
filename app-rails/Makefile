@@ -165,7 +165,7 @@ wait-on-db:
 ##################################################
 
 test: ## Run the test suite
-	$(BUNDLE_EXEC_CMD) rspec --format documentation $(args)
+	$(RUBY_RUN_CMD) ./bin/rspec
 
 ##################################################
 # Lint & Formatting
@@ -189,6 +189,10 @@ rails-routes:
 
 rails-generate:
 	$(RAILS_RUN_CMD) generate $(GENERATE_COMMAND)
+
+clear-cache:
+	$(RAILS_RUN_CMD) tmp:clear
+	$(RAILS_RUN_CMD) assets:clean
 
 locale:
 	@:$(call check_defined, MODEL, the name of model to generate)
