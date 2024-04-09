@@ -194,6 +194,10 @@ locale:
 	@:$(call check_defined, MODEL, the name of model to generate)
 	$(RAILS_RUN_CMD) generate locale $(MODEL)
 
+new-authz-policy:
+	@:$(call check_defined, MODEL, the name of model to generate)
+	$(RAILS_RUN_CMD) generate pundit:policy $(MODEL)
+
 ##################################################
 # Miscellaneous Utilities
 ##################################################
