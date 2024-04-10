@@ -43,7 +43,7 @@ until pg_isready -h localhost -p $DB_PORT -d local-postgres-db -q; do
   wait_time=$(($wait_time + 3))
   if [ $wait_time -gt $MAX_WAIT_TIME ]; then
     echo -e "${RED}ERROR: Database appears to not be starting up, running \"${DOCKER_CMD} logs main-db\" to troubleshoot${NO_COLOR}"
-    ${DOCKER_CMD} logs main-db
+    ${DOCKER_CMD} logs database
     exit 1
   fi
 done
