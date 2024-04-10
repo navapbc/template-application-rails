@@ -1,24 +1,117 @@
-# README
+# template-application-rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+This is a [Ruby on Rails](https://rubyonrails.org/) application. It includes:
 
-* Ruby version
+- [U.S. Web Design System](https://designsystem.digital.gov/) for themeable styling and a set of common components
+- Integration with AWS services, including
+  - Database integration with AWS RDS Postgresql using UUIDs
+  - Active Storage configuration with AWS S3
+  - Action Mailer configuration with AWS SES
+  - Authentication with [devise](https://github.com/heartcombo/devise) and AWS Cognito
+- Internationalization (i18n)
+- Authorization using [pundit](https://github.com/varvet/pundit)
+- Linting and code formatting using [rubocop](https://rubocop.org/)
+- Testing using [rspec](https://rspec.info)
 
-* System dependencies
+## 📂 Directory structure
 
-* Configuration
+As a Rails app, much of the directory structure is driven by Rails conventions. We've also included directories for common patterns, such as adapters, form objects and services.
 
-* Database creation
+**[Refer to the Software Architecture doc for more detail](../docs/template-application-rails/software-architecture.md)**
 
-* Database initialization
+Below are the primary directories to be aware of when working on the app:
 
-* How to run the test suite
+```
+├── app
+│   ├── adapters      # External services
+│   │   └── *_adapter.rb
+│   ├── controllers
+│   ├── forms         # Form objects
+│   │   └── *_form.rb
+│   ├── mailers
+│   ├── models
+│   │   └── concerns
+│   ├── services      # Shared cross-model business logic
+│   │   └── *_service.rb
+│   └── views
+├── db
+│   ├── migrate
+│   └── schema.rb
+├── config
+│   ├── locales       # i18n
+│   └── routes.rb
+├── spec              # Tests
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## 💻 Getting started with local development
 
-* Deployment instructions
+### Prerequisites
 
-* ...
+- A container runtime (e.g. [Docker](https://www.docker.com/) or [Finch](https://github.com/runfinch/finch))
+  - By default, `docker` is used. To change this, set the `CONTAINER_CMD` variable to `finch` (or whatever your container runtime is) in the shell.
+
+### 💾 Setup
+
+You can run the app within a container or natively. Each requires slightly different setup steps.
+
+#### Environment variables
+
+In either case, first generate a `.env` file:
+
+1. Run `make .env` to create a `.env` file based on shared template.
+1. Variables marked with `<FILL ME IN>` need to be manually set, and otherwise edit to your needs.
+
+#### Running in a container
+
+1. `make init-container`
+
+#### Running natively
+
+Prerequisites:
+
+- Ruby 3.3.0
+- [Node LTS](https://nodejs.org/en)
+- (Optional but recommended): [rbenv](https://github.com/rbenv/rbenv)
+
+Steps:
+
+1. `make init-native`
+
+### 🛠️ Development
+
+#### Running the app
+
+Once you've completed the setup steps above, you can run the site natively or within a container runtime.
+
+To run within a container:
+
+1. `make start-container`
+1. Then visit http://localhost:3100
+
+To run natively:
+
+1. `make start-native`
+1. Then visit http://localhost:3000
+
+#### IDE tips
+
+<details>
+<summary>VS Code</summary>
+
+##### Recommended extensions
+
+- [Ruby LSP](https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-lsp)
+- [Simple ERB](https://marketplace.visualstudio.com/items?itemName=vortizhe.simple-ruby-erb), for tag autocomplete and snippets
+
+</details>
+
+## 📇 Additional reading
+
+Beyond this README, you should also refer to the [`docs` directory](../docs/) for more detailed info. Some highlights:
+
+- [Technical foundation](../docs/template_application_rails/technical-foundation.md)
+- [Software architecture](../docs/template_application_rails/software-architecture.md)
+- [Authentication & Authorization](../docs/template_application_rails/auth.md)
+- [Internationalization (i18n)](../docs/template_application_rails/internationalization.md)
