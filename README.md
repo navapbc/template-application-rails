@@ -1,4 +1,4 @@
-# template-application-rails
+# Template Ruby on Rails application
 
 This is a template repository for a Ruby on Rails application.
 
@@ -22,7 +22,7 @@ See [`navapbc/platform`](https://github.com/navapbc/platform) for other template
 ```text
 ├── .github                       # GitHub workflows and repo templates
 ├── docs                          # Project docs and decision records
-├── template_application_rails    # Web application
+├── template-application-rails    # Web application
 ```
 
 ## Installation
