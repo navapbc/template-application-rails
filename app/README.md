@@ -1,5 +1,3 @@
-# template-application-rails
-
 ## Overview
 
 This is a [Ruby on Rails](https://rubyonrails.org/) application. It includes:
@@ -25,24 +23,24 @@ Below are the primary directories to be aware of when working on the app:
 
 ```
 ├── app
-│   ├── adapters      # External services
+│   ├── adapters         # External services
 │   │   └── *_adapter.rb
 │   ├── controllers
-│   ├── forms         # Form objects
+│   ├── forms            # Form objects
 │   │   └── *_form.rb
 │   ├── mailers
 │   ├── models
 │   │   └── concerns
-│   ├── services      # Shared cross-model business logic
+│   ├── services         # Shared cross-model business logic
 │   │   └── *_service.rb
 │   └── views
 ├── db
 │   ├── migrate
 │   └── schema.rb
 ├── config
-│   ├── locales       # i18n
+│   ├── locales          # i18n
 │   └── routes.rb
-├── spec              # Tests
+├── spec                 # Tests
 ```
 
 ## 💻 Getting started with local development
@@ -109,9 +107,9 @@ To run natively:
 
 ## 📇 Additional reading
 
-Beyond this README, you should also refer to the [`docs` directory](../docs/) for more detailed info. Some highlights:
+Beyond this README, you should also refer to the [`docs` directory](../docs/template-application-rails) for more detailed info. Some highlights:
 
-- [Technical foundation](../docs/template_application_rails/technical-foundation.md)
-- [Software architecture](../docs/template_application_rails/software-architecture.md)
-- [Authentication & Authorization](../docs/template_application_rails/auth.md)
-- [Internationalization (i18n)](../docs/template_application_rails/internationalization.md)
+- [Technical foundation](../docs/template-application-rails/technical-foundation.md)
+- [Software architecture](../docs/template-application-rails/software-architecture.md)
+- [Authentication & Authorization](../docs/template-application-rails/auth.md)
+- [Internationalization (i18n)](../docs/template-application-rails/internationalization.md)
