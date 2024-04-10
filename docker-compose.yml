@@ -1,0 +1,47 @@
+services:
+  database:
+    image: postgres:14-alpine
+    command: postgres -c "log_lock_waits=on" -N 1000 -c "fsync=off"
+    environment:
+      POSTGRES_PASSWORD: secret123
+      POSTGRES_USER: template_application_rails
+    healthcheck:
+      test: "pg_isready --username=template_application_rails"
+      timeout: 10s
+      retries: 20
+    ports:
+      - "5432:5432"
+    volumes:
+      - database_data:/var/lib/postgresql/data
+      - ./init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
+
+  # Rails app
+  # Configured for "development" RAILS_ENV
+  template-application-rails:
+    build:
+      context: ./app
+      target: dev
+    depends_on:
+      database:
+        condition: service_healthy
+    env_file: ./app/.env
+    environment:
+      - DB_HOST=database
+      - RAILS_BINDING=0.0.0.0
+      - RAILS_ENV=development
+    ports:
+      - 3100:3000
+    volumes:
+      - ./app:/rails
+      # Use named volumes for directories that the container should use the guest
+      # machine's dir instead of the host machine's dir, which may be divergent.
+      # This is especially true for any dependency or temp directories.
+      - app_rails_nodemodules:/rails/node_modules
+      - app_rails_tmp:/rails/tmp
+      - app_rails_storage:/rails/storage
+
+volumes:
+  database_data:
+  app_rails_nodemodules:
+  app_rails_tmp:
+  app_rails_storage:
