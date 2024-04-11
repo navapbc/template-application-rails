@@ -23,7 +23,7 @@ __check_defined = \
 # Constants
 ##################################################
 
-APP_NAME := template-application-rails
+APP_NAME := app-rails
 
 # Support other container tools like `finch`
 ifdef CONTAINER_CMD

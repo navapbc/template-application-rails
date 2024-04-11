@@ -17,7 +17,7 @@ This is a [Ruby on Rails](https://rubyonrails.org/) application. It includes:
 
 As a Rails app, much of the directory structure is driven by Rails conventions. We've also included directories for common patterns, such as adapters, form objects and services.
 
-**[Refer to the Software Architecture doc for more detail](../docs/template-application-rails/software-architecture.md)**
+**[Refer to the Software Architecture doc for more detail](../docs/app-rails/software-architecture.md)**
 
 Below are the primary directories to be aware of when working on the app:
 
@@ -107,9 +107,9 @@ To run natively:
 
 ## 📇 Additional reading
 
-Beyond this README, you should also refer to the [`docs` directory](../docs/template-application-rails) for more detailed info. Some highlights:
+Beyond this README, you should also refer to the [`docs` directory](../docs/app-rails) for more detailed info. Some highlights:
 
-- [Technical foundation](../docs/template-application-rails/technical-foundation.md)
-- [Software architecture](../docs/template-application-rails/software-architecture.md)
-- [Authentication & Authorization](../docs/template-application-rails/auth.md)
-- [Internationalization (i18n)](../docs/template-application-rails/internationalization.md)
+- [Technical foundation](../docs/app-rails/technical-foundation.md)
+- [Software architecture](../docs/app-rails/software-architecture.md)
+- [Authentication & Authorization](../docs/app-rails/auth.md)
+- [Internationalization (i18n)](../docs/app-rails/internationalization.md)

@@ -4,9 +4,9 @@ services:
     command: postgres -c "log_lock_waits=on" -N 1000 -c "fsync=off"
     environment:
       POSTGRES_PASSWORD: secret123
-      POSTGRES_USER: template_application_rails
+      POSTGRES_USER: app_rails
     healthcheck:
-      test: "pg_isready --username=template_application_rails"
+      test: "pg_isready --username=app_rails"
       timeout: 10s
       retries: 20
     ports:
@@ -17,14 +17,14 @@ services:
 
   # Rails app
   # Configured for "development" RAILS_ENV
-  template-application-rails:
+  app_rails:
     build:
-      context: ./app
+      context: ./app-rails
       target: dev
     depends_on:
       database:
         condition: service_healthy
-    env_file: ./app/.env
+    env_file: ./app-rails/.env
     environment:
       - DB_HOST=database
       - RAILS_BINDING=0.0.0.0

@@ -1,4 +1,4 @@
-# Documentation for template-application-rails
+# Documentation for app-rails
 
 ## 📂 Directory structure
 
@@ -10,6 +10,6 @@
 
 ## Recommended reading
 
-- Start by reading the application's [main README](/template-application-rails/README.md) if you haven't already
+- Start by reading the application's [main README](/app-rails/README.md) if you haven't already
 - Next, review the [Technical Foundation](./technical-foundation.md)
 - Continue reviewing the other documentation in this directory as desired

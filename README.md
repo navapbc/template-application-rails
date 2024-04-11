@@ -22,7 +22,7 @@ See [`navapbc/platform`](https://github.com/navapbc/platform) for other template
 ```text
 ├── .github                       # GitHub workflows and repo templates
 ├── docs                          # Project docs and decision records
-├── template-application-rails    # Web application
+├── app-rails                     # Web application
 ├── template-only-bin             # Scripts for managing this template; not copied into your project
 ├── template-only-docs            # Documentation for this template; not copied into your project
 ```
@@ -42,12 +42,12 @@ To get started using the template application on your project:
     1. Clone the template repository
     2. Copy the template files into your project directory
     3. Remove any files specific to the template repository, like this README.
-2. [Follow the steps in `template-application-rails/README.md`](./template-application-rails/README.md) to set up the application locally.
+2. [Follow the steps in `app-rails/README.md`](./app-rails/README.md) to set up the application locally.
 3. Optional, if using the Platform infra template: [Follow the steps in the `template-infra` README](https://github.com/navapbc/template-infra#installation) to set up the various pieces of your infrastructure.
 
 ## Getting started
 
-Now that you're all set up, you're now ready to [get started](./template-application-rails/README.md).
+Now that you're all set up, you're now ready to [get started](./app-rails/README.md).
 
 ## Learn more about this template
 
