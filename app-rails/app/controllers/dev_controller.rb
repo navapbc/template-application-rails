@@ -3,27 +3,30 @@ class DevController < ApplicationController
 
   # Frontend sandbox for testing purposes during local development
   def sandbox
+    skip_authorization
   end
 
+  # Note: This currently doesn't work because the RequestForInformationMailer requires a clarifiable object.
+  #   If we want to exercise this functionality, we should probably create a test Mailer.
   # Trigger an email to the email param
-  def send_email
-    email = params[:email]
+  # def send_email
+  #   email = params[:email]
 
-    if email.present?
-      RequestForInformationMailer.with(email_address: email, name: "Anton Weis").task_opened.deliver_now
-      flash[:notice] = "Email sent to #{email}"
-    else
-      flash[:error] = "No email provided"
-    end
-    redirect_to dev_sandbox_path
-  end
+  #   if email.present?
+  #     RequestForInformationMailer.with(email_address: email).task_opened.deliver_now
+  #     flash[:notice] = "Email sent to #{email}"
+  #   else
+  #     flash[:error] = "No email provided"
+  #   end
+  #   redirect_to dev_sandbox_path
+  # end
 
   private
 
-    def check_env
-      unless Rails.env.development?
-        redirect_to root_path
-        nil
-      end
+  def check_env
+    unless Rails.env.development?
+      redirect_to root_path
+      nil
     end
+  end
 end

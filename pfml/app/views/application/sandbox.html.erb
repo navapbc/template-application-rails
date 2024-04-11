@@ -2,18 +2,9 @@
 
 <h1>Sandbox</h1>
 
-<h2>Notifications</h2>
-
-<%= us_form_with url: dev_send_email_path do |f| %>
-  <%= f.email_field :email %>
-  <%= f.submit 'Send' %>
-<% end %>
-
-<hr />
-
 <h2>us_form_with</h2>
 
-<%= us_form_with url: authenticate_user_path do |f| %>
+<%= us_form_with url: user_session_en_path do |f| %>
   <%= f.text_field :username, { label: "Name", hint: 'As shown on your legal ID'}  %>
   <%= f.email_field :email, { class: 'usa-input--md' } %>
   <%= f.password_field :password, { hint: "Test <strong>hint</strong>" } %>
@@ -41,4 +32,15 @@
   <%= f.file_field :picture %>
 
   <%= f.submit 'Save and continue' %>
+<% end %>
+
+<h2>Notifications</h2>
+
+<p>
+  <em>This currently does not work.</em>
+</p>
+
+<%= us_form_with url: dev_send_email_path do |f| %>
+  <%= f.email_field :email %>
+  <%= f.submit 'Send' %>
 <% end %>
