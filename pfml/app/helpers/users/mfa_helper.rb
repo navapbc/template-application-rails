@@ -1,4 +1,4 @@
-module MfaHelper
+module Users::MfaHelper
   # Generate a QR code for setting up the TOTP device
   def totp_qr_code(secret, email)
     RQRCode::QRCode.new(totp_qr_code_uri(secret, email)).as_svg(
