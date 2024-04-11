@@ -33,14 +33,3 @@
 
   <%= f.submit 'Save and continue' %>
 <% end %>
-
-<h2>Notifications</h2>
-
-<p>
-  <em>This currently does not work.</em>
-</p>
-
-<%= us_form_with url: dev_send_email_path do |f| %>
-  <%= f.email_field :email %>
-  <%= f.submit 'Send' %>
-<% end %>
