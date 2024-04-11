@@ -1,16 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# This script installs a template application to your project.
+# Run this script your project's root directory.
+# -----------------------------------------------------------------------------
 set -euo pipefail
 
-echo "Fetch latest version of template-application-nextjs"
-git clone --single-branch --branch main --depth 1 git@github.com:navapbc/template-application-nextjs.git
+TEMPLATE_NAME="template-application-nextjs"
+
+echo "Fetch latest version of $(TEMPLATE_NAME)"
+git clone --single-branch --branch main --depth 1 git@github.com:navapbc/$(TEMPLATE_NAME).git
 
 echo "Install template"
-./template-application-nextjs/template-only-bin/install-template.sh
+./$(TEMPLATE_NAME)/template-only-bin/install-template.sh $TEMPLATE_NAME
 
 # Store template version in a file
-cd template-application-nextjs
-git rev-parse HEAD >../.template-nextjs-version
+cd $(TEMPLATE_NAME)
+git rev-parse HEAD >../.$(TEMPLATE_NAME)-version
 cd -
 
-echo "Clean up template-application-nextjs folder"
-rm -fr template-application-nextjs
+echo "Clean up $(TEMPLATE_NAME) folder"
+rm -fr $(TEMPLATE_NAME)
