@@ -4,7 +4,7 @@
 # Run this script using ./download-and-install-template.sh
 #
 # Positional parameters:
-#   TEMPLATE_NAME – the name of the template to install
+#   TEMPLATE_NAME (required) – the name of the template to install
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
