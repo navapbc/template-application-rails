@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/admin.scss:./app/assets/builds/admin.css --load-path=node_modules --load-path=node_modules/@uswds/uswds/packages"
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css --load-path=node_modules --load-path=node_modules/@uswds/uswds/packages"
   },
   "dependencies": {
     "@uswds/uswds": "^3.7.1"

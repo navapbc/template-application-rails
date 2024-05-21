@@ -181,6 +181,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
       net-http
+    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
@@ -387,6 +388,8 @@ GEM
       rexml
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.19.0)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -480,6 +483,7 @@ DEPENDENCIES
   rspec-rails (~> 6.1.0)
   rubocop-rails-omakase
   rubocop-rspec
+  sassc (~> 2.4)
   selenium-webdriver
   simplecov
   sprockets-rails
