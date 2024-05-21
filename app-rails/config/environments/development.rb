@@ -36,7 +36,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.active_storage.service = if ENV["BUCKET_NAME"] then :amazon else :local end
+  config.active_storage.service = if ENV["AWS_BUCKET_NAME"] then :amazon else :local end
 
   config.action_mailer.delivery_method = if ENV["SES_EMAIL"] then :sesv2 else :letter_opener end
 
