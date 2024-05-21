@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
       return employers_path
     end
 
-    # @TODO: Route to a claimant landing page
     users_account_path
   end
 end

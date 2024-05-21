@@ -25,17 +25,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "claimant?" do
+  describe "applicant?" do
     let(:user) { build(:user) }
 
-    it "returns true if the user has a claimant role" do
-      user.user_role = build(:user_role, :claimant)
-      expect(user.claimant?).to eq(true)
+    it "returns true if the user has a applicant role" do
+      user.user_role = build(:user_role, :applicant)
+      expect(user.applicant?).to eq(true)
     end
 
-    it "returns false if the user does not have a claimant role" do
+    it "returns false if the user does not have a applicant role" do
       user.user_role = build(:user_role, :employer)
-      expect(user.claimant?).to eq(false)
+      expect(user.applicant?).to eq(false)
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe User, type: :model do
     end
 
     it "returns false if the user does not have an employer role" do
-      user.user_role = build(:user_role, :claimant)
+      user.user_role = build(:user_role, :applicant)
       expect(user.employer?).to eq(false)
     end
   end
@@ -58,8 +58,8 @@ RSpec.describe User, type: :model do
 
     pending "returns true for a superadmin"
 
-    it "returns false for a claimant" do
-      user.user_role = build(:user_role, :claimant)
+    it "returns false for a applicant" do
+      user.user_role = build(:user_role, :applicant)
       expect(user.superadmin?).to eq(false)
     end
 

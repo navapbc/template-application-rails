@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     # Registration and account management
     namespace :users do
       resources :registrations, only: [ :create ]
-      get "registrations/claimant" => "registrations#new_claimant", as: :new_claimant_registration
+      get "registrations/applicant" => "registrations#new_applicant", as: :new_applicant_registration
       get "registrations/employer" => "registrations#new_employer", as: :new_employer_registration
 
       resources :mfa, only: [ :new, :create ]

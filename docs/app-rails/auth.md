@@ -1,6 +1,6 @@
 # Authentication & Authorization
 
-## Claimant & Employer Authentication
+## Applicant & Employer Authentication
 
 Authentication is the process of verifying the credentials of a user. We use AWS Cognito for authentication.
 

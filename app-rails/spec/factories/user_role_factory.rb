@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :user_role do
     user
 
-    trait :claimant do
-      role { "claimant" }
+    trait :applicant do
+      role { "applicant" }
     end
 
     trait :employer do

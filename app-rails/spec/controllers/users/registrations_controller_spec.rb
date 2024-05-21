@@ -9,12 +9,12 @@ RSpec.describe Users::RegistrationsController do
     )
   end
 
-  describe "GET new_claimant" do
-    it "renders with claimant content and role" do
-      get :new_claimant, params: { locale: "en" }
+  describe "GET new_applicant" do
+    it "renders with applicant content and role" do
+      get :new_applicant, params: { locale: "en" }
 
-      expect(response.body).to have_selector("h1", text: /create a claimant account/i)
-      expect(response.body).to have_field("users_registration_form[role]", with: "claimant", type: :hidden)
+      expect(response.body).to have_selector("h1", text: /create a applicant account/i)
+      expect(response.body).to have_field("users_registration_form[role]", with: "applicant", type: :hidden)
     end
   end
 

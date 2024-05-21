@@ -1,6 +1,6 @@
 <% content_for :title, t(".title_#{@form.role}") %>
-<% icon = @form.role == "claimant" ? "local_library" : "local_library" %>
-<% icon_color = @form.role == "claimant" ? "violet" : "mint" %>
+<% icon = @form.role == "applicant" ? "local_library" : "local_library" %>
+<% icon_color = @form.role == "applicant" ? "violet" : "mint" %>
 
 <div class="bg-white padding-top-3 padding-bottom-5 padding-x-5 border border-base-lighter">
   <div class="text-center margin-bottom-2 padding-bottom-2 border-bottom border-base-lighter">
@@ -40,7 +40,7 @@
 </p>
 
 <%= content_for :sidebar do %>
-  <% if @form.role == "claimant" %>
+  <% if @form.role == "applicant" %>
     <h2 class="font-heading-lg"><%= t('.are_employer_heading') %></h2>
     <div class="usa-prose">
       <p><%= t('.are_employer_body') %></p>
@@ -51,12 +51,12 @@
       </p>
     </div>
   <% else %>
-    <h2 class="font-heading-lg"><%= t('.are_claimant_heading') %></h2>
+    <h2 class="font-heading-lg"><%= t('.are_applicant_heading') %></h2>
     <div class="usa-prose">
-      <p><%= t('.are_claimant_body') %></p>
+      <p><%= t('.are_applicant_body') %></p>
       <p>
-        <a class="usa-button usa-button--outline" href="<%= users_new_claimant_registration_path %>">
-          <%= t('.are_claimant_action') %>
+        <a class="usa-button usa-button--outline" href="<%= users_new_applicant_registration_path %>">
+          <%= t('.are_applicant_action') %>
         </a>
       </p>
     </div>

@@ -5,8 +5,8 @@ FactoryBot.define do
     provider { "factory_bot" }
     mfa_preference { "opt_out" }
 
-    trait :claimant do
-      user_role { create(:user_role, :claimant) }
+    trait :applicant do
+      user_role { create(:user_role, :applicant) }
     end
 
     trait :employer do

@@ -40,15 +40,15 @@ en:
         submit: "Submit"
     registrations:
       new:
-        are_claimant_heading: "Are you applying for leave?"
-        are_claimant_body: "To apply for leave, create a claimant account."
-        are_claimant_action: "Create a Claimant account"
+        are_applicant_heading: "Are you applying for benefits?"
+        are_applicant_body: "To apply for benefits, create an applicant account."
+        are_applicant_action: "Create an Applicant account"
         are_employer_heading: "Are you an employer?"
-        are_employer_body: "To manage claims for an organization, create an employer account."
+        are_employer_body: "To manage applications for an organization, create an employer account."
         are_employer_action: "Create an Employer account"
         have_existing_account: "Already have an account?"
         login: "Log in"
-        title_claimant: "Create a Claimant account"
+        title_applicant: "Create an Applicant account"
         title_employer: "Create an Employer account"
       new_account_verification:
         title: "Verify your email address"

@@ -34,7 +34,6 @@ RSpec.describe Users::MfaController do
       user.reload
       expect(user.mfa_preference).to eq("opt_out")
 
-      # Redirect path likely to change once Claimant portal is implemented
       expect(response).to redirect_to(users_account_path)
     end
 

@@ -14,8 +14,8 @@ class User < ApplicationRecord
   validates :provider, presence: true
 
   # == Methods ==============================================================
-  def claimant?
-    user_role&.claimant?
+  def applicant?
+    user_role&.applicant?
   end
 
   def employer?

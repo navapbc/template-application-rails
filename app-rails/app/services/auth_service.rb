@@ -71,7 +71,7 @@ class AuthService
 
   private
 
-    def create_db_user(uid, email, provider, role = "claimant")
+    def create_db_user(uid, email, provider, role = "applicant")
       Rails.logger.info "Creating User uid: #{uid}, and UserRole: #{role}"
 
       user = User.create!(
