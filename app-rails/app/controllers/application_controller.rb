@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
 
     if resource.employer?
-      return employers_path
+      return dev_sandbox_path
     end
 
     users_account_path

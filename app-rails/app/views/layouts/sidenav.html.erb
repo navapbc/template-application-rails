@@ -1,11 +1,11 @@
 <%= content_for :content_col_class, 'tablet:grid-col-8 desktop:grid-col-9' %>
 <% nav_items = [
   {
-    path: if @employer then employer_path(@employer) else employers_path end,
+    path: dev_sandbox_path,
     label: t('.sidebar.index')
   },
-  { path: employer_private_plan_requests_path(@employer), label: t('.sidebar.private_plans') },
-  { path: employer_seasonal_employment_requests_path(@employer), label: t('.sidebar.seasonal_employees') },
+  { path: "https://rubyonrails.org", label: t('.sidebar.rails') },
+  { path: "https://guides.rubyonrails.org", label: t('.sidebar.rails_guides') },
 ] %>
 
 <%= content_for :before_content_col do %>

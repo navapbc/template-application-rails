@@ -1,4 +1,6 @@
 class DevController < ApplicationController
+  layout "sidenav"
+
   before_action :check_env
 
   # Frontend sandbox for testing purposes during local development
