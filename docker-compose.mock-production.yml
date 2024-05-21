@@ -25,5 +25,11 @@ services:
     environment:
       - DB_HOST=database
       - RAILS_BINDING=0.0.0.0
+      # The following env vars allow testing a "production"-like environment on a local
+      # machine.
+      - RAILS_ENV=mock-production
+      - SECRET_KEY_BASE=verysecret
+      - DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+      - AWS_DEFAULT_REGION=us-east-1
     ports:
       - 3200:3000
