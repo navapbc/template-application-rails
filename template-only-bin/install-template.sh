@@ -26,7 +26,6 @@ cp -r \
   .gitignore \
   $TEMPLATE_SHORT_NAME \
   docker-compose.yml \
-  init-postgres.sql \
   docs \
   $CUR_DIR
 cd - >& /dev/null
