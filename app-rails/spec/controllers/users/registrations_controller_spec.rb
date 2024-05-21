@@ -13,7 +13,7 @@ RSpec.describe Users::RegistrationsController do
     it "renders with applicant content and role" do
       get :new_applicant, params: { locale: "en" }
 
-      expect(response.body).to have_selector("h1", text: /create a applicant account/i)
+      expect(response.body).to have_selector("h1", text: /create an applicant account/i)
       expect(response.body).to have_field("users_registration_form[role]", with: "applicant", type: :hidden)
     end
   end
