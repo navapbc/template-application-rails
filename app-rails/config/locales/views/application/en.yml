@@ -11,31 +11,19 @@ en:
     account: My account
     language_toggle: English
     logout: "Log out"
-    title: "Paid Family & Medical Leave"
+    title: "Application Title"
     close: "Close"
   flash:
     error_heading:
       zero: "An unexpected error occurred"
       one: "An error occurred"
       other: "%{count} errors occurred"
-    error_fallback: "Sorry, we encountered an unexpected error. If this continues to happen, you may call the Paid Family Leave Contact Center."
+    error_fallback: "Sorry, we encountered an unexpected error. If this continues to happen, you may call the Contact Center."
     reload_page: "Reload page"
   breadcrumbs:
     home: "Home"
   buttons:
     submit: "Submit"
-  requestable_step_indicator:
-    submitted: "Submitted"
-    in_review: "In review"
-    determination_made: "Determination made"
-  requestable_index:
-    existing_requests:
-      heading: "Existing requests"
-    col_created_at: "Date submitted"
-    col_status: "Status"
-    col_actions: "Actions"
-    action_view_rfi: "Respond to RFI"
-    action_none: "You have no pending actions at this time."
   tables:
     column: "Column"
     description: "Description"
