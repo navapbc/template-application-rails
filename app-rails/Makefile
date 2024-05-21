@@ -32,6 +32,9 @@ else
 	DOCKER_CMD := docker
 endif
 
+# Support executing commands in an existing container
+DOCKER_APPROACH := run
+
 # By default, all rails commands will run inside of the docker container
 # if you wish to run this natively, add RAILS_RUN_APPROACH=local to your environment vars
 # You can set this by either running `export RAILS_RUN_APPROACH=local` in your shell or add
@@ -39,13 +42,13 @@ endif
 ifeq "$(RAILS_RUN_APPROACH)" "local"
 RAILS_RUN_CMD := bin/rails
 else
-RAILS_RUN_CMD := $(DOCKER_CMD) compose run $(DOCKER_EXEC_ARGS) --rm $(APP_NAME) bin/rails
+RAILS_RUN_CMD := $(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) $(DOCKER_APPROACH) $(DOCKER_RUN_ARGS) --rm $(APP_NAME) bin/rails
 endif
 
 ifeq "$(RAILS_RUN_APPROACH)" "local"
 RUBY_RUN_CMD :=
 else
-RUBY_RUN_CMD := $(DOCKER_CMD) compose run $(DOCKER_EXEC_ARGS) --rm $(APP_NAME)
+RUBY_RUN_CMD := $(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) $(DOCKER_APPROACH) $(DOCKER_RUN_ARGS) --rm $(APP_NAME)
 endif
 
 # Docker user configuration
@@ -99,7 +102,7 @@ clean-native: ## Remove native installs
 	git checkout vendor/bundle/.keep
 
 clean-container: ## Remove just the container related volumes
-	$(DOCKER_CMD) compose down --volumes $(APP_NAME)
+	$(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) down --volumes $(APP_NAME)
 
 ##################################################
 # Build & Run
@@ -114,27 +117,27 @@ release-build:
 		.
 
 build: ## Build the Docker container
-	$(DOCKER_CMD) compose build $(APP_NAME)
+	$(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) build $(APP_NAME)
 
 clean-volumes: ## Remove container volumes (which includes the DB state)
-	$(DOCKER_CMD) compose down --volumes
+	$(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) down --volumes
 
 start-native: ## Run Rails natively, outside Docker
 start-native: db-up
 	./bin/dev
 
 start-container: ## Run within Docker
-	$(DOCKER_CMD) compose up $(APP_NAME)
+	$(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) up $(APP_NAME)
 
 stop-containers: ## Stop Docker
-	$(DOCKER_CMD) compose down
+	$(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) down
 
 ##################################################
 # Database
 ##################################################
 
 db-up: ## Run just the database container
-	$(DOCKER_CMD) compose up --remove-orphans --detach database
+	$(DOCKER_CMD) compose $(DOCKER_COMPOSE_ARGS) up --remove-orphans --detach database
 
 db-migrate: ## Run database migrations
 	$(RAILS_RUN_CMD) db:migrate
