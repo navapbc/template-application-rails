@@ -26,6 +26,7 @@ cp -r \
   .gitignore \
   $TEMPLATE_SHORT_NAME \
   docker-compose.yml \
+  docker-compose.mock-release.yml \
   docs \
   $CUR_DIR
 cd - >& /dev/null
