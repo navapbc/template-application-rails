@@ -37,15 +37,9 @@ endif
 # You can set this by either running `export RAILS_RUN_APPROACH=local` in your shell or add
 # it to your ~/.zshrc file (and run `source ~/.zshrc`)
 ifeq "$(RAILS_RUN_APPROACH)" "local"
-BUNDLE_EXEC_CMD := bundle exec
+RAILS_RUN_CMD := bin/rails
 else
-BUNDLE_EXEC_CMD := $(DOCKER_CMD) compose run $(DOCKER_EXEC_ARGS) --rm $(APP_NAME) bundle exec
-endif
-
-ifeq "$(RAILS_RUN_APPROACH)" "local"
-RAILS_RUN_CMD := bundle exec rails
-else
-RAILS_RUN_CMD := $(DOCKER_CMD) compose run $(DOCKER_EXEC_ARGS) --rm $(APP_NAME) bundle exec rails
+RAILS_RUN_CMD := $(DOCKER_CMD) compose run $(DOCKER_EXEC_ARGS) --rm $(APP_NAME) bin/rails
 endif
 
 ifeq "$(RAILS_RUN_APPROACH)" "local"
