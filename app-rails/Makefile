@@ -98,6 +98,8 @@ clean-native: ## Remove native installs
 	rm -rf app/builds
 	git checkout app/assets/builds/.keep
 	rm -rf tmp/*
+	git checkout tmp/pids/.keep
+	git checkout tmp/storage/.keep
 	rm -rf vendor/bundle
 	git checkout vendor/bundle/.keep
 
