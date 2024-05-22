@@ -199,6 +199,10 @@ new-authz-policy:
 	@:$(call check_defined, MODEL, the name of model to generate)
 	$(RAILS_RUN_CMD) generate pundit:policy $(MODEL)
 
+precompile-assets:
+	SECRET_KEY_BASE_DUMMY=1
+	$(RAILS_RUN_CMD) assets:precompile
+
 ##################################################
 # Miscellaneous Utilities
 ##################################################
