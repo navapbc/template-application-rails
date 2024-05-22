@@ -2,8 +2,8 @@
 
 This application employs the [Docker multi-stage build strategy](https://docs.docker.com/build/building/multi-stage/) to build separate docker images for different purposes:
 
-* `dev`: image designed to run tests and support local development on a developer machine
-* `release`: image optimized for deployment to production or other hosted environments
+* `dev`: designed to run tests and support local development on a developer machine
+* `release`: optimized for deployment to production or other hosted environments
 
 ## Local development: `dev`
 
@@ -33,7 +33,7 @@ services:
 
 ## Testing `release` locally
 
-It is useful to be able to test the `release` image locally without needing to run a deploy to a hosted environment, such as to test the production asset compilation pipeline.
+It is useful to be able to test the `release` image locally without needing to run a deploy to a hosted environment. For example, this can decrease the iteration time when troubleshooting the production asset precompile pipeline.
 
 In addition to the default Rails environments (i.e. `test`, `development`, `production`), this application includes a `mock-production` Rails environment, which uses "production-like" configuration. Specifically, SSL is disabled in [`mock-production.rb`](/app-rails/config/environments/mock-production.rb):
 
@@ -44,7 +44,7 @@ config.force_ssl = false
 
 ### Instructions
 
-Follow these steps to run the `release` image locally. This process uses configuration in [`docker-compose.mock-production.yml`](/docker-compose.mock-production.yml) to build the image and run the composition.
+Follow these steps to run the `release` image locally. This process uses [`docker-compose.mock-production.yml`](/docker-compose.mock-production.yml).
 
 #### 1. Change to the application directory
 
