@@ -4,17 +4,13 @@
 # Run this script in your project's root directory.
 #
 # Positional parameters:
-#   TEMPLATE_NAME (required) – the name of the template to update. Should be in the
-#     format `template-application-<foo>`. This is case sensitive and  must match
-#     the name of the application template git repo name.
-#
 #   TARGET_VERSION (optional) – the version of the template application to install.
 #     Defaults to main. Can be any target that can be checked out, including a branch,
 #     version tag, or commit hash.
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
-TEMPLATE_NAME=$1
+TEMPLATE_NAME="template-application-rails"
 TARGET_VERSION=${2:-"main"}
 CURRENT_VERSION=$(cat ".$TEMPLATE_NAME-version")
 # Use shell parameter expansion to get the last word, where the delimiter between
