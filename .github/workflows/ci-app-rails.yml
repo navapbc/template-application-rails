@@ -25,6 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      # https://github.com/docker/compose/issues/1973
+      - name: Create required env files
+        working-directory: ./
+        run: |
+          touch ./app-rails/.env
+
       - run: make lint
       
   test:
