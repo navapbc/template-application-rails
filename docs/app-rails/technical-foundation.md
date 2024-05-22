@@ -16,7 +16,7 @@ To reference USWDS assets, use Rails asset helpers like:
 
 ### 🌎 Internationalization (i18n)
 
-The app uses [Rails' built-in i18n support](https://guides.rubyonrails.org/i18n.html). Locale strings are located in [`config/locales`](/pfml/config/locales).
+The app uses [Rails' built-in i18n support](https://guides.rubyonrails.org/i18n.html). Locale strings are located in [`config/locales`](/app-rails/config/locales).
 
 Refer to the [Internationalization doc](./internationalization.md) for more details and conventions.
 

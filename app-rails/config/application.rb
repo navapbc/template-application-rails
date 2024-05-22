@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Pfml
+module TemplateApplicationRails
   class Application < Rails::Application
     # Internationalization
     I18n.available_locales = [ :"en", :"es-US" ]
