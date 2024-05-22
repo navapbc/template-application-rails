@@ -2,14 +2,14 @@
 
 This application employs the [Docker multi-stage build strategy](https://docs.docker.com/build/building/multi-stage/) to build separate docker images for different purposes:
 
-* `dev`: docker image designed to support local development on a developer machine and to run tests
-* `release`: docker image optimized for deployment to production, or other hosted, environments
+* `dev`: image designed to run tests and support local development on a developer machine
+* `release`: image optimized for deployment to production or other hosted environments
 
 ## Local development: `dev`
 
 You can run the application locally within a container or natively. When running the application in a container locally, use the `dev` image.
 
-Example in a `docker-compose.yml`:
+Example `docker-compose.yml` snippet:
 
 ```yaml
 services:
@@ -22,7 +22,7 @@ services:
 
 When you deploy this application to hosted environments (e.g. AWS, Azure, GCP), use the `release` image.
 
-Example in a `docker-compose.yml`:
+Example `docker-compose.yml` snippet:
 
 ```yaml
 services:
@@ -33,9 +33,9 @@ services:
 
 ## Testing `release` locally
 
-It is useful to be able to test the `release` image locally without needing to execute a deployment to a hosted environment, such as for testing the production asset compilation pipeline.
+It is useful to be able to test the `release` image locally without needing to run a deploy to a hosted environment, such as to test the production asset compilation pipeline.
 
-In addition to the default Rails environments (i.e. `test`, `development`, `production`), this application implements a `mock-production` Rails environment, which uses "production-like" configuration. Specifically, SSL is disabled in [`mock-production.rb`](/app-rails/config/environments/mock-production.rb):
+In addition to the default Rails environments (i.e. `test`, `development`, `production`), this application includes a `mock-production` Rails environment, which uses "production-like" configuration. Specifically, SSL is disabled in [`mock-production.rb`](/app-rails/config/environments/mock-production.rb):
 
 ```ruby
 config.assume_ssl = false
@@ -58,7 +58,7 @@ cd app-rails
 make init-container DOCKER_COMPOSE_ARGS="-f ../docker-compose.mock-production.yml"
 ```
 
-### 3. Start the container
+#### 3. Start the container
 
 ```bash
 make start-container DOCKER_COMPOSE_ARGS="-f ../docker-compose.mock-production.yml"

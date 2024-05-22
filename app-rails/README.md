@@ -115,3 +115,4 @@ Beyond this README, you should also refer to the [`docs` directory](../docs/app-
 - [Software architecture](../docs/app-rails/software-architecture.md)
 - [Authentication & Authorization](../docs/app-rails/auth.md)
 - [Internationalization (i18n)](../docs/app-rails/internationalization.md)
+- [Container images](../docs/app-rails/container-images.md)
