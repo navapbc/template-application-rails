@@ -12,9 +12,6 @@ class NotificationService
       recipients: recipients
     })
 
-    # @TODO: Remove after the emails for user(s) have been added by callers
-    recipients << "pfml-accelerator-testing@navapbc.com"
-
     recipients.each do |recipient|
       mailer_args[:email_address] = recipient
       mail_message = mailer

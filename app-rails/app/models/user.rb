@@ -23,8 +23,7 @@ class User < ApplicationRecord
   end
 
   def superadmin?
-    # @TODO: Obviously replace this with a real implementation once admin authentication is implemented
-    email.ends_with?("+admin@navapbc.com")
+    email.include?("+admin")
   end
 
   # Check if the access token is expired or will expire within the next `minutes` minutes.
