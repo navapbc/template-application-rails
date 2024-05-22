@@ -38,10 +38,10 @@ fi
 
 # Rename all kebab-case instances
 echo "Performing a find-and-replace for all instances of (kebab-case) '$OLD_NAME_KEBAB' with '$NEW_NAME_KEBAB'..."
-LC_ALL=C find . -type f -exec bash -c "sedi \"s/$OLD_NAME_KEBAB/$NEW_NAME_KEBAB/g\" \"{}\"" \;
+LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$OLD_NAME_KEBAB/$NEW_NAME_KEBAB/g\" \"{}\"" \;
 
 # Rename all snake-case instances
 echo "Performing a find-and-replace for all instances of (snake-case) '$OLD_NAME_SNAKE' with '$NEW_NAME_SNAKE'..."
-LC_ALL=C find . -type f -exec bash -c "sedi \"s/$OLD_NAME_SNAKE/$NEW_NAME_SNAKE/g\" \"{}\"" \;
+LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$OLD_NAME_SNAKE/$NEW_NAME_SNAKE/g\" \"{}\"" \;
 
 echo "...Done."
