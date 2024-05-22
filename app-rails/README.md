@@ -17,7 +17,7 @@ This is a [Ruby on Rails](https://rubyonrails.org/) application. It includes:
 
 As a Rails app, much of the directory structure is driven by Rails conventions. We've also included directories for common patterns, such as adapters, form objects and services.
 
-**[Refer to the Software Architecture doc for more detail](../docs/app-rails/software-architecture.md)**
+**[Refer to the Software Architecture doc for more detail](../docs/app-rails/software-architecture.md).**
 
 Below are the primary directories to be aware of when working on the app:
 
@@ -49,6 +49,8 @@ Below are the primary directories to be aware of when working on the app:
 
 - A container runtime (e.g. [Docker](https://www.docker.com/) or [Finch](https://github.com/runfinch/finch))
   - By default, `docker` is used. To change this, set the `CONTAINER_CMD` variable to `finch` (or whatever your container runtime is) in the shell.
+- An AWS account with a Cognito User Pool and App Client configured
+  - By default, the application configures authentication using AWS Cognito
 
 ### 💾 Setup
 

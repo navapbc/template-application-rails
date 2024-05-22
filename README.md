@@ -7,7 +7,7 @@ See [`navapbc/platform`](https://github.com/navapbc/platform) for other template
 ## Features
 
 - [U.S. Web Design System](https://designsystem.digital.gov/) for themeable styling and a set of common components
-- Integration with AWS services, including
+- Integration with AWS services, including:
   - Database integration with AWS RDS Postgresql using UUIDs
   - Active Storage configuration with AWS S3
   - Action Mailer configuration with AWS SES
@@ -49,11 +49,7 @@ To get started using the template application on your project:
     curl https://raw.githubusercontent.com/navapbc/template-application-rails/main/template-only-bin/download-and-install-template.sh | bash -s -- <commit_hash>
     ```
 2. [Follow the steps in `app-rails/README.md`](./app-rails/README.md) to set up the application locally.
-3. Optional, if using the Platform infra template: [Follow the steps in the `template-infra` README](https://github.com/navapbc/template-infra#installation) to set up the various pieces of your infrastructure.
-
-## Getting started
-
-Now that you're all set up, you're now ready to [get started](./app-rails/README.md).
+3. Optional, if using the Platform infrastructure template: [Follow the steps in the `template-infra` README](https://github.com/navapbc/template-infra#installation) to set up the various pieces of your infrastructure.
 
 ## Updates
 
