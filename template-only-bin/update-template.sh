@@ -39,7 +39,7 @@ INCLUDE_PATHS=" \
   .gitignore \
   $TEMPLATE_SHORT_NAME \
   docker-compose.yml \
-  init-postgres.sql \
+  docker-compose.mock-production.yml \
   docs"
 git diff "$CURRENT_VERSION" "$TARGET_VERSION" -- "$INCLUDE_PATHS" >patch
 cd - >& /dev/null
