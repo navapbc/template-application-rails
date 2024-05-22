@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string "provider", null: false
       t.string "email", default: "", null: false
       t.integer "mfa_preference"
-      t.index ["uid"], name: "index_users_on_uid", unique: true
+      t.index [ "uid" ], name: "index_users_on_uid", unique: true
 
       t.timestamps
     end
