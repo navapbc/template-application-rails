@@ -72,8 +72,3 @@ If you have previously installed this template and would like to update your pro
     3. Remove any files specific to the template repository, like this README.
 
 ⚠️ Warning! This will overwrite existing files. Review all changes carefully.
-
-## Learn more about this template
-
-- [Dependency management](./template-only-docs/set-up-dependency-management.md)
-- [Deployment](./template-only-docs/set-up-cd.md)
