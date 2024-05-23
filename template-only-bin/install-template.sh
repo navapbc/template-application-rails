@@ -24,7 +24,7 @@ cd $template_dir
 
 if [ "$template_short_name" != "$app_name" ]; then
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
-  "./${template_name}/template-only-bin/rename-template-app.sh" "${app_name}" "${template_short_name}"
+  "./template-only-bin/rename-template-app.sh" "${app_name}" "${template_short_name}"
 fi
 
 echo "Copying files from $template_name..."
