@@ -7,6 +7,7 @@ class NotificationService
       msg: "Send email notification",
       mailer: mailer.name,
       # @TODO: Beware PII and other sensitive data that should not be logged.
+      # See https://github.com/navapbc/template-application-rails/issues/12
       mailer_args: mailer_args,
       mailer_action: mailer_action,
       recipients: recipients
@@ -19,6 +20,7 @@ class NotificationService
         .send(mailer_action)
 
       # @TODO: Beware PII and other sensitive data that should not be logged.
+      # See https://github.com/navapbc/template-application-rails/issues/12
       Rails.logger.debug({
         msg: "Generated mail message",
         mail_message: mail_message

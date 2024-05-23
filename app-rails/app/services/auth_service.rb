@@ -36,6 +36,7 @@ class AuthService
 
   def register(email, password, role)
     # @TODO: Handle errors from the auth service, like when the email is already taken
+    # See https://github.com/navapbc/template-application-rails/issues/15
     account = @auth_adapter.create_account(email, password)
 
     create_db_user(account[:uid], email, account[:provider], role)
