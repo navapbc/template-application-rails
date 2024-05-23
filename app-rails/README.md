@@ -2,7 +2,8 @@
 
 This is a [Ruby on Rails](https://rubyonrails.org/) application. It includes:
 
-- [U.S. Web Design System](https://designsystem.digital.gov/) for themeable styling and a set of common components
+- [U.S. Web Design System (USWDS)](https://designsystem.digital.gov/) for themeable styling and a set of common components
+  - Custom USWDS form builder
 - Integration with AWS services, including
   - Database integration with AWS RDS Postgresql using UUIDs
   - Active Storage configuration with AWS S3
