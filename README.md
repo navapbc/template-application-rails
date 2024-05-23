@@ -17,6 +17,8 @@ See [`navapbc/platform`](https://github.com/navapbc/platform) for other template
 - Linting and code formatting using [rubocop](https://rubocop.org/)
 - Testing using [rspec](https://rspec.info)
 
+<img width="1023" alt="CleanShot 2024-05-22 at 16 35 53@2x" src="https://github.com/navapbc/template-application-rails/assets/67701/fb291a98-7dfa-429e-91e2-30beacf58b9e">
+
 ## Repo structure
 
 ```text
