@@ -16,6 +16,9 @@ template_name=$1
 template_short_name="app-${template_name##*-}"
 app_name=$2
 
+echo "template_short_name: ${template_short_name}"
+echo "app_name: ${app_name}"
+
 curr_dir=$(pwd)
 script_dir=$(dirname $0)
 template_dir="${script_dir}/.."

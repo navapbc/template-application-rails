@@ -21,6 +21,10 @@ template_short_name="app-${template_name##*-}"
 target_version=${1:-"main"}
 app_name=${2:-"${template_short_name}"}
 
+echo "template_short_name: ${template_short_name}"
+echo "app_name: ${app_name}"
+echo "target_version: ${target_version}"
+
 git clone "https://github.com/navapbc/${template_name}.git"
 cd "${template_name}"
 
