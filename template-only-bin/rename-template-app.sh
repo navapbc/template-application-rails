@@ -4,9 +4,8 @@
 # Run this script in your project's root directory.
 #
 # Positional parameters:
-#   NEW_NAME (required) - the new name for the application, in either snake- or kebab-case
-#   OLD_NAME (optional) – the old name for the application, in either snake- or kebab-case
-#       Defaults to the template's short name (e.g. app-rails)
+#   new_name (required) - the new name for the application, in either snake- or kebab-case
+#   old_name (required) – the old name for the application, in either snake- or kebab-case
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
@@ -18,30 +17,30 @@ sedi () {
 # Export the function so it can be used in the `find -exec` calls later on
 export -f sedi
 
-NEW_NAME=$1
-OLD_NAME=${2:-"app-rails"}
+new_name=$1
+old_name=$2
 
 # Don't make assumptions about whether the arguments are snake- or kebab-case. Handle both.
 # Get kebab-case names
-OLD_NAME_KEBAB=$(echo $OLD_NAME | tr "_" "-")
-NEW_NAME_KEBAB=$(echo $NEW_NAME | tr "_" "-")
+old_name_kebab=$(echo $old_name | tr "_" "-")
+new_name_kebab=$(echo $new_name | tr "_" "-")
 
 # Get snake-case names
-OLD_NAME_SNAKE=$(echo $OLD_NAME | tr "-" "_")
-NEW_NAME_SNAKE=$(echo $NEW_NAME | tr "-" "_")
+old_name_snake=$(echo $old_name | tr "-" "_")
+new_name_snake=$(echo $new_name | tr "-" "_")
 
 # Rename the app directory
-if [ -d "$OLD_NAME" ]; then
-  echo "Renaming $OLD_NAME to $NEW_NAME..."
-  mv "$OLD_NAME" "$NEW_NAME"
+if [ -d "$old_name" ]; then
+  echo "Renaming ${old_name} to ${new_name}..."
+  mv "${old_name}" "${new_name}"
 fi
 
 # Rename all kebab-case instances
-echo "Performing a find-and-replace for all instances of (kebab-case) '$OLD_NAME_KEBAB' with '$NEW_NAME_KEBAB'..."
-LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$OLD_NAME_KEBAB/$NEW_NAME_KEBAB/g\" \"{}\"" \;
+echo "Performing a find-and-replace for all instances of (kebab-case) '$old_name_kebab' with '$new_name_kebab'..."
+LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$old_name_kebab/$new_name_kebab/g\" \"{}\"" \;
 
 # Rename all snake-case instances
-echo "Performing a find-and-replace for all instances of (snake-case) '$OLD_NAME_SNAKE' with '$NEW_NAME_SNAKE'..."
-LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$OLD_NAME_SNAKE/$NEW_NAME_SNAKE/g\" \"{}\"" \;
+echo "Performing a find-and-replace for all instances of (snake-case) '$old_name_snake' with '$new_name_snake'..."
+LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$old_name_snake/$new_name_snake/g\" \"{}\"" \;
 
 echo "...Done."
