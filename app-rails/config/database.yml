@@ -19,15 +19,22 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+  # Support environment variables. Set defaults.
+  database: <%= ENV.fetch("DB_NAME") { nil } %>
+  username: <%= ENV.fetch("DB_USER") { nil } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { nil } %>
+  host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
+  port: <%= ENV.fetch("DB_PORT") { 5432 } %>
+  schema_search_path: <%= ENV.fetch("DB_SCHEMA") { public } %>
+
 development:
   <<: *default
-  database: template_application_rails_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: template_application_rails
+  #username: app_rails
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -55,7 +62,12 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: template_application_rails_test
+  database: app_rails_test
+
+# For mock-production: To test a "production"-like environment on a local machine,
+# allow the use of a non-RDS database.
+mock-production:
+  <<: *default
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +91,6 @@ test:
 #
 production:
   <<: *default
-  database: template_application_rails_production
-  username: template_application_rails
-  password: <%= ENV["TEMPLATE_APPLICATION_RAILS_DATABASE_PASSWORD"] %>
+  # Enable AWS RDS IAM Auth token generator
+  # For more details, see: https://github.com/haines/pg-aws_rds_iam
+  aws_rds_iam_auth_token_generator: default

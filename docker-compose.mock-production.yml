@@ -1,0 +1,35 @@
+services:
+  database:
+    image: postgres:14-alpine
+    command: postgres -c "log_lock_waits=on" -N 1000 -c "fsync=off"
+    environment:
+      POSTGRES_PASSWORD: secret123
+      POSTGRES_USER: app_rails
+    healthcheck:
+      test: "pg_isready --username=app_rails"
+      timeout: 10s
+      retries: 20
+    ports:
+      - "5432:5432"
+
+  # Rails app
+  # Configured for "production" RAILS_ENV
+  app-rails:
+    build:
+      context: ./app-rails
+      target: release
+    depends_on:
+      database:
+        condition: service_healthy
+    env_file: ./app-rails/.env
+    environment:
+      - DB_HOST=database
+      - RAILS_BINDING=0.0.0.0
+      # The following env vars allow testing a "production"-like environment on a local
+      # machine.
+      - RAILS_ENV=mock-production
+      - SECRET_KEY_BASE=verysecret
+      - DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+      - AWS_DEFAULT_REGION=us-east-1
+    ports:
+      - 3200:3000

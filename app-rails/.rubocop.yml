@@ -1,0 +1,8 @@
+require:
+  - rubocop-rspec
+inherit_gem:
+  pundit: config/rubocop-rspec.yml
+  rubocop-rails-omakase: rubocop.yml
+AllCops:
+  Exclude:
+    - lib/templates/**/*
