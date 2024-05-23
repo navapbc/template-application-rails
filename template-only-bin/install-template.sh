@@ -20,13 +20,14 @@ curr_dir=$(pwd)
 script_dir=$(dirname $0)
 template_dir="${script_dir}/.."
 
+cd $template_dir
+
 if [ "$template_short_name" != "$app_name" ]; then
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
   "./${template_name}/template-only-bin/rename-template-app.sh" "${app_name}" "${template_short_name}"
 fi
 
 echo "Copying files from $template_name..."
-cd $template_dir
 # Note: Keep this list of paths in sync with INCLUDE_PATHS in update-template.sh
 # @TODO: Add .grype.yml
 cp -r \
