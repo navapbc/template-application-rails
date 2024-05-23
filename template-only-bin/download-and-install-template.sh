@@ -4,31 +4,43 @@
 # Run this script in your project's root directory.
 #
 # Positional parameters:
-#   TARGET_VERSION (optional) – the version of the template application to install.
+#   target_version (optional) – the version of the template application to install.
 #     Defaults to main. Can be any target that can be checked out, including a branch,
 #     version tag, or commit hash.
+#   app_name (optional) – the new name for the application, in either snake- or kebab-case
+#     Defaults to app-rails.
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
-TARGET_VERSION=${1:-"main"}
-TEMPLATE_NAME="template-application-rails"
+template_name="template-application-rails"
+# Use shell parameter expansion to get the last word, where the delimiter between
+# words is `-`.
+# See https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Shell-Parameter-Expansion
+template_short_name="app-${template_name##*-}"
 
-git clone "https://github.com/navapbc/$TEMPLATE_NAME.git"
-cd "$TEMPLATE_NAME"
+target_version=${1:-"main"}
+app_name=${2:-"${template_short_name}"}
 
-echo "Checking out $TARGET_VERSION..."
-git checkout "$TARGET_VERSION"
+echo "template_short_name: ${template_short_name}"
+echo "app_name: ${app_name}"
+echo "target_version: ${target_version}"
+
+git clone "https://github.com/navapbc/${template_name}.git"
+cd "${template_name}"
+
+echo "Checking out $target_version..."
+git checkout "$target_version"
 cd - &> /dev/null
 
-echo "Installing $TEMPLATE_NAME..."
-"./$TEMPLATE_NAME/template-only-bin/install-template.sh" "$TEMPLATE_NAME"
+echo "Installing ${template_name}..."
+"./${template_name}/template-only-bin/install-template.sh" "${template_name}" "${app_name}"
 
 echo "Storing template version in a file..."
-cd "$TEMPLATE_NAME"
-git rev-parse HEAD >../".$TEMPLATE_NAME-version"
+cd "${template_name}"
+git rev-parse HEAD >../".${template_name}-version"
 cd - &> /dev/null
 
-echo "Cleaning up $TEMPLATE_NAME folder..."
-rm -fr "$TEMPLATE_NAME"
+echo "Cleaning up ${template_name} folder..."
+rm -fr "${template_name}"
 
 echo "...Done."
