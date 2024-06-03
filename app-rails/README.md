@@ -72,7 +72,7 @@ In either case, first generate a `.env` file:
 
 Prerequisites:
 
-- Ruby 3.3.0
+- Ruby 3.3.1
 - [Node LTS](https://nodejs.org/en)
 - (Optional but recommended): [rbenv](https://github.com/rbenv/rbenv)
 
