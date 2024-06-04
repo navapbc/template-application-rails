@@ -32,11 +32,10 @@ fi
 
 echo "Copying files from $template_name..."
 # Note: Keep this list of paths in sync with INCLUDE_PATHS in update-template.sh
-# @TODO: Add .grype.yml
-# See https://github.com/navapbc/template-application-rails/issues/16
 cp -r \
   .github \
   .gitignore \
+  .grype.yml \
   "${app_name}" \
   docker-compose.yml \
   docker-compose.mock-production.yml \
