@@ -96,6 +96,10 @@ s = sanitize(user_input, tags: tags, attributes: %w(href title))
 #### 6.8.1 DNS Rebinding and Host Header Attacks
 1. **TODO:** Configure [`ActionDispatch::HostAuthorization`](https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization) in production to prevent DNS rebinding attacks.
 #### 6.8.2 Response Splitting
-1. This template uses rails verstion > 2.1.2, therefore this is not a concern.
+1. This template uses rails version > 2.1.2, therefore this is not a concern.
 
 ### 7 Unsafe Query Generation
+1. Unless you know what you're doing, don't disable `deep_munge` with `config.action_dispatch.perform_deep_munge = false`
+
+### 8 HTTP Security Headers
+#### 8.1 Default Security Headers
