@@ -103,3 +103,20 @@ s = sanitize(user_input, tags: tags, attributes: %w(href title))
 
 ### 8 HTTP Security Headers
 #### 8.1 Default Security Headers
+1. Rails locks down the headers by default, and we have no need to open these up. However, the defaults can be overridden in `config/application.rb` with `config.action_dispatch.default_headers`.
+1. X-Frame-Options is set to allow iframes from the same origin, set this to deny if not using any iframes to embed. If you need to permit an iframe from another origin, a controller can then use an `after_action :allow_some_service`.
+#### 8.2 Strict-Transport-Security Header
+1. This is set in production with `config.force_ssl = true`
+#### 8.3 Content-Security-Policy Header
+1. **TODO:** To help protect against XSS and injection attacks, define a Content-Security-Policy in the provided file: `app-rails/config/initializers/content_security_policy.rb`. The policy can be more restrictive, and controllers can override defaults when necessary.
+#### 8.3.1 Reporting Violations
+1. **TODO:** In addition to preventing attacks, it's important to log them to continuously improve security. Set the report_uri config on the content security policy and configure a controller to log the reports. Note that `report_uri` is being deprecated, and will eventually become `report_to`
+#### 8.3.2 Adding a Nonce
+1. **TODO:** We're already adding the `csp_meta_tag` to the application.html.erb, but we're not taking advantage of it with nonce generation in the content security policy.
+#### 8.4 Feature-Policy Header
+1. **TODO:** Configure which browser features are allowed in `app-rails/config/initializers/permissions_policy.rb`. This policy can be more restrictive than necessary because features can be allowed on specific controllers.
+#### 8.5 Cross-Origin Resource Sharing
+1. As of now, this application envisioned as a full-stack application template. However, if there is a need to open up endpoints as APIs, we need to configure CORS, by installing and configuring the `rack-cors` gem.
+
+### 9 Intranet and Admin Security
+
