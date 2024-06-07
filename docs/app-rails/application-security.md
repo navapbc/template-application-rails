@@ -119,4 +119,18 @@ s = sanitize(user_input, tags: tags, attributes: %w(href title))
 1. As of now, this application envisioned as a full-stack application template. However, if there is a need to open up endpoints as APIs, we need to configure CORS, by installing and configuring the `rack-cors` gem.
 
 ### 9 Intranet and Admin Security
+#### 9.1 Cross-Site Scripting
+1. The template doesn't include a admin view, but if that is added, be sure to sanitize all user inputs as they may be viewed here even if they aren't visible anywhere else in the application.
+#### 9.2 Cross-Site Request Forgery
+1. Same as CSRF countermeasures discussed above.
+#### 9.3 Additional Precautions
+1. Some effective admin protection strategies includes:
+    * Limit admin role privileges using the principle of least privilege
+    * Geofence admin login IP to the USA.
+    * Consider putting the admin app at a subdomain so the cookie for application can't be used for the admin console and vice-versa.
 
+### 10 Environmental Security
+1. Secret management is covered in the template infrastructure repo and is out of scope of this template application.
+
+### 11 Dependency Management and CVEs'
+1. We're using dependabot to notify us if we have outdated gems.
