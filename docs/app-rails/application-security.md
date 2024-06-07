@@ -2,7 +2,7 @@
 
 Application security is a top priority for technology application development, which is why the Rails framework's security helper methods and countermeasures help speed up secure application delivery. However, the framework isn't useful by itself; its helper methods and configurations only work if they are used properly. 
 
-Areas that require improvement are marked with `@TODO` and describe a security implementation. They should be accompanied by a comment in the codebase referencing the action needed, like `# **@TODO:** sanitize input to protect against SQL injection`.
+Areas that require improvement are marked with `@TODO` and describe a security implementation. 
 
 This document uses the Rails Guide to [Securing Rails Applications](https://guides.rubyonrails.org/security.html) to audit this project's Rails security best practices. This is meant to be a living document and should be updated as additional security tools and configurations are implemented, as well as when new vulnerabilities are discovered or introduced.
 
