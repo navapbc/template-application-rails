@@ -83,17 +83,24 @@ s = sanitize(user_input, tags: tags, attributes: %w(href title))
 - [x] This template uses rails version > 2.- [x]2, therefore this is not a concern.
 
 ## Unsafe Query Generation
-- [x] Enable `deep_munge` with `config.action_dispatch.perform_deep_munge = true`
+- [x] Confirm `deep_munge` hasn't been disabled. 
+    - Note: `config.action_dispatch.perform_deep_munge` is `true` by default.
 
 ## HTTP Security Headers
-- [x] Rails locks down the headers by default, and we have no need to open these up. However, the defaults can be overridden in `config/application.rb` with `config.action_dispatch.default_headers`.
-- [x] X-Frame-Options is set to allow iframes from the same origin, set this to deny if not using any iframes to embed. If you need to permit an iframe from another origin, a controller can then use an `after_action :allow_some_service`.
-- [x] This is set in production with `config.force_ssl = true`
-- [ ] To help protect against XSS and injection attacks, define a Content-Security-Policy in the provided file: `app-rails/config/initializers/content_security_policy.rb`. The policy can be more restrictive, and controllers can override defaults when necessary.
-- [ ] In addition to preventing attacks, it's important to log them to continuously improve security. Set the report_uri config on the content security policy and configure a controller to log the reports. Note that `report_uri` is being deprecated, and will eventually become `report_to`
-- [ ] We're already adding the `csp_meta_tag` to the application.html.erb, but we're not taking advantage of it with nonce generation in the content security policy.
-- [ ] Configure which browser features are allowed in `app-rails/config/initializers/permissions_policy.rb`. This policy can be more restrictive than necessary because features can be allowed on specific controllers.
-- [x] As of now, this application envisioned as a full-stack application template. However, if there is a need to open up endpoints as APIs, we need to configure CORS, by installing and configuring the `rack-cors` gem.
+Default security headers can be overridden in [application.rb](app-rails/config/application.rb) with `config.action_dispatch.default_headers`.
+- [x] Lock down X-Frame-Options to be as restrictive as possible.
+    - Note: By default this is set to allow iframes from the same origin.
+    - Note: Set this to deny if not using any iframes to embed. 
+    - Note: If you need to permit an iframe from another origin, a controller can then use an `after_action :allow_some_service`.
+- [ ] To help protect against XSS and injection attacks, define a Content-Security-Policy in the provided [content security policy file](app-rails/config/initializers/content_security_policy.rb). 
+    - Note: Set the policy to be more restrictive than you need and you can override defaults when necessary in the controllers.
+- [ ] Log content security policy violations to continuously improve security by setting the report_uri config on the content security policy and configure a controller to log the reports. 
+    - Note: `report_uri` is being deprecated, and will eventually become `report_to`.
+- [x] Set `csp_meta_tag` in [application.rb](app-rails/config/application.rb).
+- [ ] Use the `csp_meta_tag` tag with nonce generation in the content security policy.
+- [ ] Configure which browser features are allowed in [permissions_policy.rb](app-rails/config/initializers/permissions_policy.rb). 
+    - Note: This policy can be more restrictive than necessary because features can be allowed on specific controllers.
+- [ ] If opening up endpoints as APIs, configure CORS, by installing and configuring the `rack-cors` gem.
 
 ## Intranet and Admin Security
 - [x] The template doesn't include a admin view, but if that is added, be sure to sanitize all user inputs as they may be viewed here even if they aren't visible anywhere else in the application.
