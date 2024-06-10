@@ -41,17 +41,22 @@ The template application doesn't have any file upload or download functionality 
     - [ ] Check the file returned from the search is from the appropriate directory.
 
 ## User Management
-- [x] When using Devise we don’t need to set `has_secure_password` on password fields.
+- [x] Store only cryptographically hashed passwords, not plain-text passwords.
+- [x] Consider Rails' built-in `has_secure_password` method which supports secure password hashing, confirmation, and recovery mechanisms.
+    - Note: When using Devise there's no need to use `has_secure_password`.
 - [x] Username error is generic and does not indicate whether it was an error with the username or password.
 - [x] Forgot password confirms the email was sent, and not whether the username exists.
-- [x] Change password includes email 6 digit code.
-- [ ] We currently do not require entering the password when changing email, but we should.
-- [ ] Include Captcha on account creation, login, change password, and change email.
+- [x] Use a secondary verification when users change their password
+    - Note: Change password requires 6 digit code from email sent to user's email address.
+- [ ] Require user's password when changing email.
 - [ ] Include honeypot fields and logic on Non logged in forms to catch bots that spam all fields (good resource: https://nedbatchelder.com/text/stopbots.html).
-- [x] We’re filtering the following parameter partials (if all or any part matches) in the `config/initialization/filter_paramater_logging.rb` file: `:passw, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn`.
-- [x] Two places where regex is used (`mailto.rb` and devise) use the correct ruby `\A` and `\z` and not the more common: `/^` and `$/`.
+- [ ] Consider using Captcha on account creation, login, change password, and change email forms.
+    - Note: Captchas are often not accessible to screen readers and their use should be part of a UX discussion.
+- [x] Filter log entries so they do not include passwords or secrets
+    - Note:  Log filtering is set in  [filter_parameter_logging.rb](app-rails/config/initializers/filter_parameter_logging.rb): `:passw, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn`.
+- [x] Use the correct Ruby REGEX: `\A` and `\z` and not the more common: `/^` and `$/`.
 - [ ] Add multiline: true to our regex format: in validations.
-- [ ] By manually changing a parameter, a hacker may get access to information they should not be able to access. Instead of doing things like: `@task = Task.find(params[:id])`, instead do `@user.tasks.find(params[:id])`. This is not in the template, but it is in the app the template is based on.
+- [x] When searching for data belonging to the user, search using Active Record from the user and not from the target data object. ie. Instead of doing: `@task = Task.find(params[:id])`, instead do: `@user.tasks.find(params[:id])`. 
 
 ## Injection
 - [ ] Use `except: […]` instead of `only:[…]` for security related actions so when adding actions, they are behind the security by default. Ex. `app-rails/app/controllers/application_controller.rb line: 8`. `after_action :verify_policy_scoped, only: :index`.
