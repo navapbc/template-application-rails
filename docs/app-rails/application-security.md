@@ -51,7 +51,7 @@ As outlined in [Securing Rails Applications](https://guides.rubyonrails.org/secu
 1. Forgot password confirms the email was sent, and not whether the username exists.
 #### 5.2 Account Hijacking
 1. Change password includes email 6 digit code.
-1. **TODO:** Require entering the password when changing email.
+1. **@TODO:** We currently do not require entering the password when changing email, but we should.
 #### 5.3 CAPTCHA
 1. **TODO:** Include Captcha on account creation, login, change password, and change email.
 1. **TODO:** Include honeypot fields and logic on Non logged in forms to catch bots that spam all fields (good resource: https://nedbatchelder.com/text/stopbots.html).
