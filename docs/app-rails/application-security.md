@@ -12,7 +12,7 @@ This template application uses Devise to manage sessions and cookies. You can ma
 - [x] Provide the user with a prominent logout button to make it easy to clear the session on public computers.
 - [x] Cookies stored client side do not contain sensitive information.
 - [x] Cookies time out in 15 minutes of inactivity 
-    - Note: That is set with `config.timeout_in` in the Devise configuration file.
+    - Note: That is set with `config.timeout_in` in the [Devise configuration file](app-rails/config/initializers/devise.rb).
 - [x] Cookies are encrypted client side.
     - Note: Devise uses BCrypt and the secret_key_base by default for secret hashing.
 - [ ] Expire sessions after a set amount of time, regardless of activity, 
@@ -20,7 +20,7 @@ This template application uses Devise to manage sessions and cookies. You can ma
 - [ ] Use a nonce generator to protect against cookie replay attacks. 
     - Note: The commented out code for this is located in [`/app-rails/config/initializers/content_security_policy.rb`](/app-rails/config/initializers/content_security_policy.rb) Review the impact this may have on your application if you have several application servers.
 - [x] Automatically expire sessions on sign in and sign out.
-    - Note. This is set in the Devise configuration file with `config.expire_all_remember_me_on_sign_out = true`.
+    - Note. This is set in the [Devise configuration file](app-rails/config/initializers/devise.rb) with `config.expire_all_remember_me_on_sign_out = true`.
 
 ## Cross-Site Request Forgery (CSRF)
 - [x] GET, POST, DELETE, and rails’ resources are used appropriately in the `routes.rb` file.
@@ -29,9 +29,16 @@ This template application uses Devise to manage sessions and cookies. You can ma
 - [ ] Set forgery protection in production  
 
 ## Redirection and Files
-- [x] link_tos do not route to user inputs, which is XSS vulnerable.
-- [x] redirect_to does not use params or user inputs in the routes.
-- [ ] App doesn’t currently handle file imports but that should be documented as it is a common need in Government Applications.
+The template application doesn't have any file upload or download functionality at this time, so please review these items when adding file management functionality.
+- [x] Do not use user inputs to generate routes (ie. creating a route with the username), which is vulnerable to XSS attacks.
+    - [x] `link_to` methods do not interpolate to user inputs.
+    - [x] `redirect_to` methods do not interpolate to user inputs.
+- [ ] Check filename for file imports against a set of permitted characters.
+    - Note: filtering filename imports alone can still leave an application vulnerable to XSS attacks.
+- [ ] Do not allow file uploads to place files in the public directory as code in those files may be executed by the browser.
+- [ ] Prevent users from downloading files to which they shouldn't have access.
+    - [ ] Check filename for download against a set of permitted characters.
+    - [ ] Check the file returned from the search is from the appropriate directory.
 
 ## User Management
 - [x] When using Devise we don’t need to set `has_secure_password` on password fields.
