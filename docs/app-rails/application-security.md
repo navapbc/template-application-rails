@@ -22,7 +22,7 @@ As outlined in [Securing Rails Applications](https://guides.rubyonrails.org/secu
 1. Cookies time out in 15 minutes of inactivity with devise `config.timeout_in`.
 1. Cookies are encrypted client side.
 1. Devise uses BCrypt and the secret_key_base by default for secret hashing.
-1. **TODO:** Cognito, the auth service, is also managing sessions and if wanted to expire sessions after a certain time, regardless of activity, we’d have to do it there.
+1. **@TODO:** If we want to expire sessions after a set amount of time, regardless of activity, those changes would need to be enforced by the auth service, such as in AWS Cognito.
 #### 2.4 Rotating Encrypted and Signed Cookies Configurations
 1. **TODO:** We are not rotating secrets for hashing nor the hashing algorithm, could do with cognito.
 #### 2.5 Replay Attacks for CookieStore Sessions
