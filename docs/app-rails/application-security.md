@@ -83,7 +83,7 @@ s = sanitize(user_input, tags: tags, attributes: %w(href title))
 - [x] This template uses rails version > 2.- [x]2, therefore this is not a concern.
 
 ## Unsafe Query Generation
-- [x] Unless you know what you're doing, don't disable `deep_munge` with `config.action_dispatch.perform_deep_munge = false`
+- [x] Enable `deep_munge` with `config.action_dispatch.perform_deep_munge = true`
 
 ## HTTP Security Headers
 - [x] Rails locks down the headers by default, and we have no need to open these up. However, the defaults can be overridden in `config/application.rb` with `config.action_dispatch.default_headers`.
