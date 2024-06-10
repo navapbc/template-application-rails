@@ -7,21 +7,26 @@ Each item below will be checked if it is already implemented by default, or unch
 This document uses the Rails Guide to [Securing Rails Applications](https://guides.rubyonrails.org/security.html) to audit this project's Rails security best practices.
 
 ## Sessions
-- [x] `config.force_ssl = true` is set for production environments.
-- [x] Provided the user with a logout button.
-- [x] Using Devise's Session Controller to manage session storage.
+This template application uses Devise to manage sessions and cookies. You can manage the Devise configuration in the [`devise.rb`](app-rails/config/initializers/devise.rb) file, and for more detailed information you can read the [Devise documentation](https://rubydoc.info/github/heartcombo/devise).
+- [x] SSL (`config.force_ssl = true`) is enforced in production environments.
+- [x] Provide the user with a prominent logout button to make it easy to clear the session on public computers.
 - [x] Cookies stored client side do not contain sensitive information.
-- [x] Cookies time out in 15 minutes of inactivity with devise `config.timeout_in`.
+- [x] Cookies time out in 15 minutes of inactivity 
+    - Note: That is set with `config.timeout_in` in the Devise configuration file.
 - [x] Cookies are encrypted client side.
-- [x] Devise uses BCrypt and the secret_key_base by default for secret hashing.
-- [ ] If we want to expire sessions after a set amount of time, regardless of activity, those changes would need to be enforced by the auth service, such as in AWS Cognito.
-- [ ] We are not rotating secrets for hashing nor the hashing algorithm, could do with cognito.
-- [ ] We’re not using a nonce generator that would protect against cookie replay attacks. The commented out code for this is located in [`/app-rails/config/initializers/content_security_policy.rb`](/app-rails/config/initializers/content_security_policy.rb) This however ties users to a particular server/session as we don’t want to save nonces in the database.
-- [x] Devise will automatically expire sessions on sign in and sign out with `config.expire_all_remember_me_on_sign_out = true`.
+    - Note: Devise uses BCrypt and the secret_key_base by default for secret hashing.
+- [ ] Expire sessions after a set amount of time, regardless of activity, 
+    - Note: Automated session expiration can be easily set by the auth service, such as in AWS Cognito.
+- [ ] Use a nonce generator to protect against cookie replay attacks. 
+    - Note: The commented out code for this is located in [`/app-rails/config/initializers/content_security_policy.rb`](/app-rails/config/initializers/content_security_policy.rb) Review the impact this may have on your application if you have several application servers.
+- [x] Automatically expire sessions on sign in and sign out.
+    - Note. This is set in the Devise configuration file with `config.expire_all_remember_me_on_sign_out = true`.
 
 ## Cross-Site Request Forgery (CSRF)
 - [x] GET, POST, DELETE, and rails’ resources are used appropriately in the `routes.rb` file.
-- [ ] We’re not setting forgery protection in production despite passing a CSRF token to the client, therefore If I change my CSRF token manually in my browser, I’m not prevented from taking any actions (GET or POST requests) as a signed in user.
+- [x] Pass a CSRF token to the client.
+    - Note: This is accomplished with `<%= csrf_meta_tags %>` in [application.html.erb](app-rails/app/views/layouts/application.html.erb)
+- [ ] Set forgery protection in production  
 
 ## Redirection and Files
 - [x] link_tos do not route to user inputs, which is XSS vulnerable.
