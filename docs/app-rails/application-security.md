@@ -103,18 +103,19 @@ Default security headers can be overridden in [application.rb](app-rails/config/
 - [ ] If opening up endpoints as APIs, configure CORS, by installing and configuring the `rack-cors` gem.
 
 ## Intranet and Admin Security
-- [x] The template doesn't include a admin view, but if that is added, be sure to sanitize all user inputs as they may be viewed here even if they aren't visible anywhere else in the application.
-- [x] Same as CSRF countermeasures discussed above.
-- [x] Some effective admin protection strategies includes:
-    * Limit admin role privileges using the principle of least privilege
-    * Geofence admin login IP to the USA.
-    * Consider putting the admin app at a subdomain so the cookie for application can't be used for the admin console and vice-versa.
+If adding an Admin view, consider adding the following:
+- [ ] Sanitize all user inputs as they may be viewed here even if they aren't visible anywhere else in the application.
+Some effective admin protection strategies include:
+    - [ ] Limit admin role privileges using the principle of least privilege
+    - [ ] Geofence admin login IP to the USA.
+    - [ ] Consider putting the admin app at a subdomain so the cookie for application can't be used for the admin console and vice-versa.
 
 ## Environmental Security
-- [x] Secret management is covered in the template infrastructure repo and is out of scope of this template application.
+- [x] Secrets are not stored in the application repository.
 
 ## Dependency Management and CVEs'
-- [x] We're using dependabot to notify us if we have outdated gems.
+- [x] Use a service to be notified when libraries are outdated
+    - Note: We're using dependabot to notify us if we have outdated gems.
 
 ## Additional Reading
 * [Securing Rails Applications](https://guides.rubyonrails.org/security.html)
