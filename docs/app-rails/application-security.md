@@ -45,7 +45,7 @@ As outlined in [Securing Rails Applications](https://guides.rubyonrails.org/secu
 1. **TODO:** App doesn’t currently handle file imports but that should be documented as it is a common need in Government Applications.
 
 ### 5. User Management
-1. When using devise we don’t need to set has_secure_password on password fields.
+1. When using Devise we don’t need to set `has_secure_password` on password fields.
 #### 5.1 Brute Forcing Accounts
 1. Username error is generic and does not indicate whether it was an error with the username or password.
 1. Forgot password confirms the email was sent, and not whether the username exists.
