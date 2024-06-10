@@ -4,5 +4,5 @@ inherit_gem:
   pundit: config/rubocop-rspec.yml
   rubocop-rails-omakase: rubocop.yml
 AllCops:
-  Exclude:
-    - lib/templates/**/*
+  TargetRubyVersion: 3.3.1
+
