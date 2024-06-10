@@ -26,7 +26,7 @@ As outlined in [Securing Rails Applications](https://guides.rubyonrails.org/secu
 #### 2.4 Rotating Encrypted and Signed Cookies Configurations
 1. **TODO:** We are not rotating secrets for hashing nor the hashing algorithm, could do with cognito.
 #### 2.5 Replay Attacks for CookieStore Sessions
-1. **TODO:** We’re not using a nonce generator that would protect against cookie replay attacks. The commented out code for this is located in `/app-rails/config/initializers/generate_security_policy.rb` This however ties users to a particular server/session as we don’t want to save nonces in the database.
+1. **TODO:** We’re not using a nonce generator that would protect against cookie replay attacks. The commented out code for this is located in [`/app-rails/config/initializers/content_security_policy.rb`](/app-rails/config/initializers/content_security_policy.rb) This however ties users to a particular server/session as we don’t want to save nonces in the database.
 #### 2.6 Session Fixation
 #### 2.7 Session Fixation - Countermeasures
 1. Devise will automatically expire sessions on sign in and sign out with `config.expire_all_remember_me_on_sign_out = true`.
