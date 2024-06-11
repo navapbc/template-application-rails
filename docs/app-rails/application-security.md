@@ -57,6 +57,7 @@ The template application doesn't have any file upload or download functionality 
 - [x] Use the correct Ruby REGEX: `\A` and `\z` and not the more common: `/^` and `$/`.
 - [ ] Add multiline: true to our regex format: in validations.
 - [x] When searching for data belonging to the user, search using Active Record from the user and not from the target data object. ie. Instead of doing: `@task = Task.find(params[:id])`, instead do: `@user.tasks.find(params[:id])`. 
+    - Note: This application is also using [pundit](https://github.com/varvet/pundit) to support resource authorization.
 
 ## Injection
 - [ ] When defining security related `before_action` and `after_action` on controllers, use `except: […]` instead of `only:[…]` Ie. Instead of `after_action :verify_policy_scoped, only: :index` use `after_action :verify_policy_scoped, except:[ :rails_health_check, :users, :dev, ...]`. This ensures that when new views are added, they're behind the security actions by default.
