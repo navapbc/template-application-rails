@@ -59,28 +59,31 @@ The template application doesn't have any file upload or download functionality 
 - [x] When searching for data belonging to the user, search using Active Record from the user and not from the target data object. ie. Instead of doing: `@task = Task.find(params[:id])`, instead do: `@user.tasks.find(params[:id])`. 
 
 ## Injection
-- [ ] Use `except: […]` instead of `only:[…]` for security related actions so when adding actions, they are behind the security by default. Ex. `app-rails/app/controllers/application_controller.rb line: 8`. `after_action :verify_policy_scoped, only: :index`.
-- [x] Not generally an issue with rails applications. We aren’t interpolating params into SQL fragments, which would also be against ruby and rails best practices, ie. .where(“name = `#{params[:name]}`”.
-- [x] While we’re not setting secure: true on the cookies themselves, the `config.force_ssl = true` option in production ensures all cookies are `httponly`.
-- [x] The template application doesn't have any inputs that are then displayed to the user, aside from the user email, which prevents scripting. However, when those inputs are created, it will be important to sanitize the outputs in the erb files, using `<%=h <some user provided input> =>` to protect against defacement.
-- [x] An additional step can be taken to sanitize inputs, but those should use a permitted list of tags, instead of restricted lists, using:
+- [ ] When defining security related `before_action` and `after_action` on controllers, use `except: […]` instead of `only:[…]` Ie. Instead of `after_action :verify_policy_scoped, only: :index` use `after_action :verify_policy_scoped, except:[ :rails_health_check, :users, :dev, ...]`. This ensures that when new views are added, they're behind the security actions by default.
+- [x] Don't interpolate params into SQL fragments. Ie. `.where(“name ='#{params[:name]}'”`.
+- [x] Ensures all cookies are `httponly`.
+    - Note: While we’re not setting `secure: true` on the cookies themselves, the `config.force_ssl = true` option in production sets them as `httponly`.
+- [x] Sanitize content in the erb files that come from user inputs, using `<%=h <some user provided input> =>` to protect against defacement.
+- [x] Use a permitted list of tags in inputs that allow html or when allowing a text input that will be converted into html, using:
+    - Note: The most common Rails tool for text to html conversion is RedCloth.
 ```
 tags = %w(a acronym b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p)
 s = sanitize(user_input, tags: tags, attributes: %w(href title))
 ```
-- [x] While consensus seems mixed about the necessity to sanitize Rails input fields for defacement, sanitizing inputs is very useful to protect against encoding injection, and the Rails sanitize() method should be used on inputs that will be presented to the UI at any point.
-- [x] This is rarely needed as applications, especially government applications, rarely if ever offer the user the ability to input custom colors or input css filters.
-- [x] This template application doesn't allow users to enter text to be converted into html, that's more common in content management system applications. If that feature set is added, it is important to do so with a permitted input filter similar to 6.3.2.3 Defacement Countermeasures. The most common Rails tool for text to html conversion is RedCloth, which is being mentioned in case folks search the repo for RedCloth, they should find this recommendation.
-- [x] The output has to be escaped in the controller already, if the action doesn't render a view. However, we have no case of outputting strings rather than views in our template application. However, rendering data from the controller seems like a Rails anti-pattern.
-- [x] Only relevant if the application takes a user input and executes a command on the underlying operating system. Applicable methods include: 
+- [x] Rails sanitize() method is used on inputs that will be presented to the UI, including the Admin UI if there is one.
+    - Note: While consensus seems mixed about the necessity to sanitize Rails input fields for defacement, sanitizing inputs is very useful to protect against encoding injection.
+- [ ] Inputs for custom colors or CSS filters are sanitized with Rail's `sanitize()` method, and the application builds the CSS in the web application first and ensures it is valid CSS before sanitizing.
+    - Note: This application currently doesn't have that functionality, but this is a common attack vector in application that do have this functionality.
+- [x] Controllers that output strings, rather than views, are escaped.
+- [x] All methods called by the application to execute commands on the underlying operating system include the `parameters` parameter, ie. `system(command, parameters)`. Applicable methods include: 
     * `system()`
     * `exec()`
     * `spawn()`
     * `command`
-- [x] Don't use the `open()` method to access files, instead use `File.open()` or `IO.open()` that will not execute commands. Using `open()` method seems like a Rails anti-pattern so this shouldn't be an issue.
-- [x] This applies to adding user input to the `<head></head>` tags in erb files, using the `content_for :head` method in erb files, and adding user input to a response with `head :some_header` in controllers. The template doesn't use any of those features, but this may come up in the future.
-- [ ] Configure [`ActionDispatch::HostAuthorization`](https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization) in production to prevent DNS rebinding attacks.
-- [x] This template uses rails version > 2.- [x]2, therefore this is not a concern.
+- [x] Don't use the `open()` method to access files, instead use `File.open()` or `IO.open()` that will not execute commands. 
+- [ ] User inputs that are added to the document header and appear in the `<head></head>` tags in erb files, use the `content_for :head` method in erb files, and adding user input to a response with `head :some_header` in controllers. 
+    - Note: The template doesn't use any of those features, but this may come up in the future.
+- [ ] [`ActionDispatch::HostAuthorization`](https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization) is configured in production to prevent DNS rebinding attacks.
 
 ## Unsafe Query Generation
 - [x] Confirm `deep_munge` hasn't been disabled. 
