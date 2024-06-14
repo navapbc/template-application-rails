@@ -33,7 +33,7 @@ git checkout "$target_version"
 cd - &> /dev/null
 
 echo "Installing ${template_name}..."
-curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/install-template.sh" | bash -s -- "${template_name}" "${app_name}" "${target_script_branch}"
+curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/install-template" | bash -s -- "${template_name}" "${app_name}" "${target_script_branch}"
 
 echo "Storing template version in a file..."
 cd "${template_name}"

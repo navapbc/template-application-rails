@@ -36,11 +36,11 @@ cd - &> /dev/null
 if [ "$template_short_name" != "$app_name" ]; then
   cd "${template_name}"
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
-  curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/rename-template-app.sh" | bash -s -- "${template_short_name}" "${app_name}"
+  curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/rename-template-app" | bash -s -- "${template_short_name}" "${app_name}"
   cd - &> /dev/null
 fi
 
-# Note: Keep this list in sync with the files copied in install-template.sh
+# Note: Keep this list in sync with the files copied in install-template
 cd "${template_name}"
 include_paths=" \
   .github/workflows/ci-${app_name}.yml

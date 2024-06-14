@@ -38,7 +38,7 @@ if [[ "${current_name}" == "${new_name}" ]]; then
   exit 0
 fi
 
-# Note: Keep this list in sync with the files copied in install-template.sh and update-template.sh
+# Note: Keep this list in sync with the files copied in install-template and update-template
 declare -a include_paths
 include_paths=(.github/workflows/ci-app-rails.yml)
 include_paths+=(.grype.yml)

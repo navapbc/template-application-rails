@@ -28,7 +28,7 @@ jobs:
 
       - name: Update application template
         working-directory: project-repo
-        run: ../template-application-rails/template-only-bin/update-template.sh
+        run: ../template-application-rails/template-only-bin/update-template
 
       - name: Push changes to project repo
         working-directory: project-repo

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
 # This script installs an application template to your project.
-# Run this script using ./download-and-install-template.sh. Expected to be run
+# Run this script using ./download-and-install-template. Expected to be run
 # from the project's root directory.
 #
 # Positional parameters:
@@ -27,10 +27,10 @@ cd "${template_name}"
 
 if [ "${template_short_name}" != "${app_name}" ]; then
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
-  curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/rename-template-app.sh" | bash -s -- "${template_short_name}" "${app_name}"
+  curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/rename-template-app" | bash -s -- "${template_short_name}" "${app_name}"
 fi
 
-# Note: Keep this list in sync with the files listed in update-template.sh
+# Note: Keep this list in sync with the files listed in update-template
 # Copy only relevant files that should be included in the project repo.
 echo "Copying files from ${template_name}..."
 # Copy top level paths.
