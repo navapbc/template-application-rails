@@ -27,7 +27,7 @@ cd $template_dir
 
 if [ "$template_short_name" != "$app_name" ]; then
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
-  "./template-only-bin/rename-template-app.sh" "${app_name}" "${template_short_name}"
+  "./template-only-bin/rename-template-app.sh" "${template_short_name}" "${app_name}"
 fi
 
 # Note: Keep this list in sync with the files listed in update-template.sh
