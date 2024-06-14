@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
-# This script renames the application template in your project.
+# This script renames the template application in your project.
 # Run this script in your project's root directory.
 #
+# The project name is the name of the folder in your project's root directory. Use
+# lowercase letters and hyphens. Do not use spaces. Underscores may have unexpected side
+# effects. Choose a unique string that will avoid collisions with commonly used words.
+# By default, the application name is `app-rails`.
+#
 # Positional parameters:
-#   new_name (required) - the new name for the application, in either snake- or kebab-case
-#   old_name (required) – the old name for the application, in either snake- or kebab-case
+#   current_name (required) – the current name for the application
+#   new_name (required) - the new name for the application
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
@@ -17,30 +22,61 @@ sedi () {
 # Export the function so it can be used in the `find -exec` calls later on
 export -f sedi
 
-new_name=$1
-old_name=$2
+current_name=$1
+new_name=$2
+default_name="app-rails"
 
-# Don't make assumptions about whether the arguments are snake- or kebab-case. Handle both.
-# Get kebab-case names
-old_name_kebab=$(echo $old_name | tr "_" "-")
-new_name_kebab=$(echo $new_name | tr "_" "-")
+echo "---------------------------------------------------------------------"
+echo "current_name: ${current_name}"
+echo "new_name: ${new_name}"
+echo
 
-# Get snake-case names
-old_name_snake=$(echo $old_name | tr "-" "_")
-new_name_snake=$(echo $new_name | tr "-" "_")
-
-# Rename the app directory
-if [ -d "$old_name" ]; then
-  echo "Renaming ${old_name} to ${new_name}..."
-  mv "${old_name}" "${new_name}"
+if [[ "${current_name}" == "${new_name}" ]]; then
+  echo "No rename required: ${current_name} == ${new_name}"
+  exit 0
 fi
 
-# Rename all kebab-case instances
-echo "Performing a find-and-replace for all instances of (kebab-case) '$old_name_kebab' with '$new_name_kebab'..."
-LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$old_name_kebab/$new_name_kebab/g\" \"{}\"" \;
+# Note: Keep this list in sync with the files copied in install-template.sh and update-template.sh
+declare -a include_paths
+include_paths=(.github/workflows/ci-app-rails.yml)
+include_paths+=(.grype.yml)
+include_paths+=(app-rails)
+include_paths+=(docker-compose.yml)
+include_paths+=(docker-compose.mock-production.yml)
+include_paths+=(docs/app-rails)
 
-# Rename all snake-case instances
-echo "Performing a find-and-replace for all instances of (snake-case) '$old_name_snake' with '$new_name_snake'..."
-LC_ALL=C find . -type f -not -path "./.git/*" -exec bash -c "sedi \"s/$old_name_snake/$new_name_snake/g\" \"{}\"" \;
+# Loop through the paths to be included in this template.
+for include_path in "${include_paths[@]}"; do
+  echo "Checking: ${include_path}..."
 
-echo "...Done."
+  # If the application does not use the default name (i.e. it has already been renamed),
+  # change the include path to use the correct current_name.
+  if [[ "${current_name}" != "${default_name}" ]]; then
+    include_path=$(echo "${include_path}" | sed "s/${default_name}/${current_name}/g")
+  fi
+
+  # Skip if the path does not exist.
+  if [[ ! -d "${include_path}" ]] && [[ ! -f "${include_path}" ]]; then
+    echo "Skipping ahead. ${include_path} does not exist in this repo"
+    continue
+  fi
+
+  # Construct the correct string substitution that respects word boundaries.
+  # Hat tip: https://unix.stackexchange.com/a/393968
+  if sed --version >/dev/null 2>&1; then
+    word_boundary_replacement="s/\<${current_name}\>/${new_name}/g"
+  else
+    word_boundary_replacement="s/[[:<:]]${current_name}[[:>:]]/${new_name}/g"
+  fi
+
+  # Replace occurrances of the current_name with the new_name in the path.
+  # If the path is a file, replace in the file.
+  # If the path is a directory, recursively replace in all files in the directory.
+  LC_ALL=C find "${include_path}" -type f -exec bash -c "sedi \"${word_boundary_replacement}\" \"{}\"" \;
+
+  # Rename included paths that contain the current_name.
+  if [[ "${include_path}" =~ "${current_name}" ]]; then
+    new_include_path=$(echo "${include_path}" | sed "s/${default_name}/${new_name}/g")
+    mv "${include_path}" "${new_include_path}"
+  fi
+done

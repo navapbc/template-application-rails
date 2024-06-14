@@ -30,20 +30,18 @@ if [ "$template_short_name" != "$app_name" ]; then
   "./template-only-bin/rename-template-app.sh" "${app_name}" "${template_short_name}"
 fi
 
+# Note: Keep this list in sync with the files listed in update-template.sh
+# Copy only relevant files that should be included in the project repo.
 echo "Copying files from $template_name..."
-# Note: Keep this list of paths in sync with INCLUDE_PATHS in update-template.sh
+# Copy top level paths.
 cp -r \
-  .github \
-  .gitignore \
   .grype.yml \
   "${app_name}" \
   docker-compose.yml \
   docker-compose.mock-production.yml \
-  docs \
-  $curr_dir
-cd - >& /dev/null
+  ${curr_dir}
+# Copy nested paths.
+cp ".github/workflows/ci-${app_name}.yml" "${curr_dir}/.github/workflows"
+cp -r "docs/${app_name}" "${curr_dir}/docs"
 
-echo "Removing files relevant only to template development..."
-# Note: Keep this list of paths in sync with EXCLUDE_OPT in update-template.sh
-rm -rf .github/workflows/template-only-*
-rm -rf .github/ISSUE_TEMPLATE
+cd - >& /dev/null
