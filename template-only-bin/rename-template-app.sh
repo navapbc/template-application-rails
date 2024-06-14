@@ -47,13 +47,13 @@ include_paths+=(docs/app-rails)
 
 # Loop through the paths to be included in this template.
 for include_path in "${include_paths[@]}"; do
-  echo "Checking: ${include_path}..."
-
   # If the application does not use the default name (i.e. it has already been renamed),
   # change the include path to use the correct current_name.
   if [[ "${current_name}" != "${default_name}" ]]; then
     include_path=$(echo "${include_path}" | sed "s/${default_name}/${current_name}/g")
   fi
+
+  echo "Checking: ${include_path}..."
 
   # Skip if the path does not exist.
   if [[ ! -d "${include_path}" ]] && [[ ! -f "${include_path}" ]]; then
