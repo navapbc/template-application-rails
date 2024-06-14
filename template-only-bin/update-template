@@ -58,11 +58,10 @@ if [ "$template_short_name" != "$app_name" ]; then
   else
     word_boundary_replacement="s/[[:<:]]${template_short_name}[[:>:]]/${app_name}/g"
   fi
-  cat "${template_name}/update.patch" | sedi "${word_boundary_replacement}"
+  sedi "${word_boundary_replacement}" "${template_name}/update.patch"
 fi
 
 echo "Applying patch..."
-cd "${template_name}/update.patch" "~/Desktop"
 git apply --allow-empty "${template_name}/update.patch"
 
 echo "Storing template version in a file..."
