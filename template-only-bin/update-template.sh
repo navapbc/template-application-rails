@@ -9,6 +9,9 @@
 #     version tag, or commit hash.
 #   app_name (optional) – the name of the application, in either snake- or kebab-case
 #     Defaults to app-rails.
+#   target_script_branch (optional) - the branch of the template repo to use when
+#     retrieving template-only-bin scripts. Used primarily for template development.
+#     Defaults to `main`.
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
@@ -20,6 +23,7 @@ template_short_name="app-${template_name##*-}"
 
 target_version=${1:-"main"}
 app_name=${2:-"${template_short_name}"}
+target_script_branch=${3:-"main"}
 current_version=$(cat ".${template_name}-version")
 
 git clone "https://github.com/navapbc/${template_name}.git"
@@ -32,7 +36,7 @@ cd - &> /dev/null
 if [ "$template_short_name" != "$app_name" ]; then
   cd "${template_name}"
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
-  "./template-only-bin/rename-template-app.sh" "${template_short_name}" "${app_name}"
+  curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/rename-template-app.sh" | bash -s -- "${template_short_name}" "${app_name}"
   cd - &> /dev/null
 fi
 

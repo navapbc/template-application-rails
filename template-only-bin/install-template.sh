@@ -7,6 +7,9 @@
 # Positional parameters:
 #   template_name (required) – the name of the template to install
 #   app_name (required) – the name of the application
+#   target_script_branch (optional) - the branch of the template repo to use when
+#     retrieving template-only-bin scripts. Used primarily for template development.
+#     Defaults to `main`.
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
@@ -16,9 +19,7 @@ template_name=$1
 # See https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Shell-Parameter-Expansion
 template_short_name="app-${template_name##*-}"
 app_name=$2
-
-echo "template_short_name: ${template_short_name}"
-echo "app_name: ${app_name}"
+target_script_branch=${3:-"main"}
 
 curr_dir=$(pwd)
 
@@ -26,7 +27,7 @@ cd "${template_name}"
 
 if [ "${template_short_name}" != "${app_name}" ]; then
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
-  "./template-only-bin/rename-template-app.sh" "${template_short_name}" "${app_name}"
+  curl "https://raw.githubusercontent.com/navapbc/${template_name}/${target_script_branch}/template-only-bin/rename-template-app.sh" | bash -s -- "${template_short_name}" "${app_name}"
 fi
 
 # Note: Keep this list in sync with the files listed in update-template.sh
