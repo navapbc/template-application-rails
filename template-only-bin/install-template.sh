@@ -39,8 +39,8 @@ cp -r \
   docker-compose.yml \
   docker-compose.mock-production.yml \
   ${curr_dir}
-# Copy nested paths.
-cp ".github/workflows/ci-${app_name}.yml" "${curr_dir}/.github/workflows"
-cp -r "docs/${app_name}" "${curr_dir}/docs"
+# Copy nested paths. Make any missing directories.
+mkdir -p "${curr_dir}/.github/workflows" && cp ".github/workflows/ci-${app_name}.yml" "${curr_dir}/.github/workflows"
+mkdir -p "${curr_dir}/docs" && cp -r "docs/${app_name}" "${curr_dir}/docs"
 
 cd - >& /dev/null
