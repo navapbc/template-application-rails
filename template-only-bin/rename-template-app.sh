@@ -76,7 +76,7 @@ for include_path in "${include_paths[@]}"; do
 
   # Rename included paths that contain the current_name.
   if [[ "${include_path}" =~ "${current_name}" ]]; then
-    new_include_path=$(echo "${include_path}" | sed "s/${default_name}/${new_name}/g")
+    new_include_path=$(echo "${include_path}" | sed "s/${current_name}/${new_name}/g")
     mv "${include_path}" "${new_include_path}"
   fi
 done
