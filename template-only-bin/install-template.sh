@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
 # This script installs an application template to your project.
-# Run this script using ./download-and-install-template.sh
+# Run this script using ./download-and-install-template.sh. Expected to be run
+# from the project's root directory.
 #
 # Positional parameters:
 #   template_name (required) – the name of the template to install
@@ -20,19 +21,17 @@ echo "template_short_name: ${template_short_name}"
 echo "app_name: ${app_name}"
 
 curr_dir=$(pwd)
-script_dir=$(dirname $0)
-template_dir="${script_dir}/.."
 
-cd $template_dir
+cd "${template_name}"
 
-if [ "$template_short_name" != "$app_name" ]; then
+if [ "${template_short_name}" != "${app_name}" ]; then
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
   "./template-only-bin/rename-template-app.sh" "${template_short_name}" "${app_name}"
 fi
 
 # Note: Keep this list in sync with the files listed in update-template.sh
 # Copy only relevant files that should be included in the project repo.
-echo "Copying files from $template_name..."
+echo "Copying files from ${template_name}..."
 # Copy top level paths.
 cp -r \
   .grype.yml \

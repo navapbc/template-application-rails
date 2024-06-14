@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
-# This script renames the template application in your project.
-# Run this script in your project's root directory.
+# This script renames the template application in a project.
+# Run this script in a project's root directory.
 #
 # The project name is the name of the folder in your project's root directory. Use
 # lowercase letters and hyphens. Do not use spaces. Underscores may have unexpected side
@@ -26,12 +26,14 @@ current_name=$1
 new_name=$2
 default_name="app-rails"
 
+# Debug:
 echo "---------------------------------------------------------------------"
 echo "current_name: ${current_name}"
 echo "new_name: ${new_name}"
 echo
 
 if [[ "${current_name}" == "${new_name}" ]]; then
+  # Debug:
   echo "No rename required: ${current_name} == ${new_name}"
   exit 0
 fi
@@ -53,7 +55,7 @@ for include_path in "${include_paths[@]}"; do
     include_path=$(echo "${include_path}" | sed "s/${default_name}/${current_name}/g")
   fi
 
-  echo "Checking: ${include_path}..."
+  echo "Checking '${include_path}' to rename '${current_name}' to '${new_name}'..."
 
   # Skip if the path does not exist.
   if [[ ! -d "${include_path}" ]] && [[ ! -f "${include_path}" ]]; then
@@ -77,6 +79,7 @@ for include_path in "${include_paths[@]}"; do
   # Rename included paths that contain the current_name.
   if [[ "${include_path}" =~ "${current_name}" ]]; then
     new_include_path=$(echo "${include_path}" | sed "s/${current_name}/${new_name}/g")
+    echo "Renaming path from '${include_path}' to '${new_include_path}'..."
     mv "${include_path}" "${new_include_path}"
   fi
 done
