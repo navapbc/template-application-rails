@@ -44,7 +44,7 @@ To get started using the template application on your project:
 
     1. Clone the template repository
     2. Copy the template files into your project directory
-    3. Remove any files specific to the template repository, like this README.
+    3. Ignore any files specific to the template repository, like this README.
 
     You can optionally pass in a branch, commit hash, or release that you want to install. For example:
 
@@ -58,7 +58,7 @@ To get started using the template application on your project:
 
 If you have previously installed this template and would like to update your project to use a newer version of this application:
 
-1. Run the [download and install script](./template-only-bin/download-and-install-template.sh) in your project's root directory and pass in the branch, commit hash, or release that you want to update to, followed by the name of your application directory (e.g. `app-rails`).
+1. Run the [update script](./template-only-bin/update-template.sh) in your project's root directory and pass in the branch, commit hash, or release that you want to update to, followed by the name of your application directory (e.g. `app-rails`).
 
     ```bash
     curl https://raw.githubusercontent.com/navapbc/template-application-rails/main/template-only-bin/download-and-install-template.sh | bash -s -- <commit_hash> <app_name>
@@ -68,6 +68,6 @@ If you have previously installed this template and would like to update your pro
 
     1. Clone the template repository
     2. Copy the template files into your project directory
-    3. Remove any files specific to the template repository, like this README.
+    3. Ignore any files specific to the template repository, like this README.
 
 ⚠️ Warning! This will modify existing files. Review all changes carefully after executing the script by running `git diff`.
