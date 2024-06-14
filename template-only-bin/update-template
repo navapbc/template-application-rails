@@ -58,7 +58,7 @@ if [ "$template_short_name" != "$app_name" ]; then
   else
     word_boundary_replacement="s/[[:<:]]${template_short_name}[[:>:]]/${app_name}/g"
   fi
-  cat "${template_name}/update.patch" | sedi \"${word_boundary_replacement}\"
+  cat "${template_name}/update.patch" | sedi "${word_boundary_replacement}"
 fi
 
 echo "Applying patch..."
