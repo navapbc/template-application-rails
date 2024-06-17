@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# This script updates an application template in your project.
+# This script from your project's root directory.
+#
+# Positional parameters:
+#   target_version (optional) – the version of the template application to install.
+#     Defaults to main. Can be any target that can be checked out, including a branch,
+#     version tag, or commit hash.
+#   app_name (optional) – the name of the application, in either snake- or kebab-case
+#     Defaults to app-rails.
+# -----------------------------------------------------------------------------
+set -euo pipefail
+
+# Helper to get the correct sed -i behavior for both GNU sed and BSD sed (installed by default on macOS)
+# Hat tip: https://stackoverflow.com/a/38595160
+sedi () {
+  sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
+}
+# Export the function so it can be used in the `find -exec` calls later on
+export -f sedi
+
+template_name="template-application-rails"
+# Use shell parameter expansion to get the last word, where the delimiter between
+# words is `-`.
+# See https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Shell-Parameter-Expansion
+template_short_name="app-${template_name##*-}"
+
+target_version=${1:-"main"}
+app_name=${2:-"${template_short_name}"}
+current_version=$(cat ".${template_name}-version")
+
+git clone "https://github.com/navapbc/${template_name}.git"
+
+echo "Checking out $target_version..."
+cd "${template_name}"
+git checkout "$target_version"
+cd - &> /dev/null
+
+# Note: Keep this list in sync with the files copied in install-template
+cd "${template_name}"
+include_paths=" \
+  .github/workflows/ci-${template_short_name}.yml
+  .grype.yml \
+  ${template_short_name} \
+  docker-compose.yml \
+  docker-compose.mock-production.yml \
+  docs/${template_short_name}"
+git diff $current_version $target_version -- $include_paths > update.patch
+cd - &> /dev/null
+
+if [ "$template_short_name" != "$app_name" ]; then
+  echo "Modifying patch to use ${app_name} instead of ${template_short_name}..."
+  # Construct the correct string substitution that respects word boundaries.
+  # Hat tip: https://unix.stackexchange.com/a/393968
+  if sed --version >/dev/null 2>&1; then
+    word_boundary_replacement="s/\<${template_short_name}\>/${app_name}/g"
+  else
+    word_boundary_replacement="s/[[:<:]]${template_short_name}[[:>:]]/${app_name}/g"
+  fi
+  sedi "${word_boundary_replacement}" "${template_name}/update.patch"
+fi
+
+echo "Applying patch..."
+git apply --allow-empty "${template_name}/update.patch"
+
+echo "Storing template version in a file..."
+cd "${template_name}"
+git rev-parse HEAD >../".${template_name}-version"
+cd - &> /dev/null
+
+echo "Cleaning up ${template_name} folder..."
+rm -fr "${template_name}"
+
+echo "...Done."
