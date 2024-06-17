@@ -93,13 +93,20 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle"
 
 # Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends unzip python3-venv python-is-python3  curl libvips postgresql-client && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
-    curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
-    unzip awscli-bundle.zip && \
-    ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
-    rm -rf ./awscli-bundle awscli-bundle.zip
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        libvips \
+        postgresql-client \
+        python-is-python3 \
+        python3-venv \
+        unzip \
+        wget \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives \
+    && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" \
+    && unzip awscli-bundle.zip \
+    && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws \
+    && rm -rf ./awscli-bundle awscli-bundle.zip
 
 # Install custom db migrate script
 COPY bin/db-migrate /usr/bin/
