@@ -67,10 +67,10 @@ There is currently no file upload or download functionality at this time, so ple
 - [x] Sanitize content in the erb files that come from user inputs, using `<%=h <some user provided input> =>` to protect against defacement.
 - [x] Use a permitted list of tags in inputs that allow html or when allowing a text input that will be converted into html, using:
     - Note: The most common Rails tool for text to html conversion is RedCloth.
-```
-tags = %w(a acronym b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p)
-s = sanitize(user_input, tags: tags, attributes: %w(href title))
-```
+    ```
+    tags = %w(a acronym b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p)
+    s = sanitize(user_input, tags: tags, attributes: %w(href title))
+    ```
 - [x] Rails `sanitize()` method is used on inputs that will be presented to the UI, including the Admin UI if there is one.
     - Note: While consensus seems mixed about the necessity to sanitize Rails input fields for defacement, sanitizing inputs is very useful to protect against encoding injection.
 - [ ] Inputs for custom colors or CSS filters are sanitized with Rail's `sanitize()` method, and the application builds the CSS in the web application first and ensures it is valid CSS before sanitizing.
