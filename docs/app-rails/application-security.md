@@ -82,7 +82,9 @@ There is currently no file upload or download functionality at this time, so ple
     * `spawn()`
     * `command`
 - [x] Don't use the `open()` method to access files, instead use `File.open()` or `IO.open()` that will not execute commands. 
-- [ ] User inputs that are added to the document header and appear in the `<head></head>` tags in erb files, use the `content_for :head` method in erb files, and adding user input to a response with `head :some_header` in controllers. 
+- [ ] User inputs that are interpolated to the HTML header element or are included in the response header set in a controller should:
+    - Use the `content_for :head` method in `.erb` files.
+    - Use `head :some_header` in controller where that user input is passed into the controller method. 
     - Note: The template doesn't use any of those features, but this may come up in the future.
 - [ ] [`ActionDispatch::HostAuthorization`](https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization) is configured in production to prevent DNS rebinding attacks.
 
