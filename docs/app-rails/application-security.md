@@ -34,7 +34,7 @@ There is currently no file upload or download functionality at this time, so ple
     - [x] `link_to` methods do not interpolate to user inputs.
     - [x] `redirect_to` methods do not interpolate to user inputs.
 - [ ] Prevent files from being uploaded if the filename do not match a set of permitted characters.
-    - Note: filtering filename imports alone can still leave an application vulnerable to XSS attacks.
+    - Note: Filtering on filename on its own can still leave an application vulnerable to XSS attacks.
 - [ ] Do not allow file uploads to place files in the public directory as code in those files may be executed by the browser.
 - [ ] Prevent users from downloading files to which they shouldn't have access.
     - [ ] Check filename for download against a set of permitted characters.
