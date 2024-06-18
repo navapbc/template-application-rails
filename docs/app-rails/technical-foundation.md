@@ -129,7 +129,7 @@ Rails has some useful [built-in debugging tools](https://guides.rubyonrails.org/
 
 - Start the rails console: `make rails-console`
 - Run a console in the browser:
-  - Add a `console` with `<% console %>` line to an `.erb` file and an interactive console, similar to the rails console, will appear in the bottom half of your browser window
+  - Add `<% console %>` to an `.erb` file and an interactive console, similar to the rails console, will appear in the bottom half of your browser window.
   - Note: If the console doesn't appear when running in a docker container, check to see if your IP address is added to the permissions list in [development.rb](app-rails/config/environments/development.rb) in `config.web_console.permissions`. The list is currently set to allow most internal IPs. You would also see an error in your terminal that looks something like: `Cannot render console from <your.IP.address.here>! Allowed networks: 127.0.0.0/127.255.255.255, ::1`
 - Run the debugger:
   - Add a `debugger` line and the rails server will pause and start the debugger
