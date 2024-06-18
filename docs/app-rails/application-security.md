@@ -7,7 +7,7 @@ Each item below will be checked if it is already implemented by default, or unch
 This document uses the Rails Guide to [Securing Rails Applications](https://guides.rubyonrails.org/security.html) to audit this project's Rails security best practices.
 
 ## Sessions
-This template application uses Devise to manage sessions and cookies. You can manage the Devise configuration in the [`devise.rb`](app-rails/config/initializers/devise.rb) file, and for more detailed information you can read the [Devise documentation](https://rubydoc.info/github/heartcombo/devise).
+We use Devise to manage sessions and cookies. Devise configuration is managed in the [`devise.rb`](app-rails/config/initializers/devise.rb) file. For more detailed information, see the [Devise documentation](https://rubydoc.info/github/heartcombo/devise).
 - [x] SSL (`config.force_ssl = true`) is enforced in production environments.
 - [x] Provide the user with a prominent logout button to make it easy to clear the session on public computers.
 - [x] Cookies stored client side do not contain sensitive information.
