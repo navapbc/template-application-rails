@@ -125,7 +125,7 @@ make rails-generate GENERATE_COMMAND="model Foo --primary-key-type=uuid"
 
 ### 🐛 Debugging
 
-Rails has some useful [built-in debugging tools](https://guides.rubyonrails.org/debugging_rails_applications.html).
+Rails has some useful [built-in debugging tools](https://guides.rubyonrails.org/debugging_rails_applications.html). Here are a few different options:
 
 - Start the [rails console](https://guides.rubyonrails.org/command_line.html#bin-rails-console): `make rails-console`
 - Run a console in the browser:
