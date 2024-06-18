@@ -18,7 +18,7 @@ We use Devise to manage sessions and cookies. Devise configuration is managed in
 - [ ] Expire sessions after a set amount of time, regardless of activity, 
     - Note: Automated session expiration can be easily set by the auth service, such as in AWS Cognito.
 - [ ] Use a nonce generator to protect against cookie replay attacks. 
-    - Note: The commented out code for this is located in [`/app-rails/config/initializers/content_security_policy.rb`](/app-rails/config/initializers/content_security_policy.rb) Review the impact this may have on your application if you have several application servers.
+    - Note: The commented out code for this is located in [`/app-rails/config/initializers/content_security_policy.rb`](/app-rails/config/initializers/content_security_policy.rb) Review the impact this may have if there are several application servers.
 - [x] Automatically expire sessions on sign in and sign out.
     - Note. This is set in the [Devise configuration file](app-rails/config/initializers/devise.rb) with `config.expire_all_remember_me_on_sign_out = true`.
 
