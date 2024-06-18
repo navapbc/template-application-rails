@@ -38,7 +38,7 @@ There is currently no file upload or download functionality at this time, so ple
 - [ ] Do not allow file uploads to place files in the public directory as code in those files may be executed by the browser.
 - [ ] Prevent users from downloading files to which they shouldn't have access.
     - [ ] Prevent files from being downloaded if the filename do not match a set of permitted characters.
-    - [ ] Check the file returned from the search is from the appropriate directory.
+    - [ ] For website search, prevent including files in the search results if the file is not from an appropriate directory.
 
 ## User Management
 - [x] Store only cryptographically hashed passwords, not plain-text passwords.
