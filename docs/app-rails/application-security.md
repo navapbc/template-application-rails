@@ -29,7 +29,7 @@ We use Devise to manage sessions and cookies. Devise configuration is managed in
 - [ ] Set forgery protection in production  
 
 ## Redirection and Files
-The template application doesn't have any file upload or download functionality at this time, so please review these items when adding file management functionality.
+There is currently no file upload or download functionality at this time, so please review these items when adding file management functionality.
 - [x] Do not use user inputs to generate routes (ie. creating a route with the username), which is vulnerable to XSS attacks.
     - [x] `link_to` methods do not interpolate to user inputs.
     - [x] `redirect_to` methods do not interpolate to user inputs.
