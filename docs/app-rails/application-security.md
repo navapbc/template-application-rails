@@ -33,7 +33,7 @@ The template application doesn't have any file upload or download functionality 
 - [x] Do not use user inputs to generate routes (ie. creating a route with the username), which is vulnerable to XSS attacks.
     - [x] `link_to` methods do not interpolate to user inputs.
     - [x] `redirect_to` methods do not interpolate to user inputs.
-- [ ] Check filename for file imports against a set of permitted characters.
+- [ ] Prevent files from being uploaded if the filename do not match a set of permitted characters.
     - Note: filtering filename imports alone can still leave an application vulnerable to XSS attacks.
 - [ ] Do not allow file uploads to place files in the public directory as code in those files may be executed by the browser.
 - [ ] Prevent users from downloading files to which they shouldn't have access.
