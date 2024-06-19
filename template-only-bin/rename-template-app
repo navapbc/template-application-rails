@@ -83,3 +83,7 @@ for include_path in "${include_paths[@]}"; do
     mv "${include_path}" "${new_include_path}"
   fi
 done
+
+echo
+echo "===> Review all changes carefully using 'git diff' before committing!"
+echo
