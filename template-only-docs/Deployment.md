@@ -7,6 +7,3 @@ This template can be deployed using the [Nava Platform Infrastructure Template](
 ## Deploying using other methods
 
 If you choose to deploy your project using a different method:
-
-1. Ensure that `pgcrypto` is enabled in your cloud hosted databases.
-    - If you are using AWS RDS, `pgcrypto` is already
