@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV["AWS_SES_EMAIL"]
+  default from: ENV["SES_EMAIL"]
   layout "mailer"
 end

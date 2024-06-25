@@ -8,7 +8,7 @@ local:
 
 amazon:
   service: S3
-  bucket: <%= ENV.fetch("AWS_BUCKET_NAME") { nil } %>
+  bucket: <%= ENV.fetch("BUCKET_NAME") { nil } %>
 
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)

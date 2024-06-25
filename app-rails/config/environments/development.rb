@@ -36,9 +36,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.active_storage.service = ENV["AWS_BUCKET_NAME"] ? :amazon : :local
+  config.active_storage.service = ENV["BUCKET_NAME"] ? :amazon : :local
 
-  config.action_mailer.delivery_method = ENV["AWS_SES_EMAIL"] ? :sesv2 : :letter_opener
+  config.action_mailer.delivery_method = ENV["SES_EMAIL"] ? :sesv2 : :letter_opener
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false

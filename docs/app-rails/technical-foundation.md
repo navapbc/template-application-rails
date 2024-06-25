@@ -61,7 +61,7 @@ To preview email views in the browser, visit: `/rails/mailers`
 To test AWS SES email sending locally:
 
 1. Set the "AWS services" env var in your `.env` file
-1. Set the `AWS_SES_EMAIL` env var to a verified sending identity
+1. Set the `SES_EMAIL` env var to a verified sending identity
 1. Restart the server
 
 ### 🎭 Authentication
