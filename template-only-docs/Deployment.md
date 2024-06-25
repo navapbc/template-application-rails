@@ -11,6 +11,8 @@
 
 ## Deploying using the Platform Infrastructure Template
 
+*Note: The following will be true once https://github.com/navapbc/template-infra/pull/650 is merged.*
+
 This template can be deployed using the [Nava Platform Infrastructure Template](https://github.com/navapbc/template-infra). Using the infrastructure template will handle creating and configuring all of the resources required in AWS.
 
 While following the [infrastructure template installation instructions](https://github.com/navapbc/template-infra?tab=readme-ov-file#installation) and [setup instructions](https://github.com/navapbc/template-infra/blob/main/infra/README.md), use the following configuration:
