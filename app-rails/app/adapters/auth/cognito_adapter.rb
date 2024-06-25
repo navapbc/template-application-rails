@@ -14,7 +14,7 @@ class Auth::CognitoAdapter
   def create_account(email, password)
     begin
       response = @client.sign_up(
-        client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+        client_id: ENV["COGNITO_CLIENT_ID"],
         secret_hash: get_secret_hash(email),
         username: email,
         password: password,
@@ -47,7 +47,7 @@ class Auth::CognitoAdapter
   def forgot_password(email)
     begin
       response = @client.forgot_password(
-        client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+        client_id: ENV["COGNITO_CLIENT_ID"],
         secret_hash: get_secret_hash(email),
         username: email
       )
@@ -64,7 +64,7 @@ class Auth::CognitoAdapter
   def confirm_forgot_password(email, code, password)
     begin
       @client.confirm_forgot_password(
-        client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+        client_id: ENV["COGNITO_CLIENT_ID"],
         secret_hash: get_secret_hash(email),
         username: email,
         confirmation_code: code,
@@ -84,7 +84,7 @@ class Auth::CognitoAdapter
   def change_email(uid, new_email)
     begin
       response = @client.admin_update_user_attributes(
-        user_pool_id: ENV["AWS_COGNITO_USER_POOL_ID"],
+        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
         username: uid,
         user_attributes: [
           {
@@ -114,8 +114,8 @@ class Auth::CognitoAdapter
   def initiate_auth(email, password)
     begin
       response = @client.admin_initiate_auth(
-        user_pool_id: ENV["AWS_COGNITO_USER_POOL_ID"],
-        client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
+        client_id: ENV["COGNITO_CLIENT_ID"],
         auth_flow: "ADMIN_USER_PASSWORD_AUTH",
         auth_parameters: {
           "USERNAME" => email,
@@ -151,7 +151,7 @@ class Auth::CognitoAdapter
   def resend_verification_code(email)
     begin
       @client.resend_confirmation_code(
-        client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+        client_id: ENV["COGNITO_CLIENT_ID"],
         secret_hash: get_secret_hash(email),
         username: email
       )
@@ -163,8 +163,8 @@ class Auth::CognitoAdapter
   def respond_to_auth_challenge(code, challenge = {})
     begin
       response = @client.admin_respond_to_auth_challenge(
-        client_id: ENV["AWS_COGNITO_CLIENT_ID"],
-        user_pool_id: ENV["AWS_COGNITO_USER_POOL_ID"],
+        client_id: ENV["COGNITO_CLIENT_ID"],
+        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
         challenge_name: "SOFTWARE_TOKEN_MFA",
         session: challenge[:session],
         challenge_responses: {
@@ -184,7 +184,7 @@ class Auth::CognitoAdapter
   def verify_account(email, code)
     begin
       @client.confirm_sign_up(
-        client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+        client_id: ENV["COGNITO_CLIENT_ID"],
         secret_hash: get_secret_hash(email),
         username: email,
         confirmation_code: code
@@ -242,7 +242,7 @@ class Auth::CognitoAdapter
   def disable_software_token(uid)
     begin
       @client.admin_set_user_mfa_preference(
-        user_pool_id: ENV["AWS_COGNITO_USER_POOL_ID"],
+        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
         username: uid,
         software_token_mfa_settings: {
           enabled: false,
@@ -265,8 +265,8 @@ class Auth::CognitoAdapter
     end
 
     def get_secret_hash(username)
-      message = username + ENV["AWS_COGNITO_CLIENT_ID"]
-      key = ENV["AWS_COGNITO_CLIENT_SECRET"]
+      message = username + ENV["COGNITO_CLIENT_ID"]
+      key = ENV["COGNITO_CLIENT_SECRET"]
       Base64.strict_encode64(OpenSSL::HMAC.digest("sha256", key, message))
     end
 

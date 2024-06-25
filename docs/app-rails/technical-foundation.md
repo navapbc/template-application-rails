@@ -40,7 +40,6 @@ We have are using [UUIDs for primary keys](https://guides.rubyonrails.org/active
 
 - ⚠️ Using ActiveRecord functions like `Foo.first` and `Foo.last` have unreliable results
 - Generating new models or scaffolds requires passing the `--primary-key-type=uuid` flag. For instance, `make rails-generate GENERATE_COMMAND="model Foo --primary-key-type=uuid"`
-- `pgcrypto` is a required dependency
 
 #### Enums
 
@@ -61,9 +60,9 @@ To preview email views in the browser, visit: `/rails/mailers`
 
 To test AWS SES email sending locally:
 
-1. Set the `AWS_*` env var in your `.env` file
-1. Set the `SES_EMAIL` env var to a verified sending identity
-1. Restart the server
+1. Set the "AWS services" environment variables in your `.env` file.
+1. Add an `SES_EMAIL` environment variable to a verified sending identity.
+1. Restart the server.
 
 ### 🎭 Authentication
 
