@@ -15,7 +15,7 @@
 /.env*
 /*.env*
 !/.env*.erb
-!/.env*.example
+!/*.env*.example
 
 # Ignore all logfiles and tempfiles.
 /log/*
