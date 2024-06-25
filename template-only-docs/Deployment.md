@@ -41,3 +41,8 @@ While following the [infrastructure template installation instructions](https://
     }
     ```
 1. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).
+
+## Deploying using another method
+
+- AWS Cognito requires a lot of configuration to work correctly. See the Nava Platform infrastructure template for example configuration.
+- If you are deploying using AWS ECS, but don't want to use the Platform infrastructure template, pass in environment variables and secrets using the ECS task definition. Use the `environment` key for environment variables and the `secrets` key with `valueFrom` for secrets.
