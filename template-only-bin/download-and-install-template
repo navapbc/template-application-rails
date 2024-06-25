@@ -29,7 +29,7 @@ git checkout "$target_version"
 cd - &> /dev/null
 
 echo "Installing ${template_name}..."
-curl "https://raw.githubusercontent.com/navapbc/${template_name}/rocket/update-template-only-bin-scripts/template-only-bin/install-template" | bash -s -- "${template_name}" "${app_name}"
+curl "https://raw.githubusercontent.com/navapbc/${template_name}/main/template-only-bin/install-template" | bash -s -- "${template_name}" "${app_name}"
 
 echo "Storing template version in a file..."
 cd "${template_name}"
