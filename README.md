@@ -61,7 +61,7 @@ If you have previously installed this template and would like to update your pro
 1. Run the [update script](./template-only-bin/update-template) in your project's root directory and pass in the branch, commit hash, or release that you want to update to, followed by the name of your application directory (e.g. `app-rails`).
 
     ```bash
-    curl https://raw.githubusercontent.com/navapbc/template-application-rails/main/template-only-bin/download-and-install-template | bash -s -- <commit_hash> <app_name>
+    curl https://raw.githubusercontent.com/navapbc/template-application-rails/main/template-only-bin/update-template | bash -s -- <commit_hash> <app_name>
     ```
 
     This script will:

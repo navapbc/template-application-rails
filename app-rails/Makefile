@@ -144,6 +144,9 @@ db-up: ## Run just the database container
 db-migrate: ## Run database migrations
 	$(RAILS_RUN_CMD) db:migrate
 
+db-rollback: ## Rollback a database migration
+	$(RAILS_RUN_CMD) db:rollback
+
 db-test-prepare: ## Prepare the test database
 	$(RAILS_RUN_CMD) db:test:prepare
 

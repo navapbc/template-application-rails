@@ -23,7 +23,7 @@ cd "${template_name}"
 
 if [ "${template_short_name}" != "${app_name}" ]; then
   echo "Modifying template to use ${app_name} instead of ${template_short_name}..."
-  curl "https://raw.githubusercontent.com/navapbc/${template_name}/rocket/update-template-only-bin-scripts/template-only-bin/rename-template-app" | bash -s -- "${template_short_name}" "${app_name}"
+  curl "https://raw.githubusercontent.com/navapbc/${template_name}/main/template-only-bin/rename-template-app" | bash -s -- "${template_short_name}" "${app_name}"
 fi
 
 # Note: Keep this list in sync with the files listed in update-template
