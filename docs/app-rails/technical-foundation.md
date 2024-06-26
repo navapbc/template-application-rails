@@ -124,11 +124,18 @@ make rails-generate GENERATE_COMMAND="model Foo --primary-key-type=uuid"
 
 ### 🐛 Debugging
 
-Rails has some useful [built-in debugging tools](https://guides.rubyonrails.org/debugging_rails_applications.html).
+Rails has some useful [built-in debugging tools](https://guides.rubyonrails.org/debugging_rails_applications.html). Here are a few different options:
 
-- Start the rails console: `make rails-console`
+- Start the [rails console](https://guides.rubyonrails.org/command_line.html#bin-rails-console): `make rails-console`
 - Run a console in the browser:
-  - Add a `console` line and an interactive console, similar to the rails console, will appear in the bottom half of your browser window
+  - Add `<% console %>` to an `.erb` file and an interactive console, similar to the rails console, will appear in the bottom half of your browser window.
+  - Note: If the console doesn't appear when running in a docker container, check to see if your IP address is added to the permissions list in [development.rb](app-rails/config/environments/development.rb) in `config.web_console.permissions`. The list is currently set to allow most internal IPs. You would also see an error in your terminal that looks something like: `Cannot render console from <your.IP.address.here>! Allowed networks: 127.0.0.0/127.255.255.255, ::1`
 - Run the debugger:
   - Add a `debugger` line and the rails server will pause and start the debugger
-  - Note: this is not yet configured for this application when doing local development in a container
+  - If you're running the app natively, such as with `make start-native`:
+    - You must connect to the debugger from another terminal session because of our [Procfile.dev](app-rails/Procfile.dev) configuration. 
+    - From another terminal tab, run `rdbg -A`. 
+    - If you have multiple Rails applications with debuggers running, you'll have to specify the port to attach the debugger to. For more information, see the [Rails debug gem documentation](https://github.com/ruby/debug?tab=readme-ov-file#remote-debugging).
+  - If you're running the app in a container, such as with `make start-container`:
+    - `rdbg` in the terminal on your host machine will not be able to see the port in the container to connect to the debugger. 
+    - Instead, run `rdbg` inside the container: `docker compose exec app-rails rdbg -A`, where `app-rails` is the name of the service in `docker compose`
