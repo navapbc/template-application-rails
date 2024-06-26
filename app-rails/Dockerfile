@@ -55,6 +55,10 @@ RUN bundle config set --local without production && \
     bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
+# Install system-wide gems for development
+# This version must match Gemfile.lock. Otherwise, `rdbg` will fail.
+RUN gem install debug -v 1.9.2
+
 # Copy application code
 COPY . .
 

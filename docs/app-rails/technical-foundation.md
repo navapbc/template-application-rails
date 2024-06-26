@@ -135,8 +135,8 @@ Rails has some useful [built-in debugging tools](https://guides.rubyonrails.org/
   - Add a `debugger` line and the rails server will pause and start the debugger
   - If you're running the app natively, such as with `make start-native`:
     - You must connect to the debugger from another terminal session because of our [Procfile.dev](app-rails/Procfile.dev) configuration. 
-    - From another terminal tab, run `rdbg -An`. 
+    - From another terminal tab, run `rdbg -A`. 
     - If you have multiple Rails applications with debuggers running, you'll have to specify the port to attach the debugger to. For more information, see the [Rails debug gem documentation](https://github.com/ruby/debug?tab=readme-ov-file#remote-debugging).
   - If you're running the app in a container, such as with `make start-container`:
     - `rdbg` in the terminal on your host machine will not be able to see the port in the container to connect to the debugger. 
-    - Instead, run `rdbg` inside the container: `docker compose exec app-rails rdbg -An`
+    - Instead, run `rdbg` inside the container: `docker compose exec app-rails rdbg -A`, where `app-rails` is the name of the service in `docker compose`
