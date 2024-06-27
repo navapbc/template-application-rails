@@ -5,5 +5,5 @@ class Users::ResendVerificationForm
 
   attr_accessor :email
 
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, multiline: true }
 end

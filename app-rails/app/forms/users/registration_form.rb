@@ -6,7 +6,7 @@ class Users::RegistrationForm
   attr_accessor :email, :password, :password_confirmation, :role
 
   validates :email, :password, :role, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email.present? }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, multiline: true }, if: -> { email.present? }
 
   validates :password, confirmation: true, if: -> { password.present? }
 end

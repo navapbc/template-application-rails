@@ -6,5 +6,5 @@ class Users::NewSessionForm
   attr_accessor :email, :password
 
   validates :email, :password, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email.present? }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, multiline: true }, if: -> { email.present? }
 end
