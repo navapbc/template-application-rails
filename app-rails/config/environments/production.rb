@@ -57,7 +57,7 @@ Rails.application.configure do
   # Exclude healthcheck endpoint from force SSL since healthchecks should not go through
   # the reverse proxy.
   # See https://api.rubyonrails.org/classes/ActionDispatch/SSL.html
-  config.ssl_options = { redirect: { exclude: -> request { /health/.match?(request.path) } } }
+  config.ssl_options = { redirect: { exclude: ->(request) { /health/.match?(request.path) } } }
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
@@ -75,9 +75,13 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
-  # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter = :resque
-  # config.active_job.queue_name_prefix = "app_rails_production"
+  # Use "GoodJob" for Active Job backend - docs at https://github.com/bensheldon/good_job
+  # GoodJob was picked as a default because it uses Postgres (already a part of this template)
+  # and has good adoption and maintenence.
+  config.active_job.queue_adapter = :good_job
+  # This mode of execution runs jobs async in the same thread pool as the Rails server.
+  # Project teams will want to evaluate the best way to run queued jobs for their project.
+  config.good_job.execution_mode = :async
 
   config.action_mailer.delivery_method = :sesv2
   config.action_mailer.perform_caching = false

@@ -60,6 +60,9 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  # Use "GoodJob" for Active Job backend - docs at https://github.com/bensheldon/good_job
+  config.active_job.queue_adapter = :good_job
+
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
 
@@ -67,7 +70,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Allow web_console to render when triggered from the rails app running locally in a docker container.
-  config.web_console.permissions = ["192.168.0.0/16", "172.16.0.0/16", "10.0.0.0/8"]
+  config.web_console.permissions = [ "192.168.0.0/16", "172.16.0.0/16", "10.0.0.0/8" ]
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
