@@ -80,7 +80,7 @@ Rails.application.configure do
   # and has good adoption and maintenence.
   config.active_job.queue_adapter = :good_job
   # This mode of execution runs jobs async in the same thread pool as the Rails server.
-  # Project teams will want to evaluate the best way to run queued jobs for their project.
+  # Choose the best way to run queued jobs for your project.
   config.good_job.execution_mode = :async
 
   config.action_mailer.delivery_method = :sesv2
