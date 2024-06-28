@@ -57,7 +57,7 @@ Rails.application.configure do
   # Exclude healthcheck endpoint from force SSL since healthchecks should not go through
   # the reverse proxy.
   # See https://api.rubyonrails.org/classes/ActionDispatch/SSL.html
-  config.ssl_options = { redirect: { exclude: -> request { /health/.match?(request.path) } } }
+  config.ssl_options = { redirect: { exclude: ->(request) { /health/.match?(request.path) } } }
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
