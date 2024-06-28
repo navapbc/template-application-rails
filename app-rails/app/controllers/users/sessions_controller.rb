@@ -94,7 +94,7 @@ class Users::SessionsController < Devise::SessionsController
     def new_session_params
       # If :users_new_session_form is renamed, make sure to also update it in
       # cognito_authenticatable.rb otherwise login will not work.
-      params.require(:users_new_session_form).permit(:email, :password)
+      params.require(:users_new_session_form).permit(:email, :password, :hp_field)
     end
 
     # This is similar to the default Devise SessionController implementation
