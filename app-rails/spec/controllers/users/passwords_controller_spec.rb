@@ -105,7 +105,7 @@ RSpec.describe Users::PasswordsController do
       expect(response.status).to eq(422)
     end
 
-    it "handles submission by bots" do 
+    it "handles submission by bots" do
       post :confirm_reset, params: {
         users_reset_password_form: {
           email: "test@example.com",
