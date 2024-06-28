@@ -46,6 +46,10 @@ en:
       default: "%m/%d/%Y"
       short: "%b %d"
       long: "%B %d, %Y"
+  errors:
+    attributes:
+      hp_field:
+        present: "You entered text in a field that is meant to catch spambots."
   helpers:
     submit:
       create: "Submit"

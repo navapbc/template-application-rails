@@ -9,7 +9,8 @@ class Users::PasswordsController < ApplicationController
 
   def send_reset_password_instructions
     email = params[:users_forgot_password_form][:email]
-    @form = Users::ForgotPasswordForm.new(email: email)
+    hp_field = params[:users_forgot_password_form][:hp_field]
+    @form = Users::ForgotPasswordForm.new(email: email, hp_field: hp_field)
 
     if @form.invalid?
       flash.now[:errors] = @form.errors.full_messages
@@ -38,7 +39,7 @@ class Users::PasswordsController < ApplicationController
       return render :reset, status: :unprocessable_entity
     end
 
-    begin
+    begin 
       auth_service.confirm_forgot_password(
         @form.email,
         @form.code,
