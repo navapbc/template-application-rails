@@ -47,7 +47,7 @@ RSpec.describe Users::PasswordsController do
 
     it "handles submission by bots" do
       post :send_reset_password_instructions, params: {
-        users_forgot_password_form: { email: "UsernameExists@example.com", hp_field: "I am a bot" },
+        users_forgot_password_form: { email: "UsernameExists@example.com", spam_trap: "I am a bot" },
         locale: "en"
       }
 
@@ -111,7 +111,7 @@ RSpec.describe Users::PasswordsController do
           email: "test@example.com",
           code: "123456",
           password: "password",
-          hp_field: "I am a bot"
+          spam_trap: "I am a bot"
         },
         locale: "en"
       }

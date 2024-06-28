@@ -1,9 +1,9 @@
 class Users::ForgotPasswordForm
   include ActiveModel::Model
 
-  attr_accessor :email, :hp_field
+  attr_accessor :email, :spam_trap
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  validates :hp_field, absence: true
+  validates :spam_trap, absence: true
 end

@@ -80,7 +80,7 @@ RSpec.describe Users::RegistrationsController do
           email: email,
           password: "password",
           role: "employer",
-          hp_field: "I am a bot"
+          spam_trap: "I am a bot"
         },
         locale: "en"
       }

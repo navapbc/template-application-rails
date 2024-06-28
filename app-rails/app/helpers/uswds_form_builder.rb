@@ -79,12 +79,12 @@ class UswdsFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def honeypot_field
-    hp_classes = "opacity-0 position-absolute z-bottom top-0 left-0 height-0 width-0"
+    spam_trap_classes = "opacity-0 position-absolute z-bottom top-0 left-0 height-0 width-0"
     label_text = "Do not fill in this field. It is an anti-spam measure."
 
-    @template.content_tag(:div, class: "usa-form-group #{hp_classes}") do
-      label(:hp_field, label_text, { tabindex: -1, class: "usa-label #{hp_classes}" }) +
-      @template.text_field(@object_name, :hp_field, { autocomplete: "false", tabindex: -1, class: "usa-input #{hp_classes}" })
+    @template.content_tag(:div, class: "usa-form-group #{spam_trap_classes}") do
+      label(:spam_trap, label_text, { tabindex: -1, class: "usa-label #{spam_trap_classes}" }) +
+      @template.text_field(@object_name, :spam_trap, { autocomplete: "false", tabindex: -1, class: "usa-input #{spam_trap_classes}" })
     end
   end
 

@@ -99,7 +99,7 @@ RSpec.describe Users::SessionsController do
         users_new_session_form: {
           email: "test@example.com",
           password: "password",
-          hp_field: "I am a bot"
+          spam_trap: "I am a bot"
         },
         locale: "en"
       }

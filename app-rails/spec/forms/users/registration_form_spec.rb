@@ -40,9 +40,9 @@ RSpec.describe Users::RegistrationForm do
   it "requires the honeypot field is empty" do
     form.email = "test@example.com"
     form.password = valid_password
-    form.hp_field = "I am a bot"
+    form.spam_trap = "I am a bot"
 
     expect(form).not_to be_valid
-    expect(form.errors.of_kind?(:hp_field, :present)).to be_truthy
+    expect(form.errors.of_kind?(:spam_trap, :present)).to be_truthy
   end
 end

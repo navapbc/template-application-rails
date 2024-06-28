@@ -48,7 +48,7 @@ en:
       long: "%B %d, %Y"
   errors:
     attributes:
-      hp_field:
+      spam_trap:
         present: "This field should be left empty. It is intended to prevent bots from submitting spam using this form."
   helpers:
     submit:
