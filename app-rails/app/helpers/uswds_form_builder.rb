@@ -84,7 +84,7 @@ class UswdsFormBuilder < ActionView::Helpers::FormBuilder
     
     @template.content_tag(:div, class: "usa-form-group #{hp_classes}") do
       label(:hp_field, label_text, { tabindex: -1, class: "usa-label #{hp_classes}" }) +
-      @template.text_field(@object_name, :hp_field, { autocomplete: "false", tabindex: -1, class: "usa-input #{hp_classes}", value: "test"})
+      @template.text_field(@object_name, :hp_field, { autocomplete: "false", tabindex: -1, class: "usa-input #{hp_classes}", value: "test"}) # remove value: "test when done testing"
     end
   end
 
