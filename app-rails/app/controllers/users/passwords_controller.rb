@@ -60,6 +60,6 @@ class Users::PasswordsController < ApplicationController
     end
 
     def reset_password_params
-      params.require(:users_reset_password_form).permit(:email, :code, :password)
+      params.require(:users_reset_password_form).permit(:email, :code, :password, :hp_field)
     end
 end

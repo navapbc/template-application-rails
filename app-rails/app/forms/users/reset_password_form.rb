@@ -3,9 +3,11 @@
 class Users::ResetPasswordForm
   include ActiveModel::Model
 
-  attr_accessor :email, :password, :code
+  attr_accessor :email, :password, :code, :hp_field
 
   validates :email, :password, :code, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email.present? }
   validates :code, length: { is: 6 }, if: -> { code.present? }
+
+  validates :hp_field, absence: true
 end
