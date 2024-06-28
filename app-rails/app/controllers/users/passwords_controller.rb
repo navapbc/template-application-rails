@@ -39,7 +39,7 @@ class Users::PasswordsController < ApplicationController
       return render :reset, status: :unprocessable_entity
     end
 
-    begin 
+    begin
       auth_service.confirm_forgot_password(
         @form.email,
         @form.code,
