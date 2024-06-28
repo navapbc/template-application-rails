@@ -91,6 +91,21 @@ RSpec.describe Users::SessionsController do
       expect(session[:challenge_email]).to eq("mfa@example.com")
       expect(response).to redirect_to(session_challenge_path)
     end
+
+    it "handles submission by bots" do
+      create(:user, uid: uid)
+
+      post :create, params: {
+        users_new_session_form: {
+          email: "test@example.com",
+          password: "password",
+          hp_field: "I am a bot"
+        },
+        locale: "en"
+      }
+
+      expect(response.status).to eq(422)
+    end
   end
 
   describe "GET challenge" do
