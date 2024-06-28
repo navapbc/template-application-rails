@@ -49,7 +49,7 @@ en:
   errors:
     attributes:
       hp_field:
-        present: "You entered text in a field that is meant to catch spambots."
+        present: "This field should be left empty. It is intended to prevent bots from submitting spam using this form."
   helpers:
     submit:
       create: "Submit"
