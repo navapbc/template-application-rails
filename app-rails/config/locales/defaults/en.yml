@@ -46,6 +46,10 @@ en:
       default: "%m/%d/%Y"
       short: "%b %d"
       long: "%B %d, %Y"
+  errors:
+    attributes:
+      spam_trap:
+        present: "This field should be left empty. It is intended to prevent bots from submitting spam using this form."
   helpers:
     submit:
       create: "Submit"

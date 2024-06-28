@@ -29,4 +29,15 @@ RSpec.describe Users::NewSessionForm do
     expect(form).not_to be_valid
     expect(form.errors.of_kind?(:email, :invalid)).to be_truthy
   end
+
+  it "requires the honeypot field to be empty" do
+    form = Users::NewSessionForm.new(
+      email: "test@example.com",
+      password: "password",
+      spam_trap: "I am a bot"
+    )
+
+    expect(form).not_to be_valid
+    expect(form.errors.of_kind?(:spam_trap, :present)).to be_truthy
+  end
 end

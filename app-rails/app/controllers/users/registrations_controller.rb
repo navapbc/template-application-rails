@@ -77,7 +77,7 @@ class Users::RegistrationsController < ApplicationController
     end
 
     def registration_params
-      params.require(:users_registration_form).permit(:email, :password, :password_confirmation, :role)
+      params.require(:users_registration_form).permit(:email, :password, :password_confirmation, :role, :spam_trap)
     end
 
     def verify_account_params

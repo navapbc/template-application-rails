@@ -9,7 +9,8 @@ class Users::PasswordsController < ApplicationController
 
   def send_reset_password_instructions
     email = params[:users_forgot_password_form][:email]
-    @form = Users::ForgotPasswordForm.new(email: email)
+    spam_trap = params[:users_forgot_password_form][:spam_trap]
+    @form = Users::ForgotPasswordForm.new(email: email, spam_trap: spam_trap)
 
     if @form.invalid?
       flash.now[:errors] = @form.errors.full_messages
@@ -59,6 +60,6 @@ class Users::PasswordsController < ApplicationController
     end
 
     def reset_password_params
-      params.require(:users_reset_password_form).permit(:email, :code, :password)
+      params.require(:users_reset_password_form).permit(:email, :code, :password, :spam_trap)
     end
 end

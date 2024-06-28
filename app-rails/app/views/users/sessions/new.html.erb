@@ -6,6 +6,7 @@
   </h1>
 
   <%= us_form_with model: @form, url: new_user_session_path, local: true do |f| %>
+    <%= f.honeypot_field %>
     <%= f.email_field :email, { autocomplete: "username" } %>
 
     <%= f.password_field :password, {id: "password", autocomplete: "current-password"} %>
