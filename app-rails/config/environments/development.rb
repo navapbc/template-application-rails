@@ -60,6 +60,9 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  # Use "GoodJob" for Active Job backend - docs at https://github.com/bensheldon/good_job
+  config.active_job.queue_adapter = :good_job
+
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
 

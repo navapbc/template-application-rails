@@ -13,6 +13,8 @@ class NotificationService
       recipients: recipients
     })
 
+    mail_message.deliver_later
+
     recipients.each do |recipient|
       mailer_args[:email_address] = recipient
       mail_message = mailer
@@ -25,8 +27,6 @@ class NotificationService
         msg: "Generated mail message",
         mail_message: mail_message
       })
-
-      mail_message.deliver_now
     end
   end
 end
