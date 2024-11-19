@@ -54,10 +54,12 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Exclude healthcheck endpoint from force SSL since healthchecks should not go through
-  # the reverse proxy.
+  # Exclude healthcheck endpoint from force SSL since healthcheck requests can
+  # come from internal network sources (e.g., a load balancer) that do not go
+  # through the service's SSL-terminating reverse proxy.
+  #
   # See https://api.rubyonrails.org/classes/ActionDispatch/SSL.html
-  config.ssl_options = { redirect: { exclude: ->(request) { /health/.match?(request.path) } } }
+  config.ssl_options = { redirect: { exclude: ->(request) { request.get? and request.path == "/health" } } }
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
