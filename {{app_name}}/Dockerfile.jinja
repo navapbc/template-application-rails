@@ -18,7 +18,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle"
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+EXPOSE {{ app_local_port }}
 
 
 ##########################################################################################
