@@ -29,7 +29,7 @@ services:
       - RAILS_BINDING=0.0.0.0
       - RAILS_ENV=development
     ports:
-      - 3100:3000
+      - 3100:{{ app_local_port }}
     volumes:
       - ./{{app_name}}:/rails
       # Use named volumes for directories that the container should use the guest

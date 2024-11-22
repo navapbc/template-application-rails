@@ -5,8 +5,8 @@ if gem list --no-installed --exact --silent overman; then
   gem install overman
 fi
 
-# Default to port 3000 if not specified
-export PORT="${PORT:-3000}"
+# Default to port {{ app_local_port }} if not specified
+export PORT="${PORT:-{{ app_local_port }}}"
 export RAILS_BINDING="${RAILS_BINDING:-localhost}"
 
 # -e /dev/null to disable the limited/broken .env file loading logic, which does

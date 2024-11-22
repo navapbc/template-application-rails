@@ -32,4 +32,4 @@ services:
       - DISABLE_DATABASE_ENVIRONMENT_CHECK=1
       - AWS_DEFAULT_REGION=us-east-1
     ports:
-      - 3200:3000
+      - 3200:{{ app_local_port }}
