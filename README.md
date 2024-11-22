@@ -25,7 +25,7 @@ See [`navapbc/platform`](https://github.com/navapbc/platform) for other template
 ```text
 ├── .github                       # GitHub workflows and repo templates
 ├── docs                          # Project docs and decision records
-├── app-rails                     # Web application
+├── {{app_name}}                  # Web application
 ├── template-only-bin             # Scripts for managing this template; not copied into your project
 ├── template-only-docs            # Documentation for this template; not copied into your project
 ```

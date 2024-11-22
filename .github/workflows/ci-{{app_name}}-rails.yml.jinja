@@ -1,20 +1,20 @@
-name: CI app-rails
+name: CI {{app_name}}
 
 on:
   push:
     branches:
       - main
     paths:
-      - app-rails/**
-      - .github/workflows/ci-app-rails.yml
+      - {{app_name}}/**
+      - .github/workflows/ci-{{app_name}}.yml
   pull_request:
     paths:
-      - app-rails/**
-      - .github/workflows/ci-app-rails.yml
+      - {{app_name}}/**
+      - .github/workflows/ci-{{app_name}}.yml
 
 defaults:
   run:
-    working-directory: ./app-rails
+    working-directory: ./{{app_name}}
 
 jobs:
   # As an enhancement, it is possible to share the built docker image and share
@@ -29,7 +29,7 @@ jobs:
       - name: Create required env files
         working-directory: ./
         run: |
-          touch ./app-rails/.env
+          touch ./{{app_name}}/.env
 
       - run: make lint-ci
       

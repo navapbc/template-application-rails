@@ -16,14 +16,14 @@ services:
 
   # Rails app
   # Configured for "development" RAILS_ENV
-  app-rails:
+  {{app_name}}:
     build:
-      context: ./app-rails
+      context: ./{{app_name}}
       target: dev
     depends_on:
       database:
         condition: service_healthy
-    env_file: ./app-rails/.env
+    env_file: ./{{app_name}}/.env
     environment:
       - DB_HOST=database
       - RAILS_BINDING=0.0.0.0
@@ -31,7 +31,7 @@ services:
     ports:
       - 3100:3000
     volumes:
-      - ./app-rails:/rails
+      - ./{{app_name}}:/rails
       # Use named volumes for directories that the container should use the guest
       # machine's dir instead of the host machine's dir, which may be divergent.
       # This is especially true for any dependency or temp directories.

@@ -14,14 +14,14 @@ services:
 
   # Rails app
   # Configured for "production" RAILS_ENV
-  app-rails:
+  {{app_name}}:
     build:
-      context: ./app-rails
+      context: ./{{app_name}}
       target: release
     depends_on:
       database:
         condition: service_healthy
-    env_file: ./app-rails/.env
+    env_file: ./{{app_name}}/.env
     environment:
       - DB_HOST=database
       - RAILS_BINDING=0.0.0.0
