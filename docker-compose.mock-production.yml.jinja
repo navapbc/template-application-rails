@@ -4,9 +4,9 @@ services:
     command: postgres -c "log_lock_waits=on" -N 1000 -c "fsync=off"
     environment:
       POSTGRES_PASSWORD: secret123
-      POSTGRES_USER: app_rails
+      POSTGRES_USER: app
     healthcheck:
-      test: "pg_isready --username=app_rails"
+      test: "pg_isready --username=app"
       timeout: 10s
       retries: 20
     ports:
