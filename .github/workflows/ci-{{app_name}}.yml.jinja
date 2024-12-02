@@ -32,7 +32,7 @@ jobs:
           touch ./{{app_name}}/.env
 
       - run: make lint-ci
-      
+
   test:
     name: Test
     runs-on: ubuntu-latest
