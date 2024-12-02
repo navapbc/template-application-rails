@@ -11,8 +11,10 @@ module Devise
         # It takes as many params as elements in the array returned in
         # serialize_into_session.
         def serialize_from_session(id, access_token = "")
-          resource = find(id)
-          resource.access_token = access_token
+          resource = find_by(id: id)
+          if resource
+            resource.access_token = access_token
+          end
           resource
         end
 
