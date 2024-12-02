@@ -11,13 +11,11 @@
 
 ## Deploying using the Platform Infrastructure Template
 
-*Note: The following will be true once https://github.com/navapbc/template-infra/pull/650 is merged.*
-
 This template can be deployed using the [Nava Platform Infrastructure Template](https://github.com/navapbc/template-infra). Using the infrastructure template will handle creating and configuring all of the resources required in AWS.
 
 While following the [infrastructure template installation instructions](https://github.com/navapbc/template-infra?tab=readme-ov-file#installation) and [setup instructions](https://github.com/navapbc/template-infra/blob/main/infra/README.md), use the following configuration:
 
-1. Rename `/infra/app` to `/infra/<APP_NAME>` so that it matches the directory name of your application. By default, this is `app-rails`.
+1. Be sure you've installed this template and the infra-app template via [the nava-platform tool](https://github.com/navapbc/platform-cli) using the same `<APP_NAME>`.
 1. In `/infra/<APP_NAME>/app-config/main.tf`:
     1. Set `has_external_non_aws_service` to `true`.
     2. Set `enable_identity_provider` to `true`.
