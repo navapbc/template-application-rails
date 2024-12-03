@@ -1,4 +1,4 @@
-.PHONY : \
+.PHONY: \
 	release-build \
 	test
 
@@ -112,6 +112,7 @@ clean-container: ## Remove just the container related volumes
 
 release-build:
 	docker buildx build \
+		--target release \
 		--platform=linux/amd64 \
 		--build-arg RUN_USER=$(RUN_USER) \
 		--build-arg RUN_UID=$(RUN_UID) \
