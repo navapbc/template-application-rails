@@ -29,6 +29,7 @@ _envops:
 _exclude:
   - /.git
   - /.github/ISSUE_TEMPLATE
+  - /.github/pull_request_template.md
   - /.gitignore
   - /copier.yml
   - /LICENSE
