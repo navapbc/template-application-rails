@@ -16,12 +16,12 @@ services:
   # Configured for "production" RAILS_ENV
   {{app_name}}:
     build:
-      context: ./{{app_name}}
+      context: .
       target: release
     depends_on:
       database:
         condition: service_healthy
-    env_file: ./{{app_name}}/.env
+    env_file: .env
     environment:
       - DB_HOST=database
       - RAILS_BINDING=0.0.0.0

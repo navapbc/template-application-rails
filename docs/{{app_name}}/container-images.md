@@ -35,7 +35,7 @@ services:
 
 It is useful to be able to test the `release` image locally without needing to run a deploy to a hosted environment. For example, this can decrease the iteration time when troubleshooting the production asset precompile pipeline.
 
-In addition to the default Rails environments (i.e. `test`, `development`, `production`), this application includes a `mock-production` Rails environment, which uses "production-like" configuration. Specifically, SSL is disabled in [`mock-production.rb`](/app-rails/config/environments/mock-production.rb):
+In addition to the default Rails environments (i.e. `test`, `development`, `production`), this application includes a `mock-production` Rails environment, which uses "production-like" configuration. Specifically, SSL is disabled in `/<APP_NAME>/config/environments/mock-production.rb`:
 
 ```ruby
 config.assume_ssl = false
@@ -44,7 +44,7 @@ config.force_ssl = false
 
 ### Instructions
 
-Follow these steps to run the `release` image locally. This process uses [`docker-compose.mock-production.yml`](/docker-compose.mock-production.yml).
+Follow these steps to run the `release` image locally. This process uses `/<APP_NAME>/docker-compose.mock-production.yml`.
 
 #### 1. Change to the application directory
 
@@ -55,13 +55,13 @@ cd app-rails
 #### 2. Initialize the container
 
 ```bash
-make init-container DOCKER_COMPOSE_ARGS="-f ../docker-compose.mock-production.yml"
+make init-container DOCKER_COMPOSE_ARGS="-f ./docker-compose.mock-production.yml"
 ```
 
 #### 3. Start the container
 
 ```bash
-make start-container DOCKER_COMPOSE_ARGS="-f ../docker-compose.mock-production.yml"
+make start-container DOCKER_COMPOSE_ARGS="-f ./docker-compose.mock-production.yml"
 ```
 
 To stop the container, type `Ctrl-C`.
