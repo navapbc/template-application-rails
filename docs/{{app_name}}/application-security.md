@@ -7,25 +7,25 @@ Each item below will be checked if it is already implemented by default, or unch
 This document uses the Rails Guide to [Securing Rails Applications](https://guides.rubyonrails.org/security.html) to audit this project's Rails security best practices.
 
 ## Sessions
-We use Devise to manage sessions and cookies. Devise configuration is managed in the [`devise.rb`](app-rails/config/initializers/devise.rb) file. For more detailed information, see the [Devise documentation](https://rubydoc.info/github/heartcombo/devise).
+We use Devise to manage sessions and cookies. Devise configuration is managed in the `devise.rb` (`/<APP_NAME>/config/initializers/devise.rb`) file. For more detailed information, see the [Devise documentation](https://rubydoc.info/github/heartcombo/devise).
 - [x] SSL (`config.force_ssl = true`) is enforced in production environments.
 - [x] Provide the user with a prominent logout button to make it easy to clear the session on public computers.
 - [x] Cookies stored client side do not contain sensitive information.
 - [x] Cookies time out in 15 minutes of inactivity
-    - Note: That is set with `config.timeout_in` in the [Devise configuration file](app-rails/config/initializers/devise.rb).
+    - Note: That is set with `config.timeout_in` in the Devise configuration file (`/<APP_NAME>/config/initializers/devise.rb`).
 - [x] Cookies are encrypted client side.
     - Note: Devise uses BCrypt and the secret_key_base by default for secret hashing.
 - [ ] Expire sessions after a set amount of time, regardless of activity,
     - Note: Automated session expiration can be easily set by the auth service, such as in AWS Cognito.
 - [ ] Use a nonce generator to protect against cookie replay attacks.
-    - Note: The commented out code for this is located in [`/app-rails/config/initializers/content_security_policy.rb`](/app-rails/config/initializers/content_security_policy.rb) Review the impact this may have if there are several application servers.
+    - Note: The commented out code for this is located in `/<APP_NAME>/config/initializers/content_security_policy.rb` Review the impact this may have if there are several application servers.
 - [x] Automatically expire sessions on sign in and sign out.
-    - Note. This is set in the [Devise configuration file](app-rails/config/initializers/devise.rb) with `config.expire_all_remember_me_on_sign_out = true`.
+    - Note. This is set in the Devise configuration file (`/<APP_NAME>/config/initializers/devise.rb`) with `config.expire_all_remember_me_on_sign_out = true`.
 
 ## Cross-Site Request Forgery (CSRF)
 - [x] GET, POST, DELETE, and rails’ resources are used appropriately in the `routes.rb` file.
 - [x] Pass a CSRF token to the client.
-    - Note: This is accomplished with `<%= csrf_meta_tags %>` in [application.html.erb](app-rails/app/views/layouts/application.html.erb)
+    - Note: This is accomplished with `<%= csrf_meta_tags %>` in `/<APP_NAME>/app/views/layouts/application.html.erb`
 - [ ] Set forgery protection in production
 
 ## Redirection and Files
@@ -53,7 +53,7 @@ There is currently no file upload or download functionality at this time, so ple
 - [ ] Consider using Captcha on account creation, login, change password, and change email forms.
     - Note: Captchas are often not accessible to screen readers and their use should be part of a UX discussion.
 - [x] Filter log entries so they do not include passwords or secrets
-    - Note:  Log filtering is set in  [filter_parameter_logging.rb](app-rails/config/initializers/filter_parameter_logging.rb): `:passw, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn`.
+    - Note:  Log filtering is set in `/<APP_NAME>/config/initializers/filter_parameter_logging.rb`: `:passw, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn`.
 - [x] Use the correct Ruby REGEX: `\A` and `\z` and not the more common: `/^` and `$/`.
     - Note: If there is a need to use `/^` and `$/` in the regex, add `multiline: true` to regex `format:` in validations.
 - [x] When searching for data belonging to the user, search using Active Record from the user and not from the target data object. ie. Instead of doing: `@task = Task.find(params[:id])`, instead do: `@user.tasks.find(params[:id])`.
@@ -89,18 +89,18 @@ There is currently no file upload or download functionality at this time, so ple
     - Note: `config.action_dispatch.perform_deep_munge` is `true` by default.
 
 ## HTTP Security Headers
-Default security headers can be overridden in [application.rb](app-rails/config/application.rb) with `config.action_dispatch.default_headers`.
+Default security headers can be overridden in `application.rb` (`/<APP_NAME>/config/application.rb`) with `config.action_dispatch.default_headers`.
 - [x] Lock down X-Frame-Options to be as restrictive as possible.
     - Note: By default this is set to allow iframes from the same origin.
     - Note: Set this to deny if not using any iframes to embed.
     - Note: If you need to permit an iframe from another origin, a controller can then use an `after_action :allow_some_service`.
-- [ ] To help protect against XSS and injection attacks, define a Content-Security-Policy in the provided [content security policy file](app-rails/config/initializers/content_security_policy.rb).
+- [ ] To help protect against XSS and injection attacks, define a Content-Security-Policy in the provided `/<APP_NAME>/config/initializers/content_security_policy.rb`.
     - Note: Set the policy to be more restrictive than you need and you can override defaults when necessary in the controllers.
 - [ ] Log content security policy violations to continuously improve security by setting the report_uri config on the content security policy and configure a controller to log the reports.
     - Note: `report_uri` is being deprecated, and will eventually become `report_to`.
-- [x] Set `csp_meta_tag` in [application.rb](app-rails/config/application.rb).
+- [x] Set `csp_meta_tag` in `/<APP_NAME>/config/application.rb`.
 - [ ] Use the `csp_meta_tag` tag with nonce generation in the content security policy.
-- [ ] Configure which browser features are allowed in [permissions_policy.rb](app-rails/config/initializers/permissions_policy.rb).
+- [ ] Configure which browser features are allowed in `/<APP_NAME>/config/initializers/permissions_policy.rb`.
     - Note: This policy can be more restrictive than necessary because features can be allowed on specific controllers.
 - [ ] If opening up endpoints as APIs, configure CORS, by installing and configuring the `rack-cors` gem.
 
