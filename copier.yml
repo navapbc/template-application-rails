@@ -26,12 +26,4 @@ _envops:
 #
 # https://github.com/copier-org/copier/issues/1868
 
-_exclude:
-  - /.git
-  - /.github/ISSUE_TEMPLATE
-  - /.github/pull_request_template.md
-  - /.github/workflows/README.md
-  - /.gitignore
-  - /copier.yml
-  - /LICENSE
-  - /README.md
+_subdirectory: template
