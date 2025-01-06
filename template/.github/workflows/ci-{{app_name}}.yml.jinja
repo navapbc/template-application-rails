@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       # https://github.com/docker/compose/issues/1973
       - name: Create required env files
         working-directory: ./
