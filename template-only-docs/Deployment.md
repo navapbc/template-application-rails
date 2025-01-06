@@ -6,7 +6,7 @@
 - AWS Cognito: The application comes with AWS Cognito enabled by default, so AWS Cognito must be set up before deploying the application.
 - Custom domain name with HTTPS support: AWS Cognito requires HTTPS for callback urls to function.
 - Access to write to temporary directory: Rails needs to be able to write out temporary files.
-- Environment variables: You must provide the application with the environment variables listed in [local.env.example](/app-rails/local.env.example).
+- Environment variables: You must provide the application with the environment variables listed in [local.env.example](/template/{{app_name}}/local.env.example).
 - Secrets: You must provide the application with a secret `SECRET_KEY_BASE`. For more information, see the [Rails Guide on Security](https://guides.rubyonrails.org/v7.1/security.html#environmental-security).
 
 ## Deploying using the Platform Infrastructure Template
@@ -29,13 +29,6 @@ While following the [infrastructure template installation instructions](https://
     SECRET_KEY_BASE = {
       manage_method     = "generated"
       secret_store_name = "/${var.app_name}-${var.environment}/service/rails-secret-key-base"
-    }
-    ```
-1. In `/infra/networks/main.tf`:
-    1. Modify the `app_config` module to change the path to match the directory name of your application. By default, this is `app-rails`.
-    ```terraform
-    module "app_config" {
-      source = "../<APP_NAME>/app-config"
     }
     ```
 1. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).

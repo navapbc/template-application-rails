@@ -49,7 +49,7 @@ Follow these steps to run the `release` image locally. This process uses `/<APP_
 #### 1. Change to the application directory
 
 ```bash
-cd app-rails
+cd <APP_NAME>
 ```
 
 #### 2. Initialize the container
