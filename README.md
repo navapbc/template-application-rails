@@ -23,51 +23,34 @@ See [`navapbc/platform`](https://github.com/navapbc/platform) for other template
 ## Repo structure
 
 ```text
-├── .github                       # GitHub workflows and repo templates
-├── docs                          # Project docs and decision records
-├── app-rails                     # Web application
-├── template-only-bin             # Scripts for managing this template; not copied into your project
-├── template-only-docs            # Documentation for this template; not copied into your project
+.
+├── template           # The template (the things that get installed/updated)
+│   ├── .github        # GitHub workflows
+│   ├── docs           # Project docs and decision records
+│   └── {{app_name}}   # Application code
+└── template-only-docs # Template repo docs
 ```
 
 ## Installation
 
-To get started using the template application on your project:
+To get started using the template application on your project, for an
+application to be called `<APP_NAME>`:
 
-1. Run the [download and install script](./template-only-bin/download-and-install-template) in your project's root directory.
-
-    ```bash
-    curl https://raw.githubusercontent.com/navapbc/template-application-rails/main/template-only-bin/download-and-install-template | bash -s
+1. [Install the nava-platform tool](https://github.com/navapbc/platform-cli).
+2. Install template by running in your project's root:
+    ```sh
+    nava-platform app install --template-uri https://github.com/navapbc/template-application-rails . <APP_NAME>
     ```
-
-    This script will:
-
-    1. Clone the template repository
-    2. Copy the template files into your project directory
-    3. Ignore any files specific to the template repository, like this README.
-
-    You can optionally pass in a branch, commit hash, or release that you want to install. For example:
-
-    ```bash
-    curl https://raw.githubusercontent.com/navapbc/template-application-rails/main/template-only-bin/download-and-install-template | bash -s -- <commit_hash>
-    ```
-2. [Follow the steps in `app-rails/README.md`](./app-rails/README.md) to set up the application locally.
-3. Optional, if using the Platform infrastructure template: [Follow the steps in the `template-infra` README](https://github.com/navapbc/template-infra#installation) to set up the various pieces of your infrastructure.
+3. Follow the steps in `<APP_NAME>/README.md` to set up the application locally.
+4. Optional, if using the Platform infrastructure template: [Follow the steps in the `template-infra` README](https://github.com/navapbc/template-infra#installation) to set up the various pieces of your infrastructure.
 
 ## Updates
 
-If you have previously installed this template and would like to update your project to use a newer version of this application:
+If you have previously installed this template and would like to update your
+project to use a newer version of this template:
 
-1. Run the [update script](./template-only-bin/update-template) in your project's root directory and pass in the branch, commit hash, or release that you want to update to, followed by the name of your application directory (e.g. `app-rails`).
-
-    ```bash
-    curl https://raw.githubusercontent.com/navapbc/template-application-rails/main/template-only-bin/update-template | bash -s -- <commit_hash> <app_name>
+1. [Install the nava-platform tool](https://github.com/navapbc/platform-cli).
+2. Update app template by running in your project's root:
+    ```sh
+    nava-platform app update . <APP_NAME>
     ```
-
-    This script will:
-
-    1. Clone the template repository
-    2. Copy the template files into your project directory
-    3. Ignore any files specific to the template repository, like this README.
-
-⚠️ Warning! This will modify existing files. Review all changes carefully after executing the script by running `git diff`.
