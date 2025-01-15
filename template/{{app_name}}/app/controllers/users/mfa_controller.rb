@@ -67,6 +67,6 @@ class Users::MfaController < ApplicationController
   private
 
     def auth_service
-      AuthService.new
+      AuthServiceFactory.instance.auth_service
     end
 end

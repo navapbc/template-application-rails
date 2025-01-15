@@ -73,7 +73,7 @@ class Users::RegistrationsController < ApplicationController
 
   private
     def auth_service
-      AuthService.new
+      AuthServiceFactory.instance.auth_service
     end
 
     def registration_params

@@ -27,7 +27,7 @@ class Users::AccountsController < ApplicationController
 
   private
     def auth_service
-      AuthService.new
+      AuthServiceFactory.instance.auth_service
     end
 
     def user_email_params

@@ -114,7 +114,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
     def auth_service
-      AuthService.new
+      AuthServiceFactory.instance.auth_service
     end
 
     def new_session_params
