@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
-  around_action :switch_locale
+  # around_action :switch_locale
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 

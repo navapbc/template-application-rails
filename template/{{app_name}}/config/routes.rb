@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     root "home#index"
 
     # Session management
-    devise_for :users, controllers: { sessions: "users/sessions" }
+    devise_for :users, controllers: {
+      sessions: 'users/sessions',
+      registrations: 'registrations'
+    }
+    
     devise_scope :user do
       get "sessions/challenge" => "users/sessions#challenge", as: :session_challenge
       post "sessions/challenge" => "users/sessions#respond_to_challenge", as: :respond_to_session_challenge
