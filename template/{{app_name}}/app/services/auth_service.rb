@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AuthService
-  def initialize(auth_adapter = Auth::CognitoAdapter.new)
+  def initialize(auth_adapter = Auth::AuthServiceFactory.instance.auth_service)
     @auth_adapter = auth_adapter
   end
 
