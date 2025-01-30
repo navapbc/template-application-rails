@@ -1,5 +1,11 @@
 class User < ApplicationRecord
-  devise :cognito_authenticatable, :timeoutable
+
+  if Rails.env.development? && ENV['USE_COGNITO'].blank?
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  else
+    devise :cognito_authenticatable, :timeoutable
+  end
+
   attr_accessor :access_token
 
   # == Enums ========================================================

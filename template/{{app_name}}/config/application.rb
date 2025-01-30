@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module TemplateApplicationRails
   class Application < Rails::Application
+    config.eager_load = true if Rails.env.development?
     # Internationalization
     I18n.available_locales = [ :"en", :"es-US" ]
     I18n.default_locale = :"en"
@@ -49,5 +50,7 @@ module TemplateApplicationRails
 
     # Show a 403 Forbidden error page when Pundit raises a NotAuthorizedError
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
+
+    config.auth_provider = ENV['USE_DEVISE'] == 'true' ? :devise : :cognito
   end
 end

@@ -3,39 +3,65 @@
 class Users::SessionsController < Devise::SessionsController
   layout "users"
   skip_after_action :verify_authorized
+  protect_from_forgery with: :null_session, if: -> { request.format.json? } # Disable CSRF for API requests
+  respond_to :html, :json
 
   def new
     @form = Users::NewSessionForm.new
   end
 
   def create
-    @form = Users::NewSessionForm.new(new_session_params)
+    if Rails.application.config.auth_provider == :cognito
+      @form = Users::NewSessionForm.new(new_session_params)
 
-    if @form.invalid?
-      flash.now[:errors] = @form.errors.full_messages
-      return render :new, status: :unprocessable_entity
+      if @form.invalid?
+        flash.now[:errors] = @form.errors.full_messages
+        return render :new, status: :unprocessable_entity
+      end
+  
+      begin
+        response = auth_service.initiate_auth(
+          @form.email,
+          @form.password
+        )
+      rescue Auth::Errors::UserNotConfirmed => e
+        return redirect_to users_verify_account_path
+      rescue Auth::Errors::BaseAuthError => e
+        flash.now[:errors] = [ e.message ]
+        return render :new, status: :unprocessable_entity
+      end
+  
+      unless response[:user].present?
+        puts response.inspect
+        session[:challenge_session] = response[:session]
+        session[:challenge_email] = @form.email
+        return redirect_to session_challenge_path
+      end
+  
+      auth_user(response[:user], response[:access_token])
+    else
+      user_params = params.dig(:user) || params.dig(:users_new_session_form)
+      warden = request.env['warden']
+      user_params = params.require(:users_new_session_form).permit(:email, :password)
+      # Manually find the user before trying Warden
+      user = User.find_by(email: user_params[:email])
+      
+      if user.nil?
+        flash[:alert] = "Invalid email or password"
+        render :new, status: :unauthorized
+        return
+      end
+  
+      if !user.valid_password?(user_params[:password])
+        flash[:alert] = "Invalid email or password"
+        render :new, status: :unauthorized
+        return
+      end
+      warden.set_user(user, scope: :user)
+      redirect_to root_path, notice: "Signed in successfully!"
     end
 
-    begin
-      response = auth_service.initiate_auth(
-        @form.email,
-        @form.password
-      )
-    rescue Auth::Errors::UserNotConfirmed => e
-      return redirect_to users_verify_account_path
-    rescue Auth::Errors::BaseAuthError => e
-      flash.now[:errors] = [ e.message ]
-      return render :new, status: :unprocessable_entity
-    end
 
-    unless response[:user].present?
-      puts response.inspect
-      session[:challenge_session] = response[:session]
-      session[:challenge_email] = @form.email
-      return redirect_to session_challenge_path
-    end
-
-    auth_user(response[:user], response[:access_token])
   end
 
   # Show MFA

@@ -39,7 +39,7 @@ class AuthService
     # See https://github.com/navapbc/template-application-rails/issues/15
     account = @auth_adapter.create_account(email, password)
 
-    create_db_user(account[:uid], email, account[:provider], role)
+    create_db_user(account[:uid], email, account[:provider], password, role)
   end
 
   # Verify the code sent to the user as part of their initial sign up process.
@@ -72,15 +72,16 @@ class AuthService
 
   private
 
-    def create_db_user(uid, email, provider, role = "applicant")
+    def create_db_user(uid, email, provider, password, role = "applicant")
       Rails.logger.info "Creating User uid: #{uid}, and UserRole: #{role}"
 
       user = User.create!(
-        uid: uid,
-        email: email,
-        provider: provider,
+        uid:,
+        email:,
+        password:,
+        provider:,
       )
-      user_role = UserRole.create!(user: user, role: role)
+      user_role = UserRole.create!(user:, role:)
       user
     end
 
