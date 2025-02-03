@@ -27,8 +27,16 @@ EXPOSE {{ app_local_port }}
 FROM base AS build
 
 # Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config npm
+RUN apt-get update -qq \
+    && apt-get install --no-install-recommends -y \
+        build-essential \
+        git \
+        libpq-dev \
+        libvips \
+        pkg-config \
+        npm \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install npm packages
 COPY package.json package-lock.json ./
@@ -45,9 +53,12 @@ FROM build AS dev
 ENV RAILS_ENV="development"
 
 # Install packages needed for development
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y postgresql-client graphviz && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN apt-get update -qq \
+    && apt-get install --no-install-recommends -y \
+        postgresql-client \
+        graphviz \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install application gems for development
 COPY Gemfile Gemfile.lock ./
@@ -106,7 +117,8 @@ RUN apt-get update -qq \
         python3-venv \
         unzip \
         wget \
-    && rm -rf /var/lib/apt/lists /var/cache/apt/archives \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
     && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" \
     && unzip awscli-bundle.zip \
     && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws \
