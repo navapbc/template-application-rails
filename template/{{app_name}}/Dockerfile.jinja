@@ -33,6 +33,7 @@ RUN apt-get update -qq \
         git \
         libpq-dev \
         libvips \
+        libyaml-dev \
         pkg-config \
         npm \
     && apt-get clean \
@@ -68,7 +69,7 @@ RUN bundle config set --local without production && \
 
 # Install system-wide gems for development
 # This version must match Gemfile.lock. Otherwise, `rdbg` will fail.
-RUN gem install debug -v 1.9.2
+RUN gem install debug -v 1.10.0
 
 # Copy application code
 COPY . .
@@ -112,6 +113,7 @@ RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends \
         curl \
         libvips \
+        libyaml-dev \
         postgresql-client \
         python-is-python3 \
         python3-venv \
