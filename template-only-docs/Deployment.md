@@ -22,7 +22,13 @@ While following the [infrastructure template installation instructions](https://
 1. In `/infra/<APP_NAME>/app-config/<ENVIRONMENT>.tf`:
     1. Set the `domain_name`.
     2. Set `enable_https` to `true`.
-    3. Set `enable_command_execution` to `true`: This is necessary temporarily until a temporary file system can be enabled. Otherwise, ECS will run with read-only root filesystem, which will cause rails to error.
+1. In `/infra/<APP_NAME>/app-config/env-config/outputs.tf`:
+    1. Configure the service's `ephemeral_write_volumes`:
+        ```terraform
+        ephemeral_write_volumes = [
+          "/rails/tmp"
+        ]
+        ```
 1. In `/infra/<APP_NAME>/app-config/env-config/environment-variables.tf`:
     1. Add an entry to `secrets`:
     ```terraform
