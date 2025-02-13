@@ -22,7 +22,7 @@ While following the [infrastructure template installation instructions](https://
 1. In `/infra/<APP_NAME>/app-config/<ENVIRONMENT>.tf`:
     1. Set the `domain_name`.
     2. Set `enable_https` to `true`.
-1. In `/infra/<APP_NAME>/app-config/env-config/outputs.tf`:
+1. In `/infra/<APP_NAME>/app-config/env-config/service.tf`:
     1. Configure the service's `ephemeral_write_volumes`:
         ```terraform
         ephemeral_write_volumes = [
