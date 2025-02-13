@@ -117,7 +117,6 @@ ENV RAILS_ENV="production" \
 # Install packages needed for deployment
 RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends \
-        curl \
         libvips \
         libyaml-dev \
         postgresql-client \
