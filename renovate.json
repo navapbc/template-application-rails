@@ -1,6 +1,25 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:best-practices"
+  ],
+  "ignorePresets": [
+    ":pinDevDependencies"
+  ],
+  "github-actions": {
+    "fileMatch": ["^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"]
+  },
+  "packageRules": [
+    {
+      "groupName": "{{manager}} non-major dependencies",
+      "groupSlug": "{{manager}}-minor-patch",
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    }
   ]
 }
