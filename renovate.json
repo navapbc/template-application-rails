@@ -1,11 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:best-practices"
+    "config:recommended",
+    "schedule:monthly",
+    ":maintainLockFilesMonthly"
   ],
-  "ignorePresets": [
-    ":pinDevDependencies"
-  ],
+  "labels": ["dependencies"],
+  "dockerfile": {
+    "enabled": false
+  },
+  "ruby-version": {
+    "enabled": false
+  },
   "github-actions": {
     "fileMatch": ["^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"]
   },
@@ -21,5 +27,8 @@
         "patch"
       ]
     }
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  }
 }
