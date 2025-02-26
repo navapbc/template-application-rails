@@ -9,9 +9,6 @@
   "dockerfile": {
     "enabled": false
   },
-  "ruby-version": {
-    "enabled": false
-  },
   "github-actions": {
     "fileMatch": ["^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"]
   },
@@ -26,6 +23,18 @@
         "minor",
         "patch"
       ]
+    },
+    {
+      "groupName": "Ruby language",
+      "groupSlug": "ruby-lang",
+      "matchManagers": [
+        "bundler",
+        "ruby-version"
+      ],
+      "matchDepNames": [
+        "ruby"
+      ],
+      "commitMessageTopic": "Ruby language"
     }
   ],
   "vulnerabilityAlerts": {
