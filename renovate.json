@@ -2,13 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
+    "customManagers:dockerfileVersions",
     "schedule:monthly",
     ":maintainLockFilesMonthly"
   ],
   "labels": ["dependencies"],
-  "dockerfile": {
-    "enabled": false
-  },
   "github-actions": {
     "fileMatch": ["^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"]
   },
@@ -29,10 +27,18 @@
       "groupSlug": "ruby-lang",
       "matchManagers": [
         "bundler",
+        "dockerfile",
+        "regex",
+        "ruby-version"
+      ],
+      "matchDatasources": [
+        "docker",
+        "rubygems",
         "ruby-version"
       ],
       "matchDepNames": [
-        "ruby"
+        "ruby",
+        "registry.docker.com/library/ruby"
       ],
       "commitMessageTopic": "Ruby language"
     }
