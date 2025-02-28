@@ -6,20 +6,24 @@
     "schedule:monthly",
     ":maintainLockFilesMonthly"
   ],
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "github-actions": {
-    "fileMatch": ["^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"]
+    "fileMatch": [
+      "^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"
+    ]
   },
   "packageRules": [
     {
       "groupName": "{{manager}} non-major dependencies",
       "groupSlug": "{{manager}}-minor-patch",
-      "matchPackagePatterns": [
-        "*"
-      ],
       "matchUpdateTypes": [
         "minor",
         "patch"
+      ],
+      "matchPackageNames": [
+        "*"
       ]
     },
     {
@@ -28,7 +32,7 @@
       "matchManagers": [
         "bundler",
         "dockerfile",
-        "regex",
+        "custom.regex",
         "ruby-version"
       ],
       "matchDatasources": [
@@ -44,6 +48,8 @@
     }
   ],
   "vulnerabilityAlerts": {
-    "labels": ["security"]
+    "labels": [
+      "security"
+    ]
   }
 }
