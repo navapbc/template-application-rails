@@ -1,0 +1,49 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "customManagers:dockerfileVersions",
+    "schedule:monthly",
+    ":maintainLockFilesMonthly"
+  ],
+  "labels": ["dependencies"],
+  "github-actions": {
+    "fileMatch": ["^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"]
+  },
+  "packageRules": [
+    {
+      "groupName": "{{manager}} non-major dependencies",
+      "groupSlug": "{{manager}}-minor-patch",
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "groupName": "Ruby language",
+      "groupSlug": "ruby-lang",
+      "matchManagers": [
+        "bundler",
+        "dockerfile",
+        "regex",
+        "ruby-version"
+      ],
+      "matchDatasources": [
+        "docker",
+        "rubygems",
+        "ruby-version"
+      ],
+      "matchDepNames": [
+        "ruby",
+        "registry.docker.com/library/ruby"
+      ],
+      "commitMessageTopic": "Ruby language"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  }
+}
