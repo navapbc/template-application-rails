@@ -5,8 +5,8 @@ app_name:
   type: str
   help: The name of the app
   validator: >-
-    {% if not (app_name) %}
-    The app name can not be empty.
+    {% if not (app_name | regex_search('^[a-z0-9\-_]+$')) %}
+    The app name can not be empty and should only contain lower case letters, digits, dashes, and underscores.
     {% endif %}
 
 app_local_port:
