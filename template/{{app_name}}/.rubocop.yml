@@ -3,5 +3,3 @@ require:
 inherit_gem:
   pundit: config/rubocop-rspec.yml
   rubocop-rails-omakase: rubocop.yml
-AllCops:
-  TargetRubyVersion: 3.4.2
