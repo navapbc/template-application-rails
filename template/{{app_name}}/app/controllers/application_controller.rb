@@ -24,10 +24,6 @@ class ApplicationController < ActionController::Base
       return users_mfa_preference_path
     end
 
-    if resource.employer?
-      return dev_sandbox_path
-    end
-
     users_account_path
   end
 end

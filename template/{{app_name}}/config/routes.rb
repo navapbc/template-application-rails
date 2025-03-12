@@ -22,8 +22,7 @@ Rails.application.routes.draw do
     # Registration and account management
     namespace :users do
       resources :registrations, only: [ :create ]
-      get "registrations/applicant" => "registrations#new_applicant", as: :new_applicant_registration
-      get "registrations/employer" => "registrations#new_employer", as: :new_employer_registration
+      get "registrations" => "registrations#new", as: :new_registration
 
       resources :mfa, only: [ :new, :create ]
       get "mfa/preference" => "mfa#preference", as: :mfa_preference

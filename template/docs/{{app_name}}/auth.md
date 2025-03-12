@@ -13,7 +13,6 @@ Authentication is the process of verifying the credentials of a user. We use AWS
 
 Authorization is the process of determining whether a user has access to a specific resource. We use [Pundit](https://github.com/varvet/pundit) for authorization.
 
-- User roles are defined in the `user_roles` table
 - Policies (`app/policies`) are created for each model to define who can perform what actions
 - Policies are used in controllers to authorize actions
 - Policies are used in views to show/hide elements based on user permissions

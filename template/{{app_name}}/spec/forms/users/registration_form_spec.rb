@@ -3,7 +3,7 @@ require "rails_helper"
 valid_password = "password1234"
 
 RSpec.describe Users::RegistrationForm do
-  let (:form) { Users::RegistrationForm.new(role: "applicant") }
+  let (:form) { Users::RegistrationForm.new() }
 
   it "passes validation with valid email and password" do
     form.email = "test@example.com"

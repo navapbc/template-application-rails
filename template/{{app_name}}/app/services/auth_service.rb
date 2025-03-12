@@ -34,12 +34,12 @@ class AuthService
     handle_auth_result(response, challenge[:email])
   end
 
-  def register(email, password, role)
+  def register(email, password)
     # @TODO: Handle errors from the auth service, like when the email is already taken
     # See https://github.com/navapbc/template-application-rails/issues/15
     account = @auth_adapter.create_account(email, password)
 
-    create_db_user(account[:uid], email, account[:provider], role)
+    create_db_user(account[:uid], email, account[:provider])
   end
 
   # Verify the code sent to the user as part of their initial sign up process.
@@ -72,15 +72,14 @@ class AuthService
 
   private
 
-    def create_db_user(uid, email, provider, role = "applicant")
-      Rails.logger.info "Creating User uid: #{uid}, and UserRole: #{role}"
+    def create_db_user(uid, email, provider)
+      Rails.logger.info "Creating User uid: #{uid}"
 
       user = User.create!(
         uid: uid,
         email: email,
         provider: provider,
       )
-      user_role = UserRole.create!(user: user, role: role)
       user
     end
 

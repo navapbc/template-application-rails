@@ -38,7 +38,7 @@ RSpec.describe Users::SessionsController do
       expect(response.body).to have_selector(".usa-alert--error")
     end
 
-    it "signs in a applicant and redirects to their account page (for now)" do
+    it "signs in a user and redirects to their account page (for now)" do
       create(:user, uid: uid)
 
       post :create, params: {
@@ -141,7 +141,7 @@ RSpec.describe Users::SessionsController do
       expect(response.body).to have_selector(".usa-alert--error")
     end
 
-    it "signs in a applicant and redirects to their account page (for now)" do
+    it "signs in a user and redirects to their account page (for now)" do
       create(:user, uid: uid)
       session[:challenge_session] = "session"
       session[:challenge_email] = "test@example.com"
