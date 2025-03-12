@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Auth::CognitoAdapter do
-  let(:mock_client) { instance_double("Aws::CognitoIdentityProvider::Client") }
-  let(:adapter) { Auth::CognitoAdapter.new(client: mock_client) }
+  let(:mock_client) { instance_double(Aws::CognitoIdentityProvider::Client) }
+  let(:adapter) { described_class.new(client: mock_client) }
   let(:email) { "test@example.com" }
 
   describe "#associate_software_token" do
@@ -97,14 +97,9 @@ RSpec.describe Auth::CognitoAdapter do
 
   describe "#verify_software_token" do
     it "sets the MFA preference when the token is verified" do
-      allow(mock_client).to receive(:verify_software_token).and_return(
-        Aws::CognitoIdentityProvider::Types::VerifySoftwareTokenResponse.new(
+      allow(mock_client).to receive_messages(verify_software_token: Aws::CognitoIdentityProvider::Types::VerifySoftwareTokenResponse.new(
           status: "SUCCESS"
-        )
-      )
-      allow(mock_client).to receive(:set_user_mfa_preference).and_return(
-        Aws::CognitoIdentityProvider::Types::SetUserMFAPreferenceResponse.new
-      )
+        ), set_user_mfa_preference: Aws::CognitoIdentityProvider::Types::SetUserMFAPreferenceResponse.new)
 
       adapter.verify_software_token("123456", "mock_token")
 

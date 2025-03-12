@@ -8,7 +8,9 @@ RSpec.describe Users::SessionsController do
   let (:uid_generator) { -> { uid } }
 
   before do
+    # rubocop:disable RSpec/InstanceVariable
     @request.env["devise.mapping"] = Devise.mappings[:user]
+    # rubocop:enable RSpec/InstanceVariable
 
     allow(controller).to receive(:auth_service).and_return(
       AuthService.new(Auth::MockAdapter.new(uid_generator: uid_generator))

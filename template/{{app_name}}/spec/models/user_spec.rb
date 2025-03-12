@@ -17,11 +17,11 @@ RSpec.describe User, type: :model do
     }
 
     it "returns true if the access token expires within the designated minutes" do
-      expect(user.access_token_expires_within_minutes?(access_token, 5)).to eq(true)
+      expect(user.access_token_expires_within_minutes?(access_token, 5)).to be(true)
     end
 
     it "returns false if the access token is not expiring within the designated minutes" do
-      expect(user.access_token_expires_within_minutes?(access_token, 1)).to eq(false)
+      expect(user.access_token_expires_within_minutes?(access_token, 1)).to be(false)
     end
   end
 end
