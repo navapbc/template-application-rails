@@ -23,6 +23,8 @@ jobs:
             app: paidleave
           - repo: navapbc/pfml-starter-kit-app
             app: demo
+    concurrency:
+      group: cd-${{ matrix.project.repo }}
     steps:
       - name: Checkout project repo
         uses: actions/checkout@v4
