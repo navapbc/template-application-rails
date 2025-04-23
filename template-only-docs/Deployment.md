@@ -26,10 +26,11 @@ While following the [infrastructure template installation instructions](https://
     1. Configure the service's `ephemeral_write_volumes`:
         ```terraform
         ephemeral_write_volumes = [
-          "/rails/tmp"
+          "/rails/tmp",
+          "/tmp"
         ]
         ```
-1. In `/infra/<APP_NAME>/app-config/env-config/environment-variables.tf`:
+2. In `/infra/<APP_NAME>/app-config/env-config/environment-variables.tf`:
     1. Add an entry to `secrets`:
     ```terraform
     SECRET_KEY_BASE = {
@@ -37,7 +38,7 @@ While following the [infrastructure template installation instructions](https://
       secret_store_name = "/${var.app_name}-${var.environment}/service/rails-secret-key-base"
     }
     ```
-1. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).
+3. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).
 
 ## Deploying using another method
 
