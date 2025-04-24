@@ -9,7 +9,9 @@
 h1,
 h2,
 h3,
-h4 {
+h4,
+label,
+legend {
   text-wrap: balance;
 }
 
@@ -19,8 +21,7 @@ h4 {
 
 p,
 li,
-label,
-legend {
+.usa-hint {
   text-wrap: pretty;
 }
 

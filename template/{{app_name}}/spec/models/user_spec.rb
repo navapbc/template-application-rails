@@ -17,55 +17,11 @@ RSpec.describe User, type: :model do
     }
 
     it "returns true if the access token expires within the designated minutes" do
-      expect(user.access_token_expires_within_minutes?(access_token, 5)).to eq(true)
+      expect(user.access_token_expires_within_minutes?(access_token, 5)).to be(true)
     end
 
     it "returns false if the access token is not expiring within the designated minutes" do
-      expect(user.access_token_expires_within_minutes?(access_token, 1)).to eq(false)
-    end
-  end
-
-  describe "applicant?" do
-    let(:user) { build(:user) }
-
-    it "returns true if the user has a applicant role" do
-      user.user_role = build(:user_role, :applicant)
-      expect(user.applicant?).to eq(true)
-    end
-
-    it "returns false if the user does not have a applicant role" do
-      user.user_role = build(:user_role, :employer)
-      expect(user.applicant?).to eq(false)
-    end
-  end
-
-  describe "employer?" do
-    let(:user) { build(:user) }
-
-    it "returns true if the user has an employer role" do
-      user.user_role = build(:user_role, :employer)
-      expect(user.employer?).to eq(true)
-    end
-
-    it "returns false if the user does not have an employer role" do
-      user.user_role = build(:user_role, :applicant)
-      expect(user.employer?).to eq(false)
-    end
-  end
-
-  describe "superadmin?" do
-    let(:user) { build(:user) }
-
-    pending "returns true for a superadmin"
-
-    it "returns false for a applicant" do
-      user.user_role = build(:user_role, :applicant)
-      expect(user.superadmin?).to eq(false)
-    end
-
-    it "returns false for an employer" do
-      user.user_role = build(:user_role, :employer)
-      expect(user.superadmin?).to eq(false)
+      expect(user.access_token_expires_within_minutes?(access_token, 1)).to be(false)
     end
   end
 end

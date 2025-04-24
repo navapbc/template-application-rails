@@ -7,13 +7,12 @@ Authentication is the process of verifying the credentials of a user. We use AWS
 - User credentials are stored in AWS Cognito
 - Password policy is enforced by Cognito
 - Custom pages are built for the AWS Cognito flows (login, signup, forgot password, etc.). We aren't using the hosted UI that Cognito provides since we need more control over the UI and content.
-- [Devise](https://www.rubydoc.info/github/heartcombo/devise/main) and [Warden](https://www.rubydoc.info/github/hassox/warden) facilitate auth and session management
+- [Devise](https://www.rubydoc.info/github/heartcombo/devise/main) and [Warden](https://github.com/wardencommunity/warden/wiki) facilitate auth and session management
 
 ## Authorization
 
 Authorization is the process of determining whether a user has access to a specific resource. We use [Pundit](https://github.com/varvet/pundit) for authorization.
 
-- User roles are defined in the `user_roles` table
 - Policies (`app/policies`) are created for each model to define who can perform what actions
 - Policies are used in controllers to authorize actions
 - Policies are used in views to show/hide elements based on user permissions

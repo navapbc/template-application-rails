@@ -13,12 +13,24 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - repo: navapbc/platform-test
+            app: app-rails
+          - repo: navapbc/pfml-starter-kit-app
+            app: paidleave
+          - repo: navapbc/pfml-starter-kit-app
+            app: demo
+    concurrency:
+      group: cd-${{ matrix.project.repo }}
     steps:
       - name: Checkout project repo
         uses: actions/checkout@v4
         with:
           path: project-repo
-          repository: navapbc/platform-test
+          repository: ${{ matrix.project.repo }}
           token: ${{ secrets.PLATFORM_BOT_GITHUB_TOKEN }}
 
       - name: Set up Python
@@ -37,7 +49,7 @@ jobs:
 
       - name: Update application template
         working-directory: project-repo
-        run: nava-platform app update --template-uri ${{ github.server_url }}/${{ github.repository }} --version HEAD . app-rails
+        run: nava-platform app update --template-uri ${{ github.server_url }}/${{ github.repository }} --version HEAD . ${{ matrix.project.app }}
 
       - name: Push changes to project repo
         working-directory: project-repo

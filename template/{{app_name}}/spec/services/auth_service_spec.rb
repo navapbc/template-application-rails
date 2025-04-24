@@ -5,22 +5,21 @@ RSpec.describe AuthService do
   let(:mock_auth_adapter) { Auth::MockAdapter.new(uid_generator: -> { mock_uid }) }
 
   describe "#register" do
-    it "creates a new user with the given role" do
-      auth_service = AuthService.new(mock_auth_adapter)
+    it "creates a new user" do
+      auth_service = described_class.new(mock_auth_adapter)
 
-      auth_service.register("test@example.com", "password", "employer")
+      auth_service.register("test@example.com", "password")
 
       user = User.find_by(uid: mock_uid)
       expect(user).to be_present
       expect(user.provider).to eq("mock")
       expect(user.email).to eq("test@example.com")
-      expect(user.employer?).to eq(true)
     end
   end
 
   describe "#change_email" do
     it "updates the user's email" do
-      auth_service = AuthService.new(mock_auth_adapter)
+      auth_service = described_class.new(mock_auth_adapter)
       User.create!(uid: mock_uid, email: "test@example.com", provider: "mock")
 
       auth_service.change_email(mock_uid, "new@example.com")
@@ -32,17 +31,16 @@ RSpec.describe AuthService do
 
   describe "#initiate_auth" do
     it "creates a new user if one does not exist" do
-      auth_service = AuthService.new(mock_auth_adapter)
+      auth_service = described_class.new(mock_auth_adapter)
 
       response = auth_service.initiate_auth("test@example.com", "password")
 
       user = User.find_by(uid: mock_uid)
       expect(response[:user]).to eq(user)
-      expect(user.applicant?).to eq(true)
     end
 
     it "updates the user's email if it has changed" do
-      auth_service = AuthService.new(mock_auth_adapter)
+      auth_service = described_class.new(mock_auth_adapter)
       User.create!(uid: mock_uid, email: "oldie@example.com", provider: "mock")
 
       response = auth_service.initiate_auth("new@example.com", "password")
@@ -54,7 +52,7 @@ RSpec.describe AuthService do
 
   describe "#verify_account" do
     it "returns empty struct on success" do
-      auth_service = AuthService.new(mock_auth_adapter)
+      auth_service = described_class.new(mock_auth_adapter)
 
       expect(auth_service.verify_account("test@example.com", "123456")).to eq({})
     end
