@@ -88,9 +88,6 @@ group :development do
   gem "rubocop-rails-omakase", require: false
   gem "rubocop-rspec", require: false
 
-  # Sass compiling
-  gem "sassc", "~> 2.4"
-
   # Test notifications locally without sending the emails
   gem "letter_opener"
 

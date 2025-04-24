@@ -161,16 +161,6 @@ GEM
       logger
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
-    ffi (1.17.1-aarch64-linux-gnu)
-    ffi (1.17.1-aarch64-linux-musl)
-    ffi (1.17.1-arm-linux-gnu)
-    ffi (1.17.1-arm-linux-musl)
-    ffi (1.17.1-arm64-darwin)
-    ffi (1.17.1-x86-linux-gnu)
-    ffi (1.17.1-x86-linux-musl)
-    ffi (1.17.1-x86_64-darwin)
-    ffi (1.17.1-x86_64-linux-gnu)
-    ffi (1.17.1-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -382,8 +372,6 @@ GEM
       rexml
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     securerandom (0.4.1)
     selenium-webdriver (4.29.1)
       base64 (~> 0.2)
@@ -481,7 +469,6 @@ DEPENDENCIES
   rspec-rails (~> 6.1.0)
   rubocop-rails-omakase
   rubocop-rspec
-  sassc (~> 2.4)
   selenium-webdriver
   simplecov
   sprockets-rails
