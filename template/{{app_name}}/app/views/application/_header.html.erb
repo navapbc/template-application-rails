@@ -29,12 +29,12 @@
             <% end %>
 
           <li class="usa-nav__primary-item">
-            <%= render partial: "language-toggle", locals: { container_class: "display-block desktop:display-none relative" } %>
+            <%= render partial: "application/language-toggle", locals: { container_class: "display-block desktop:display-none relative" } %>
           </li>
         </ul>
       </div>
     </nav>
 
-    <%= render partial: "language-toggle", locals: { container_class: "usa-language-container display-none desktop:display-block" } %>
+    <%= render partial: "application/language-toggle", locals: { container_class: "usa-language-container display-none desktop:display-block" } %>
   </div>
 </header>
