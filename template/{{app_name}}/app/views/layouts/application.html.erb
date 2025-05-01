@@ -20,13 +20,13 @@
 
   <body>
     <div class="display-flex flex-column minh-viewport">
-      <%= render partial: 'header' %>
+      <%= render partial: 'application/header' %>
 
       <main id="main-content" class="grid-col-fill display-flex flex-column">
         <div class="grid-col-fill <%= yield :main_col_class %>">
           <section class="usa-section">
             <div class="grid-container">
-              <%= render partial: 'flash' %>
+              <%= render partial: 'application/flash' %>
 
               <div class="grid-row grid-gap">
                 <%= yield :before_content_col %>
