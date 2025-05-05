@@ -1,8 +1,21 @@
 # frozen_string_literal: true
 
 class AuthService
-  def initialize(auth_adapter = Auth::CognitoAdapter.new)
-    @auth_adapter = auth_adapter
+  def initialize(auth_adapter = nil)
+    @auth_adapter = auth_adapter || default_adapter
+  end
+
+  def default_adapter
+    auth_service = Rails.application.config.auth_adapter
+
+    case auth_service
+    when "cognito"
+      Auth::CognitoAdapter.new
+    when "mock"
+      Auth::MockAdapter.new
+    else
+      raise "Unsupported AUTH_SERVICE: #{auth_service}"
+    end
   end
 
   # Send a confirmation code that's required to change the user's password

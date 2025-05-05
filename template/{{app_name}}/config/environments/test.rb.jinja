@@ -11,6 +11,9 @@ Rails.application.default_url_options[:host] = "localhost"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Set auth_adapter to ensure tests run against appropriate auth mock
+  config.auth_adapter = "mock"
+
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
 
