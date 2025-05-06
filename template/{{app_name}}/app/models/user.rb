@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  devise :cognito_authenticatable, :timeoutable
+  devise :auth_service_authenticatable, :timeoutable
   attr_accessor :access_token
 
   # == Enums ========================================================
