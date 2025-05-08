@@ -19,7 +19,7 @@ module TemplateApplicationRails
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
-    #Fetch authentication flow; default to cognito
+    # Fetch authentication flow; default to cognito
     Rails.application.config.auth_adapter = ENV.fetch("AUTH_ADAPTER", "cognito")
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
