@@ -49,7 +49,7 @@ class UswdsFormBuilder < ActionView::Helpers::FormBuilder
       end
 
       form_group(attribute, options[:group_options] || {}) do
-        us_text_field_label(attribute, label_text, label_options) + super(attribute, field_options)
+        content
       end
     end
   end
