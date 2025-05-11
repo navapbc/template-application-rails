@@ -29,15 +29,23 @@ class UswdsFormBuilder < ActionView::Helpers::FormBuilder
 
       label_text = options.delete(:label)
       label_class = options.delete(:label_class) || ""
+      skip_form_group = options.delete(:skip_form_group)
 
       label_options = options.except(:width, :class, :id).merge({
         class: label_class,
         for: options[:id]
       })
-      field_options = options.except(:label, :hint, :large_label, :label_class)
+      field_options = options.except(:label, :hint, :label_class)
 
       if options[:hint]
         field_options[:aria_describedby] = hint_id(attribute)
+      end
+
+      content = us_text_field_label(attribute, label_text, label_options) +
+        super(attribute, field_options)
+
+      if skip_form_group
+        return content
       end
 
       form_group(attribute, options[:group_options] || {}) do
@@ -71,10 +79,16 @@ class UswdsFormBuilder < ActionView::Helpers::FormBuilder
     append_to_option(html_options, :class, " usa-select")
 
     label_text = options.delete(:label)
+    skip_form_group = options.delete(:skip_form_group)
 
-    form_group(attribute) do
-      us_text_field_label(attribute, label_text, options) + super(attribute, choices, options, html_options)
+    content = us_text_field_label(attribute, label_text, options) +
+      super(attribute, choices, options, html_options)
+
+    if skip_form_group
+      return content
     end
+
+    form_group(attribute) { content }
   end
 
   def submit(value = nil, options = {})
@@ -126,6 +140,79 @@ class UswdsFormBuilder < ActionView::Helpers::FormBuilder
     end
 
     text_field(attribute, options.merge(value: value, group_options: group_options))
+  end
+
+  def memorable_date(attribute, options = {})
+    legend_text = options.delete(:legend) || human_name(attribute)
+    hint_text = options.delete(:hint) || I18n.t("us_form_with.memorable_date_hint")
+    hint_id = "#{attribute}_hint"
+
+    object_value = object&.send(attribute)
+    raw_value = object&.send("#{attribute}_before_type_cast") || {}
+    month_value = object_value&.month || raw_value[:month] || nil
+    day_value = object_value&.day || raw_value[:day] || nil
+    year_value = object_value&.year || raw_value[:year] || nil
+
+    month_options = (1..12).map do |m|
+      [ Date::MONTHNAMES[m], m ]
+    end
+    month_options.unshift([ "- Select -", "" ])
+
+    fieldset(legend_text) do
+      @template.content_tag(:span, hint_text, class: "usa-hint", id: hint_id) +
+      field_error(attribute) +
+      @template.content_tag(:div, class: "usa-memorable-date") do
+        fields_for attribute do |date_of_birth_fields|
+          # Month select
+          @template.content_tag(:div, class: "usa-form-group usa-form-group--month usa-form-group--select") do
+            date_of_birth_fields.select(
+              "month",
+              month_options,
+              { label: "Month", skip_form_group: true, selected: month_value },
+              {
+                class: "usa-select",
+                "aria-describedby": hint_id
+              }
+            )
+          end +
+
+          # Day input
+          @template.content_tag(:div, class: "usa-form-group usa-form-group--day") do
+            date_of_birth_fields.text_field(
+              "day",
+              {
+                label: "Day",
+                skip_form_group: true,
+                type: "number",
+                value: day_value,
+                "aria-describedby": hint_id,
+                maxlength: 2,
+                pattern: "[0-9]*",
+                inputmode: "numeric"
+              }
+            )
+          end +
+
+          # Year input
+          @template.content_tag(:div, class: "usa-form-group usa-form-group--year") do
+            date_of_birth_fields.text_field(
+              "year",
+              {
+                label: "Year",
+                skip_form_group: true,
+                type: "number",
+                value: year_value,
+                "aria-describedby": hint_id,
+                minlength: 4,
+                maxlength: 4,
+                pattern: "[0-9]*",
+                inputmode: "numeric"
+              }
+            )
+          end
+        end
+      end
+    end
   end
 
   def field_error(attribute)
@@ -271,6 +358,10 @@ class UswdsFormBuilder < ActionView::Helpers::FormBuilder
       end
 
       label(attribute, label_text, options)
+    end
+
+    def hint_id(attribute)
+      "#{attribute}_hint"
     end
 
     def hint_id(attribute)
