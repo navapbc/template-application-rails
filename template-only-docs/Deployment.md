@@ -43,6 +43,16 @@ While following the [infrastructure template installation instructions](https://
 
 6. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).
 
+## Enabling Lookbook on the dev environment
+
+Lookbook is useful for sharing in progress components with teammates, including product managers and designers. To enable Lookbook on the dev environment, add an environment variable `ENABLE_LOOKBOOK` set to `true` in `/infra/<APP_NAME>/app-config/dev.tf` by adding the following code.
+
+```terraform
+service_override_extra_environment_variables = {
+  ENABLE_LOOKBOOK = "true"
+}
+```
+
 ## Deploying using another method
 
 - AWS Cognito requires a lot of configuration to work correctly. See the Nava Platform infrastructure template for example configuration.

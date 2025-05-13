@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.4.2"
+ruby "3.4.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0", ">= 7.2.2.1"
@@ -71,7 +71,11 @@ gem "faraday"
 # Create fake data (outside of dev/test block to support seeding lower environments)
 gem "faker", "~> 3.2"
 
+gem "lookbook", ">= 2.3.9"
+
 group :development, :test do
+  gem "guard-rspec", require: false
+
   # Support .env files
   gem "dotenv"
 
@@ -81,15 +85,16 @@ group :development, :test do
   # Testing framework
   gem "factory_bot_rails"
   gem "rspec-rails", "~> 6.1.0"
+
+  # Required by Lookbook
+  gem "listen"
+  gem "actioncable"
 end
 
 group :development do
   # Linting
   gem "rubocop-rails-omakase", require: false
   gem "rubocop-rspec", require: false
-
-  # Sass compiling
-  gem "sassc", "~> 2.4"
 
   # Test notifications locally without sending the emails
   gem "letter_opener"

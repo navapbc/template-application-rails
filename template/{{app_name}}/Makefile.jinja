@@ -1,6 +1,7 @@
 .PHONY: \
 	release-build \
-	test
+	test \
+	test-watch
 
 .DEFAULT_GOAL := help
 
@@ -169,6 +170,9 @@ wait-on-db:
 
 test: ## Run the test suite
 	$(RUBY_RUN_CMD) ./bin/rspec
+
+test-watch: ## Watch for file changes and run the test suite
+	$(RUBY_RUN_CMD) ./bin/bundle exec guard
 
 ##################################################
 # Lint & Formatting

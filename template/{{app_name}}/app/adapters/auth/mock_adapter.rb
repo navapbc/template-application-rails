@@ -52,10 +52,24 @@ class Auth::MockAdapter
       }
     end
 
+    existing_user = User.find_by(email: email)
+
+    uid = if existing_user
+            existing_user.uid
+    else
+            @uid_generator.call
+    end
+
     {
-      uid: @uid_generator.call,
-      provider: "mock"
+      uid: uid,
+      provider: "mock",
+      token: generate_token(email)
     }
+  end
+
+  def generate_token(email)
+    # Return a dummy token — apps expecting a token can grab this
+    JWT.encode({ user_id: email, exp: 24.hours.from_now.to_i }, "mock_secret_key")
   end
 
   def associate_software_token(access_token)
@@ -78,7 +92,8 @@ class Auth::MockAdapter
 
     {
       uid: @uid_generator.call,
-      provider: "mock"
+      provider: "mock",
+      token: generate_token("challenge-user@example.com")
     }
   end
 

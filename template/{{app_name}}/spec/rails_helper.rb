@@ -3,6 +3,8 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter 'lib/templates/'
   add_filter 'lib/generators/'
+
+  enable_coverage :branch
 end
 
 require 'spec_helper'

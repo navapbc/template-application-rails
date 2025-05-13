@@ -4,7 +4,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # ==> Support AWS Cognito login
-  Devise.add_module :cognito_authenticatable, controller: :sessions, route: :session
+  Devise.add_module :auth_service_authenticatable, controller: :sessions, route: :session
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this

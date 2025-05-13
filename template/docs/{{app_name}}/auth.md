@@ -7,7 +7,7 @@ Authentication is the process of verifying the credentials of a user. We use AWS
 - User credentials are stored in AWS Cognito
 - Password policy is enforced by Cognito
 - Custom pages are built for the AWS Cognito flows (login, signup, forgot password, etc.). We aren't using the hosted UI that Cognito provides since we need more control over the UI and content.
-- [Devise](https://www.rubydoc.info/github/heartcombo/devise/main) and [Warden](https://www.rubydoc.info/github/hassox/warden) facilitate auth and session management
+- [Devise](https://www.rubydoc.info/github/heartcombo/devise/main) and [Warden](https://github.com/wardencommunity/warden/wiki) facilitate auth and session management
 
 ## Authorization
 
@@ -35,3 +35,17 @@ We use a few `after_action` Pundit callbacks in the application controller to ve
 - If you forget to call `policy_scope` in a controller action, you'll see an exception like `PolicyScopingNotPerformedError`.
 
 To opt out of these checks on actions that don't need them, you can add `skip_after_action :verify_authorized` or `skip_after_action :verify_policy_scoped` to your controller. Alternatively, you can add `skip_authorization` or `skip_policy_scope` to your controller action.
+
+### Mock Auth Adapter Behavior (Development & Test)
+
+When running in test environments (or `dev` with `AUTH_ADAPTER=mock`), the application uses a mock authentication adapter to simulate interactions with an external auth provider. This allows you to test various authentication flows and error states without needing real external infrastructure.
+
+#### How to Trigger Different Auth Scenarios
+The mock adapter looks for specific keywords in the email or password fields during login to simulate different outcomes:
+
+| Scenario | How to Trigger | Result |
+| -------- | -------------- | ------ |
+| Unconfirmed account |	Use an email containing the word unconfirmed | Raises Auth::Errors::UserNotConfirmed |
+| Invalid credentials |	Use the password wrong	                     | Raises Auth::Errors::InvalidCredentials
+| MFA challenge       |	Use an email containing the word mfa	     | Returns a response with challenge_name: SOFTWARE_TOKEN_MFA
+| Successful login    |	Use any other email and password combination | Returns a mock token and UID
