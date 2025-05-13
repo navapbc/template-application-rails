@@ -16,29 +16,32 @@ This template can be deployed using the [Nava Platform Infrastructure Template](
 While following the [infrastructure template installation instructions](https://github.com/navapbc/template-infra?tab=readme-ov-file#installation) and [setup instructions](https://github.com/navapbc/template-infra/blob/main/infra/README.md), use the following configuration:
 
 1. Be sure you've installed this template and the infra-app template via [the nava-platform tool](https://github.com/navapbc/platform-cli) using the same `<APP_NAME>`.
-1. In `/infra/<APP_NAME>/app-config/main.tf`:
+2. In `/infra/<APP_NAME>/app-config/main.tf`:
     1. Set `has_external_non_aws_service` to `true`.
     2. Set `enable_identity_provider` to `true`.
-1. In `/infra/<APP_NAME>/app-config/<ENVIRONMENT>.tf`:
+3. In `/infra/<APP_NAME>/app-config/<ENVIRONMENT>.tf`:
     1. Set the `domain_name`.
     2. Set `enable_https` to `true`.
-1. In `/infra/<APP_NAME>/app-config/env-config/service.tf`:
+4. In `/infra/<APP_NAME>/app-config/env-config/service.tf`:
     1. Configure the service's `ephemeral_write_volumes`:
+
         ```terraform
         ephemeral_write_volumes = [
-          "/rails/tmp",
-          "/tmp"
+          "/rails/tmp"
         ]
         ```
-2. In `/infra/<APP_NAME>/app-config/env-config/environment-variables.tf`:
+
+5. In `/infra/<APP_NAME>/app-config/env-config/environment-variables.tf`:
     1. Add an entry to `secrets`:
-    ```terraform
-    SECRET_KEY_BASE = {
-      manage_method     = "generated"
-      secret_store_name = "/${var.app_name}-${var.environment}/service/rails-secret-key-base"
-    }
-    ```
-3. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).
+
+        ```terraform
+        SECRET_KEY_BASE = {
+          manage_method     = "generated"
+          secret_store_name = "/${var.app_name}-${var.environment}/service/rails-secret-key-base"
+        }
+        ```
+
+6. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).
 
 ## Deploying using another method
 
