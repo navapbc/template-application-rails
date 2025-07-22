@@ -18,6 +18,10 @@ on:
       access_token:
         required: true
 
+env:
+  BRANCH_NAME: ${{ inputs.branch_name }}
+  PROJECT_APP: ${{ inputs.project_app }}
+
 jobs:
   create-or-update-pr:
     name: Create or update PR
@@ -47,11 +51,11 @@ jobs:
       - name: Set up PR branch
         working-directory: project-repo
         run: |
-          git checkout -b ${{ inputs.branch_name }}
+          git checkout -b "${BRANCH_NAME}"
 
       - name: Update application template
         working-directory: project-repo
-        run: nava-platform app update --template-uri ${{ github.server_url }}/${{ github.repository }} --version ${{ inputs.branch_name }} . ${{ inputs.project_app }}
+        run: nava-platform app update --template-uri ${{ github.server_url }}/${{ github.repository }} --version "${BRANCH_NAME}" . "${PROJECT_APP}"
 
       - name: Push changes to project repo
         working-directory: project-repo
@@ -63,7 +67,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.access_token }}
         run: |
-          PR_URL="$(gh pr list --head "${{ inputs.branch_name }}" --state open --json url --jq .[].url)"
+          PR_URL="$(gh pr list --head "${BRANCH_NAME}" --state open --json url --jq .[].url)"
           if [[ -n "${PR_URL}" ]]; then
             echo "PR already exists -> ${PR_URL}"
             echo "exists=true" >> "$GITHUB_OUTPUT"
@@ -77,17 +81,16 @@ jobs:
         working-directory: project-repo
         env:
           GITHUB_TOKEN: ${{ secrets.access_token }}
+          PR_BODY: ${{ inputs.pr_body }}
         run: |
-          pr_body=""
-
-          if [[ -n "${{ inputs.pr_body }}" ]]; then
-            pr_body=${{ inputs.pr_body }}
+          if [[ -n "${PR_BODY}" ]]; then
+            : # we're good
           elif [[ -n "${{ github.event.pull_request.html_url }}" ]]; then
-            pr_body=${{ github.event.pull_request.html_url }}
+            PR_BODY="${{ github.event.pull_request.html_url }}"
           else
-            pr_body=${{ github.server_url }}/${{ github.repository }}/tree/${{ inputs.branch_name }}
+            PR_BODY="${{ github.server_url }}/${{ github.repository }}/tree/${BRANCH_NAME}"
           fi
 
           gh pr create \
-            --body "${pr_body}" \
-            --title "Test Template PR: ${{ inputs.branch_name }}"
+            --body "${PR_BODY}" \
+            --title "Test Template PR: ${BRANCH_NAME}"

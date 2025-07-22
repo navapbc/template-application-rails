@@ -39,5 +39,6 @@ jobs:
       - name: Close test PR
         env:
           GITHUB_TOKEN: ${{ secrets.PLATFORM_BOT_GITHUB_TOKEN }}
+          BRANCH_NAME: ${{ inputs.branch_name || github.head_ref }}
         run: |
-          gh pr close ${{ inputs.branch_name || github.head_ref }} --delete-branch --repo navapbc/platform-test
+          gh pr close "${BRANCH_NAME}" --delete-branch --repo navapbc/platform-test
