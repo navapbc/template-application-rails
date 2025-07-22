@@ -18,6 +18,9 @@ on:
       access_token:
         required: true
 
+# all access is via the provided `access_token`
+permissions: {}
+
 env:
   BRANCH_NAME: ${{ inputs.branch_name }}
   PROJECT_APP: ${{ inputs.project_app }}
