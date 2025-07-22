@@ -80,9 +80,9 @@ jobs:
         run: |
           pr_body=""
 
-          if [[ -z "${{ inputs.pr_body }}" ]]; then
+          if [[ -n "${{ inputs.pr_body }}" ]]; then
             pr_body=${{ inputs.pr_body }}
-          elif [[ -z "${{ github.event.pull_request.html_url }}" ]]; then
+          elif [[ -n "${{ github.event.pull_request.html_url }}" ]]; then
             pr_body=${{ github.event.pull_request.html_url }}
           else
             pr_body=${{ github.server_url }}/${{ github.repository }}/tree/${{ inputs.branch_name }}
