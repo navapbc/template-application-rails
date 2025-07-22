@@ -20,6 +20,9 @@ on:
   pull_request_target:
     types: [closed]
 
+# all access is via `PLATFORM_BOT_GITHUB_TOKEN`
+permissions: {}
+
 jobs:
   update:
     name: " " # GitHub UI is noisy when calling reusable workflows, so use whitespace for name to reduce noise
