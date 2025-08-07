@@ -19,9 +19,6 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle" \
     TMPDIR="/rails/tmp"
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE {{ app_local_port }}
-
 # In production, this should be the only filesystem location with writes
 VOLUME /rails/tmp
 
