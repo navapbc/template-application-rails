@@ -4,4 +4,4 @@
 # sets RAILS_ENV to development, we need to override it:
 export RAILS_ENV=test
 
-bundle exec rspec --format documentation
+bundle exec rspec --format documentation "$@"
