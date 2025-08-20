@@ -94,3 +94,6 @@ production:
   # Enable AWS RDS IAM Auth token generator
   # For more details, see: https://github.com/haines/pg-aws_rds_iam
   aws_rds_iam_auth_token_generator: default
+
+  # Require SSL when connecting to the database
+  sslmode: require
