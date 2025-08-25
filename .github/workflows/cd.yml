@@ -30,6 +30,8 @@ jobs:
             app: paidleave
           - repo: navapbc/pfml-starter-kit-app
             app: demo
+          - repo: navapbc/community-engagement-medicaid
+            app: reporting-app
     concurrency:
       group: cd-${{ matrix.project.repo }}
     steps:
