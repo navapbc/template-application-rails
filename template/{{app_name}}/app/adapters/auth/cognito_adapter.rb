@@ -5,8 +5,19 @@ require "aws-sdk-cognitoidentityprovider"
 class Auth::CognitoAdapter
   @@provider_name = "cognito"
 
-  def initialize(client: Aws::CognitoIdentityProvider::Client.new)
+  class Config < Data.define(:client_id, :client_secret, :user_pool_id)
+    def self.from_env
+      Config.new(
+        client_id: ENV["COGNITO_CLIENT_ID"],
+        client_secret: ENV["COGNITO_CLIENT_SECRET"],
+        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
+      )
+    end
+  end
+
+  def initialize(client: Aws::CognitoIdentityProvider::Client.new, config: Config.from_env)
     @client = client
+    @config = config
   end
 
   # Add a user to the Cognito user pool
@@ -14,7 +25,7 @@ class Auth::CognitoAdapter
   def create_account(email, password)
     begin
       response = @client.sign_up(
-        client_id: ENV["COGNITO_CLIENT_ID"],
+        client_id: @config.client_id,
         secret_hash: get_secret_hash(email),
         username: email,
         password: password,
@@ -47,7 +58,7 @@ class Auth::CognitoAdapter
   def forgot_password(email)
     begin
       response = @client.forgot_password(
-        client_id: ENV["COGNITO_CLIENT_ID"],
+        client_id: @config.client_id,
         secret_hash: get_secret_hash(email),
         username: email
       )
@@ -64,7 +75,7 @@ class Auth::CognitoAdapter
   def confirm_forgot_password(email, code, password)
     begin
       @client.confirm_forgot_password(
-        client_id: ENV["COGNITO_CLIENT_ID"],
+        client_id: @config.client_id,
         secret_hash: get_secret_hash(email),
         username: email,
         confirmation_code: code,
@@ -84,7 +95,7 @@ class Auth::CognitoAdapter
   def change_email(uid, new_email)
     begin
       response = @client.admin_update_user_attributes(
-        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
+        user_pool_id: @config.user_pool_id,
         username: uid,
         user_attributes: [
           {
@@ -114,8 +125,8 @@ class Auth::CognitoAdapter
   def initiate_auth(email, password)
     begin
       response = @client.admin_initiate_auth(
-        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
-        client_id: ENV["COGNITO_CLIENT_ID"],
+        user_pool_id: @config.user_pool_id,
+        client_id: @config.client_id,
         auth_flow: "ADMIN_USER_PASSWORD_AUTH",
         auth_parameters: {
           "USERNAME" => email,
@@ -151,7 +162,7 @@ class Auth::CognitoAdapter
   def resend_verification_code(email)
     begin
       @client.resend_confirmation_code(
-        client_id: ENV["COGNITO_CLIENT_ID"],
+        client_id: @config.client_id,
         secret_hash: get_secret_hash(email),
         username: email
       )
@@ -163,8 +174,8 @@ class Auth::CognitoAdapter
   def respond_to_auth_challenge(code, challenge = {})
     begin
       response = @client.admin_respond_to_auth_challenge(
-        client_id: ENV["COGNITO_CLIENT_ID"],
-        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
+        client_id: @config.client_id,
+        user_pool_id: @config.user_pool_id,
         challenge_name: "SOFTWARE_TOKEN_MFA",
         session: challenge[:session],
         challenge_responses: {
@@ -184,7 +195,7 @@ class Auth::CognitoAdapter
   def verify_account(email, code)
     begin
       @client.confirm_sign_up(
-        client_id: ENV["COGNITO_CLIENT_ID"],
+        client_id: @config.client_id,
         secret_hash: get_secret_hash(email),
         username: email,
         confirmation_code: code
@@ -242,7 +253,7 @@ class Auth::CognitoAdapter
   def disable_software_token(uid)
     begin
       @client.admin_set_user_mfa_preference(
-        user_pool_id: ENV["COGNITO_USER_POOL_ID"],
+        user_pool_id: @config.user_pool_id,
         username: uid,
         software_token_mfa_settings: {
           enabled: false,
@@ -265,8 +276,8 @@ class Auth::CognitoAdapter
     end
 
     def get_secret_hash(username)
-      message = username + ENV["COGNITO_CLIENT_ID"]
-      key = ENV["COGNITO_CLIENT_SECRET"]
+      message = username + @config.client_id
+      key = @config.client_secret
       Base64.strict_encode64(OpenSSL::HMAC.digest("sha256", key, message))
     end
 
