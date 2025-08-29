@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.describe Auth::CognitoAdapter do
   let(:mock_client) { instance_double(Aws::CognitoIdentityProvider::Client) }
-  let(:adapter) { described_class.new(client: mock_client) }
+  let(:dummy_config) { Auth::CognitoAdapter::Config.new(client_id: "Foo", client_secret: "Bar", user_pool_id: "Baz") }
+  let(:adapter) { described_class.new(client: mock_client, config: dummy_config) }
   let(:email) { "test@example.com" }
 
   describe "#associate_software_token" do
