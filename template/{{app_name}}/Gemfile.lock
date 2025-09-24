@@ -553,7 +553,7 @@ DEPENDENCIES
   puma (>= 6.0)
   pundit
   pundit-matchers
-  rails (= 8.0.3)
+  rails (~> 8.0.3, >= 8.0.3)
   rails-erd
   route_translator
   rqrcode
