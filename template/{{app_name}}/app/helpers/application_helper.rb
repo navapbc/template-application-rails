@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def us_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)
+  def us_form_with(model:, scope: nil, url: nil, format: nil, **options, &block)
     options[:builder] = UswdsFormBuilder
     form_with model: model, scope: scope, url: url, format: format, **options, &block
   end
