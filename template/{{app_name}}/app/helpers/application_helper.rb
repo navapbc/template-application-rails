@@ -1,7 +1,12 @@
 module ApplicationHelper
-  def us_form_with(model:, scope: nil, url: nil, format: nil, **options, &block)
+  def us_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)
     options[:builder] = UswdsFormBuilder
-    form_with model: model, scope: scope, url: url, format: format, **options, &block
+
+    # Build arguments hash, excluding model if it's nil
+    form_args = { scope: scope, url: url, format: format, **options }
+    form_args[:model] = model unless model.nil?
+
+    form_with **form_args, &block
   end
 
   def local_time(time, format: nil, timezone: "America/Chicago")
