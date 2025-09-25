@@ -1,10 +1,10 @@
 module ApplicationHelper
-  def us_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)
+  def us_form_with(model: false, scope: nil, url: nil, format: nil, **options, &block)
     options[:builder] = UswdsFormBuilder
 
     # Build arguments hash, excluding model if it's nil
     form_args = { scope: scope, url: url, format: format, **options }
-    form_args[:model] = model unless model.nil?
+    form_args[:model] = model unless model == false
 
     form_with **form_args, &block
   end
