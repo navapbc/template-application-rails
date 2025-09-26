@@ -4,7 +4,7 @@ module ApplicationHelper
 
     # Build arguments hash, excluding model if it's nil
     form_args = { scope: scope, url: url, format: format, **options }
-    form_args[:model] = model unless model == false
+    form_args[:model] = model if model
 
     form_with **form_args, &block
   end
