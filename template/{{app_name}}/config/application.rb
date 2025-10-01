@@ -17,7 +17,7 @@ module TemplateApplicationRails
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
+    config.load_defaults 8.0
 
     # Fetch authentication flow; default to cognito
     Rails.application.config.auth_adapter = ENV.fetch("AUTH_ADAPTER", "cognito")
