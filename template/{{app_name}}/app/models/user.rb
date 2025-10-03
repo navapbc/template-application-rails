@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   devise :auth_service_authenticatable, :timeoutable
   attr_accessor :access_token

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Custom form builder. Beyond adding USWDS classes, this also
 # supports setting the label, hint, and error messages by just
 # using the field helpers (i.e text_field, check_box), and adds

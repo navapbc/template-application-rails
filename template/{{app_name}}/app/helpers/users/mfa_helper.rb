@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users::MfaHelper
   # Generate a QR code for setting up the TOTP device
   def totp_qr_code(secret, email)

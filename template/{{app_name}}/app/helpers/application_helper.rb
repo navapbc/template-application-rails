@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def us_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)
     options[:builder] = UswdsFormBuilder

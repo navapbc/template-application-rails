@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # SimpleCov needs to be required before any of your application code is loaded.
 require 'simplecov'
 SimpleCov.start 'rails' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # freeze_string_literal: true
 
 class Users::RegistrationsController < ApplicationController
