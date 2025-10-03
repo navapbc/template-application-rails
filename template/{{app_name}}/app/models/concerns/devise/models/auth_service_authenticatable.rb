@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This adds a :auth_service_authenticatable accessor for use in the `devise` portion of a user model
 # Heavily inspired by https://www.endpointdev.com/blog/2023/01/using-devise-for-authentication-without-database-stored-accounts/
 module Devise

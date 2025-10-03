@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa-totp.html#totp-mfa-set-up-api
 class Users::MfaController < ApplicationController
   before_action :authenticate_user!

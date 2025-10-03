@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Not to be confused with a "benefits application" or "claim".
 # This is the parent class for all other controllers in the application.
 class ApplicationController < ActionController::Base

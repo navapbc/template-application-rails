@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # If a model uses Active Storage and it defines any of the defined methods (after_commit,
 # after_create_commit, or after_update_commit), then those methods will be called after
 # the attachment has been fully committed to database. This allows for post-processing

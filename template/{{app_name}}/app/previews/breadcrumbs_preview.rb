@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BreadcrumbsPreview < Lookbook::Preview
   layout "component_preview"
 
