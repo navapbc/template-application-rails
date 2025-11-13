@@ -2,16 +2,14 @@
 
 class Users::AccountsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_email_form
+  before_action :set_password_form
   skip_after_action :verify_authorized
 
   def edit
-    @email_form = Users::UpdateEmailForm.new({ email: current_user.email })
-    @password_form = Users::ForgotPasswordForm.new({ email: current_user.email })
   end
 
   def update_email
-    @email_form = Users::UpdateEmailForm.new(user_email_params)
-
     if @email_form.invalid?
       flash.now[:errors] = @email_form.errors.full_messages
       return render :edit, status: :unprocessable_content
@@ -28,6 +26,16 @@ class Users::AccountsController < ApplicationController
   end
 
   private
+
+    def set_email_form
+      email_params = action_name == "update_email" ? user_email_params : { email: current_user.email }
+      @email_form = Users::UpdateEmailForm.new(email_params)
+    end
+
+    def set_password_form
+      @password_form = Users::ForgotPasswordForm.new({ email: current_user.email })
+    end
+
     def auth_service
       AuthService.new
     end
