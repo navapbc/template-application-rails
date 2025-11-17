@@ -1,8 +1,29 @@
+<p>
+  <img src="template/docs/assets/Nava-Strata-Logo-V02.svg" alt="Nava Strata" width="400">
+</p>
+<p><i>Open source tools for every layer of government service delivery.</i></p>
+<p><b>Strata is a gold-standard target architecture and suite of open-source tools that gives government agencies everything they need to run a modern service.</b></p>
+
+<h4 align="center">
+  <a href="https://github.com/navapbc/template-application-rails/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-apache_2.0-red" alt="Nava Strata is released under the Apache 2.0 license" >
+  </a>
+  <a href="https://github.com/navapbc/template-application-rails/blob/main/CONTRIBUTING.md">
+    <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen" alt="PRs welcome!" />
+  </a>
+  <a href="https://github.com/navapbc/template-application-rails/issues">
+    <img src="https://img.shields.io/github/commit-activity/m/navapbc/template-application-rails" alt="git commit activity" />
+  </a>
+  <a href="https://github.com/navapbc/template-application-rails/repos/">
+    <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/navapbc/template-application-rails/total">
+  </a>
+</h4>
+
 # Template Ruby on Rails application
 
 This is a template repository for a Ruby on Rails application.
 
-See [`navapbc/platform`](https://github.com/navapbc/platform) for other template repos.
+See [`navapbc/platform`](https://github.com/navapbc/strata) for other template repos.
 
 ## Features
 
