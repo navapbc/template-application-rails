@@ -75,3 +75,12 @@ project to use a newer version of this template:
     ```sh
     nava-platform app update . <APP_NAME>
     ```
+## License
+
+This project is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE) file for details.
+
+## Community
+
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Contributing Guidelines](CONTRIBUTING.MD)
+- [Security Policy](SECURITY.md)
