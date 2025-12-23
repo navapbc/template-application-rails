@@ -36,7 +36,7 @@ jobs:
       group: cd-${{ matrix.project.repo }}
     steps:
       - name: Checkout project repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: project-repo
           repository: ${{ matrix.project.repo }}
