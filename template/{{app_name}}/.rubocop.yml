@@ -22,3 +22,5 @@ RSpecRails/HttpStatusNameConsistency:
 
 Style/FrozenStringLiteralComment:
   Enabled: true
+Style/RedundantSelf:
+  Enabled: true
