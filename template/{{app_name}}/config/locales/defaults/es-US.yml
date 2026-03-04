@@ -1,4 +1,17 @@
 es-US:
+  auth:
+    errors:
+      messages:
+        access_denied: "No tiene permiso para acceder a esta aplicación"
+    sso:
+      login_success: "Ha iniciado sesión correctamente con SSO"
+      logout_success: "Sesión cerrada correctamente"
+      authentication_failed: "Error de autenticación. Inténtelo de nuevo."
+      not_enabled: "SSO no está habilitado para esta aplicación"
+      redirecting_title: "Redirigiendo al inicio de sesión..."
+      redirecting_message: "Redirigiendo al inicio de sesión de su organización..."
+      javascript_required: "Se requiere JavaScript para la redirección automática. Haga clic abajo para continuar."
+      continue_button: "Continuar al inicio de sesión"
   date:
     formats:
       default: "%m/%d/%Y"

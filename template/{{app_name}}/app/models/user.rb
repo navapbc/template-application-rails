@@ -14,6 +14,12 @@ class User < ApplicationRecord
   # == Validations ==========================================================
   validates :provider, presence: true
 
+  scope :staff_members, -> { where.not(role: nil) }
+
+  def self.regions
+    where.not(region: nil).distinct.pluck(:region)
+  end
+
   # == Methods ==============================================================
 
   # Check if the access token is expired or will expire within the next `minutes` minutes.
@@ -25,5 +31,17 @@ class User < ApplicationRecord
     expiration_time = Time.at(decoded_token.first["exp"])
 
     expiration_time < Time.now + minutes.minutes
+  end
+
+  def admin?
+    role == "admin"
+  end
+
+  def caseworker?
+    role == "caseworker"
+  end
+
+  def staff?
+    admin? || caseworker?
   end
 end
