@@ -576,7 +576,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails (>= 2.0)
   tzinfo-data
-  web-console
+  web-console (< 4.3.0)
 
 RUBY VERSION
    ruby 3.4.9p82
