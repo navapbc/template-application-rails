@@ -10,8 +10,8 @@
     "dependencies"
   ],
   "github-actions": {
-    "fileMatch": [
-      "^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$"
+    "managerFilePatterns": [
+      "/^template/\\.github/(?:workflows|actions)/.+\\.ya?ml(?:.jinja)?$/"
     ]
   },
   "packageRules": [
