@@ -91,9 +91,7 @@ mock-production:
 #
 production:
   <<: *default
-  # Enable AWS RDS IAM Auth token generator
-  # For more details, see: https://github.com/haines/pg-aws_rds_iam
-  aws_rds_iam_auth_token_generator: default
-
+  # Password is injected at runtime via the database_auth.rb initializer strategy
+  # (Azure Managed Identity or AWS IAM token, controlled by DB_AUTH_METHOD env var)
   # Require SSL when connecting to the database
   sslmode: require
