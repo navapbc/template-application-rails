@@ -4,6 +4,17 @@ This document tracks the changes made during the upgrade of the application temp
 
 The command `bin/rails app:update` was run to generate the standard Rails 8 configuration and structure. The following files were either modified (overwritten) or newly created.
 
+## Template Testing
+Verified template install with the following:
+1. Setup a new local git repo
+2. nava-platform app install --template-uri local/path/to/template-application-rails --version branch-name . rails-demo-1
+3. Run make .env, make build, make precompile-assets, make lint, and make test
+4. Run make start-container, and navigated to localhost:3000 in browser and successfully logged in.
+
+## Updating an existing nava-platform app to use new template version
+1. Updated [OSCER](https://github.com/navapbc/oscer) to Rails 8.0, passed all tests, including multiple end-to-end tests.
+2. Updated validates_timeliness gem to 8.0 for compatibility with Rails 8.0, as Strata Gem defines 7.0 for compatibility with Rails 7.2.
+
 ## Overwritten Files
 
 The following files existed in Rails 7.2 and were updated by the Rails 8.0 generator.
