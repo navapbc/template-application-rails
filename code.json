@@ -1,6 +1,6 @@
 {
   "name": "strata-template-rails",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Open source tools for every layer of government service delivery. Strata is a gold-standard target architecture and suite of open source tools that gives government agencies everything they need to run a modern service.",
   "status": "Production",
   "permissions": {
@@ -10,7 +10,9 @@
         "URL": "https://github.com/navapbc/template-application-rails/strata/blob/main/LICENSE.md"
       }
     ],
-    "usageType": ["openSource"]
+    "usageType": [
+      "openSource"
+    ]
   },
   "organization": "Nava",
   "repositoryURL": "https://github.com/navapbc/template-application-rails/strata",
@@ -19,7 +21,9 @@
   "reuseFrequency": {
     "forks": 2
   },
-  "languages": ["Ruby"],
+  "languages": [
+    "Ruby"
+  ],
   "maintenance": "internal",
   "SBOM": "https://github.com/navapbc/template-application-rails/strata/network/dependencies",
   "date": {
@@ -27,7 +31,10 @@
     "lastModified": "2025-10-16T18:20:45Z",
     "metadataLastUpdated": "2025-10-16T19:37:20.815Z"
   },
-  "tags": ["platform", "sdk"],
+  "tags": [
+    "platform",
+    "sdk"
+  ],
   "contact": {},
   "feedbackMechanism": "https://github.com/navapbc/template-application-rails/strata/issues",
   "AIUseCaseID": "0"

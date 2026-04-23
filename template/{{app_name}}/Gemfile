@@ -5,7 +5,7 @@ source "https://rubygems.org"
 ruby "3.4.9"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.0", ">= 7.2.2.1"
+gem "rails", "~> 8.0.5", ">= 8.0.5"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -103,13 +103,7 @@ group :development do
   gem "letter_opener"
 
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  #
-  # 4.3.0 dropped support for Rails 7
-  # https://github.com/rails/web-console/commit/6bc7159fa73b4b186cab95284ba9063c6eef0b23
-  #
-  # TODO(https://github.com/navapbc/template-application-rails/issues/71):
-  # remove version constraint when updating to Rails 8+
-  gem "web-console", "< 4.3.0"
+  gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
