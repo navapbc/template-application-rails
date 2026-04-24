@@ -172,7 +172,7 @@ test: ## Run the test suite
 	$(RUBY_RUN_CMD) ./bin/rspec $(args)
 
 test-watch: ## Watch for file changes and run the test suite
-	$(RUBY_RUN_CMD) ./bin/bundle exec guard
+	$(RUBY_RUN_CMD) bundle exec guard
 
 ##################################################
 # Lint & Formatting
