@@ -22,7 +22,7 @@ class Users::SessionsController < Devise::SessionsController
         @form.password
       )
     rescue Auth::Errors::UserNotConfirmed => e
-      return redirect_to users_verify_account_path
+      return redirect_to users_verify_account_url
     rescue Auth::Errors::BaseAuthError => e
       flash.now[:errors] = [ e.message ]
       return render :new, status: :unprocessable_content
@@ -31,7 +31,7 @@ class Users::SessionsController < Devise::SessionsController
     unless response[:user].present?
       session[:challenge_session] = response[:session]
       session[:challenge_email] = @form.email
-      return redirect_to session_challenge_path
+      return redirect_to session_challenge_url
     end
 
     auth_user(response[:user], response[:access_token])
@@ -40,7 +40,7 @@ class Users::SessionsController < Devise::SessionsController
   # Show MFA
   def challenge
     if session[:challenge_session].nil?
-      return redirect_to new_user_session_path
+      return redirect_to new_user_session_url
     end
 
     @form = Users::AuthAppCodeForm.new

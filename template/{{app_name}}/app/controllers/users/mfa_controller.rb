@@ -34,7 +34,7 @@ class Users::MfaController < ApplicationController
     # forcing the user to log in again
     if current_user.access_token_expires_within_minutes?(current_user.access_token, 5)
       sign_out(current_user)
-      redirect_to new_user_session_path
+      redirect_to new_user_session_url
       return
     end
 
@@ -58,12 +58,12 @@ class Users::MfaController < ApplicationController
       return redirect_to({ action: :new }, flash: { errors: [ e.message ] })
     end
 
-    redirect_to root_path, { notice: I18n.t("users.mfa.create.success") }
+    redirect_to root_url, { notice: I18n.t("users.mfa.create.success") }
   end
 
   def destroy
     auth_service.disable_software_token(current_user)
-    redirect_to users_account_path, notice: I18n.t("users.accounts.edit.mfa_successfully_disabled")
+    redirect_to users_account_url, notice: I18n.t("users.accounts.edit.mfa_successfully_disabled")
   end
 
   private

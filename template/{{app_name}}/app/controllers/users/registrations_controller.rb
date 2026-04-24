@@ -26,7 +26,7 @@ class Users::RegistrationsController < ApplicationController
       return render :new, status: :unprocessable_content
     end
 
-    redirect_to users_verify_account_path
+    redirect_to users_verify_account_url
   end
 
   def new_account_verification
@@ -50,7 +50,7 @@ class Users::RegistrationsController < ApplicationController
       return render :new_account_verification, status: :unprocessable_content
     end
 
-    redirect_to new_user_session_path
+    redirect_to new_user_session_url
   end
 
   def resend_verification_code
@@ -65,7 +65,7 @@ class Users::RegistrationsController < ApplicationController
     auth_service.resend_verification_code(email)
 
     flash[:notice] = I18n.t("users.registrations.new_account_verification.resend_success")
-    redirect_to users_verify_account_path
+    redirect_to users_verify_account_url
   end
 
   private
