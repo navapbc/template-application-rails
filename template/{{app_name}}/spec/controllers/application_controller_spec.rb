@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
-
   describe "View paths" do
     it "first resolves to app/views/overrides" do
       first_view_path = controller.view_paths.first
