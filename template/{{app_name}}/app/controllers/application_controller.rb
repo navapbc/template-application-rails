@@ -28,4 +28,40 @@ class ApplicationController < ActionController::Base
 
     users_account_path
   end
+
+  # Intercept redirect_to to replace the host with APP_HOST (the public hostname).
+  def redirect_to(options = {}, response_options_and_flash = {})
+    app_host = ENV["APP_HOST"]
+    if app_host.present?
+      options = case options
+      when String
+        if options.start_with?("http://", "https://")
+          options.sub(%r{\Ahttps?://[^/]+}, "https://#{app_host}")
+        elsif options.start_with?("/")
+          "https://#{app_host}#{options}"
+        else
+          options
+        end
+      when Hash
+        { host: app_host, protocol: "https" }.merge(options)
+      else
+        options
+      end
+      response_options_and_flash = response_options_and_flash.merge(allow_other_host: true)
+    end
+    super
+  end
+
+  private
+
+  # Compare the Origin header against the configured APP_HOST (the public hostname) instead.
+  def valid_request_origin?
+    app_host = ENV["APP_HOST"]
+    if app_host.present?
+      request.origin.nil? || request.origin == "#{request.scheme}://#{app_host}"
+    else
+      super
+    end
+  end
+
 end

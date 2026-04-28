@@ -24,7 +24,7 @@ class Users::PasswordsController < ApplicationController
       return render :forgot, status: :unprocessable_content
     end
 
-    redirect_to users_reset_password_path
+    redirect_to users_reset_password_url
   end
 
   def reset
@@ -50,7 +50,7 @@ class Users::PasswordsController < ApplicationController
       return render :reset, status: :unprocessable_content
     end
 
-    redirect_to new_user_session_path, notice: I18n.t("users.passwords.reset.success")
+    redirect_to new_user_session_url, notice: I18n.t("users.passwords.reset.success")
   end
 
   private

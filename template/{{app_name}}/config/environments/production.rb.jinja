@@ -50,7 +50,12 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
+  config.assume_ssl = true
+
+  # Azure Application Gateway sets Host: <container-app-fqdn> on backend connections.
+  # Set the default URL host to APP_HOST so that redirects use the public hostname
+  # instead of the internal Container App FQDN.
+  config.action_dispatch.default_url_options = { host: ENV["APP_HOST"] }
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
