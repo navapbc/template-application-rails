@@ -7,6 +7,9 @@ ruby "3.4.9"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.5", ">= 8.0.5"
 
+# Ensure rack 3.x for Rails 7.2 compatibility (rack-oauth2 allows >= 2.1.0)
+gem "rack", ">= 3.0"
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -59,6 +62,10 @@ gem "jwt"
 gem "pundit"
 gem "pundit-matchers"
 gem "rqrcode"
+
+# Staff SSO via OIDC
+gem "omniauth_openid_connect"
+gem "omniauth-rails_csrf_protection"
 
 # Notifications: AWS SES
 gem "aws-sdk-rails"

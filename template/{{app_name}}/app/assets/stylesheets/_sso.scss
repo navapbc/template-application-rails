@@ -1,0 +1,31 @@
+// SSO redirect page styles
+@use "uswds-core" as *;
+
+.sso-redirect-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: units(4);
+}
+
+.sso-redirect-container {
+  text-align: center;
+  max-width: units(40);
+}
+
+.sso-redirect-spinner {
+  width: units(5);
+  height: units(5);
+  margin: 0 auto units(3);
+  border: 3px solid color("base-lighter");
+  border-top-color: color("primary");
+  border-radius: 50%;
+  animation: sso-spin 0.8s linear infinite;
+}
+
+@keyframes sso-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
