@@ -23,7 +23,7 @@
 
 module DatabaseAuth
   class AzureEntra
-    RESOURCE = "https://ossrdbms-aad.database.windows.net"
+    RESOURCE = ENV.fetch("AZURE_DB_RESOURCE_URI")
 
     def token
       endpoint  = ENV.fetch("IDENTITY_ENDPOINT")
