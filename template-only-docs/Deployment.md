@@ -11,7 +11,7 @@
 
 ## Deploying using the Platform Infrastructure Template
 
-This template can be deployed using the [Nava Platform Infrastructure Template](https://github.com/navapbc/template-infra). Using the infrastructure template will handle creating and configuring all of the resources required in AWS.
+This template can be deployed using the [Nava AWS Platform Infrastructure Template](https://github.com/navapbc/template-infra) or [Nava Azure Platform Infrastructure Template](https://github.com/navapbc/template-infra-azure). Using the infrastructure template will handle creating and configuring all of the resources required.
 
 While following the [infrastructure template installation instructions](https://github.com/navapbc/template-infra?tab=readme-ov-file#installation) and [setup instructions](https://github.com/navapbc/template-infra/blob/main/infra/README.md), use the following configuration:
 
@@ -37,7 +37,41 @@ While following the [infrastructure template installation instructions](https://
       secret_store_name = "/${var.app_name}-${var.environment}/service/rails-secret-key-base"
     }
     ```
+    1. Configure database authentication (see [Database Integration](#database-integration) below).
 1. Follow the infrastructure template instructions to configure [custom domains](https://github.com/navapbc/template-infra/blob/main/docs/infra/set-up-custom-domains.md) and [https support](https://github.com/navapbc/template-infra/blob/main/docs/infra/https-support.md).
+
+### Database Integration
+
+The application supports multiple database authentication methods via the `DB_AUTH_METHOD` environment variable. Set it in `default_extra_environment_variables` inside `/infra/<APP_NAME>/app-config/env-config/environment-variables.tf`:
+
+| `DB_AUTH_METHOD` | Description | When to use |
+|---|---|---|
+| *(unset or omitted)* | Use `DB_PASSWORD` as-is | Local development / password-based auth |
+| `aws_iam` | AWS RDS IAM auth token | Deployed on AWS with RDS |
+| `azure_entra` | Azure Managed Identity token via MS Entra ID | Deployed on Azure with Azure Database for PostgreSQL |
+
+**AWS (RDS IAM)**:
+```terraform
+default_extra_environment_variables = {
+  DB_AUTH_METHOD = "aws_iam"
+}
+```
+
+**Azure (Entra ID)**:
+```terraform
+default_extra_environment_variables = {
+  DB_AUTH_METHOD        = "azure_entra"
+  AZURE_DB_RESOURCE_URI = "https://ossrdbms-aad.database.windows.net"
+}
+```
+
+`AZURE_DB_RESOURCE_URI` is the audience URI used when requesting an access token from MS Entra ID. The value depends on which Azure PostgreSQL service is being used:
+
+| Azure PostgreSQL service | `AZURE_DB_RESOURCE_URI` |
+|---|---|
+| Azure Database for PostgreSQL Flexible Server | `https://ossrdbms-aad.database.windows.net` |
+
+Consult the [Azure documentation](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication) if using a different service.
 
 ## Enabling Lookbook on the dev environment
 
@@ -51,5 +85,6 @@ service_override_extra_environment_variables = {
 
 ## Deploying using another method
 
+### AWS
 - AWS Cognito requires a lot of configuration to work correctly. See the Nava Platform infrastructure template for example configuration.
 - If you are deploying using AWS ECS, but don't want to use the Platform infrastructure template, pass in environment variables and secrets using the ECS task definition. Use the `environment` key for environment variables and the `secrets` key with `valueFrom` for secrets.

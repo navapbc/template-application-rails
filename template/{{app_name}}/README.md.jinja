@@ -9,6 +9,8 @@ This is a [Ruby on Rails](https://rubyonrails.org/) application. It includes:
   - Active Storage configuration with AWS S3
   - Action Mailer configuration with AWS SES
   - Authentication with [devise](https://github.com/heartcombo/devise) and AWS Cognito
+- Integration with Azure services, including
+  - Database integration with Azure PostgreSQL using Entra ID
 - Internationalization (i18n)
 - Authorization using [pundit](https://github.com/varvet/pundit)
 - Linting and code formatting using [rubocop](https://rubocop.org/)
@@ -52,6 +54,7 @@ Below are the primary directories to be aware of when working on the app:
   - By default, `docker` is used. To change this, set the `CONTAINER_CMD` variable to `finch` (or whatever your container runtime is) in the shell.
 - An AWS account with a Cognito User Pool and App Client configured
   - By default, the application configures authentication using AWS Cognito
+- Or an Azure subscription
 
 ### 💾 Setup
 
@@ -104,6 +107,31 @@ AUTH_ADAPTER=cognito
 ```
 
 You will need to set the other cognito variables as well; setting `AUTH_ADAPTER` alone will merely set the auth flow to cognito, not enable cognito log in.
+
+#### Database Authentication
+
+The application supports three database authentication methods, controlled by the `DB_AUTH_METHOD` environment variable in your `.env` file:
+
+| `DB_AUTH_METHOD` | Description | When to use |
+|---|---|---|
+| *(unset or blank)* | Use `DB_PASSWORD` as-is | Local development |
+| `aws_iam` | AWS RDS IAM auth token | Deployed on AWS |
+| `azure_entra` | Azure Managed Identity token via MS Entra ID | Deployed on Azure |
+
+**Local development** (default): Leave `DB_AUTH_METHOD` unset in your `.env`. The app uses `DB_PASSWORD` directly — no further configuration needed.
+
+**AWS (RDS IAM)**: Set the following in your `.env`:
+```
+DB_AUTH_METHOD=aws_iam
+```
+
+**Azure (Entra ID)**: Set the following in your `.env`:
+```
+DB_AUTH_METHOD=azure_entra
+AZURE_DB_RESOURCE_URI=https://ossrdbms-aad.database.windows.net
+```
+
+`AZURE_DB_RESOURCE_URI` is the audience URI used when requesting an access token from MS Entra ID. For Azure Database for PostgreSQL Flexible Server the value is `https://ossrdbms-aad.database.windows.net`. Consult the Azure documentation if using a different database service.
 
 #### IDE tips
 
