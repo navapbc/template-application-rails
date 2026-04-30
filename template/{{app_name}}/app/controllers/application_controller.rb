@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index
 
   # Make sure templates in app/views/overrides are used if present
-  @@view_overrides = ActionView::FileSystemResolver.new(Rails.root.join("app/views/overrides"))
-  prepend_view_path @@view_overrides
+  prepend_view_path ActionView::FileSystemResolver.new(Rails.root.join("app/views/overrides"))
 
   # Set the active locale based on the URL
   # For example, if the URL starts with /es-US, the locale will be set to :es-US
