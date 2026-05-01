@@ -1,0 +1,61 @@
+name: Template Smoke Test
+
+on:
+  pull_request:
+    paths:
+      - "template/**"
+      - "copier.yml"
+      - ".github/workflows/template-smoke-test.yml"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  smoke-test:
+    name: Apply template + lint + test
+    runs-on: ubuntu-latest
+    env:
+      APP_NAME: testapp
+    steps:
+      - name: Checkout template repo
+        uses: actions/checkout@v6
+
+      - name: Set work directory
+        run: echo "WORK_DIR=$RUNNER_TEMP/generated" >> "$GITHUB_ENV"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install nava-platform CLI
+        run: pipx install --python "$(which python)" git+https://github.com/navapbc/platform-cli
+
+      - name: Create output directory
+        run: mkdir -p "${WORK_DIR}"
+
+      - name: Apply template
+        working-directory: ${{ env.WORK_DIR }}
+        run: |
+          nava-platform app install \
+            --template-uri "${{ github.server_url }}/${{ github.repository }}" \
+            --version "${{ github.head_ref || github.ref_name }}" \
+            --data app_local_port=3000 \
+            --data app_name="${APP_NAME}" \
+            . "${APP_NAME}"
+
+      - name: Build + init container
+        working-directory: ${{ env.WORK_DIR }}/${{ env.APP_NAME }}
+        run: make init-container
+
+      - name: Precompile assets
+        working-directory: ${{ env.WORK_DIR }}/${{ env.APP_NAME }}
+        run: make precompile-assets
+
+      - name: Lint
+        working-directory: ${{ env.WORK_DIR }}/${{ env.APP_NAME }}
+        run: make lint-ci
+
+      - name: Test
+        working-directory: ${{ env.WORK_DIR }}/${{ env.APP_NAME }}
+        run: make test
