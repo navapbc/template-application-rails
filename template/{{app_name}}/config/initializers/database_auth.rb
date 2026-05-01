@@ -23,16 +23,15 @@
 
 module DatabaseAuth
   class AzureEntra
-    RESOURCE = ENV.fetch("AZURE_DB_RESOURCE_URI")
-
     def token
+      resource  = ENV.fetch("AZURE_DB_RESOURCE_URI")
       endpoint  = ENV.fetch("IDENTITY_ENDPOINT")
       header    = ENV.fetch("IDENTITY_HEADER")
       client_id = ENV.fetch("AZURE_CLIENT_ID")
 
       uri = URI(endpoint)
       uri.query = URI.encode_www_form(
-        resource:  RESOURCE,
+        resource:  resource,
         client_id: client_id,
         "api-version" => "2019-08-01"
       )
