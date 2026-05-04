@@ -50,10 +50,8 @@ module DatabaseAuth
 
   class AwsIAM
     def token
-      require "pg-aws_rds_iam"
-      require "aws-sdk-rds"
       generator = Aws::RDS::AuthTokenGenerator.new(
-        credentials: Aws::InstanceProfileCredentials.new
+        credentials: Aws::CredentialProviderChain.new.resolve
       )
       generator.auth_token(
         region:   ENV.fetch("AWS_REGION"),
