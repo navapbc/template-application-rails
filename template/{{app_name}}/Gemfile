@@ -16,6 +16,9 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
+# Terminate requests that run longer than the load balancer timeout
+gem "rack-timeout"
+
 # Support Sass stylesheets
 gem "cssbundling-rails", "~> 1.4"
 
