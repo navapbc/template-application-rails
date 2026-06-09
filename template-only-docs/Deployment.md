@@ -29,7 +29,7 @@ While following the [infrastructure template installation instructions](https://
           "/rails/tmp"
         ]
         ```
-1. In `/infra/<APP_NAME>/app-config/env-config/environment-variables.tf`:
+1. In `/infra/<APP_NAME>/app-config/env-config/environment_variables.tf`:
     1. Add an entry to `secrets`:
     ```terraform
     SECRET_KEY_BASE = {
