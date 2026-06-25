@@ -1,0 +1,11 @@
+# in general for all Strata templates
+* @navapbc/strata-foundations
+
+# but the Ruby/Rails code itself is lead by a diffent group...
+template/{{app_name}}/ @navapbc/strata-components
+template/docs/{{app_name}}/ @navapbc/strata-components
+
+# ...except for things that relate to requirements of being a "Strata template"
+template/{{app_name}}/Dockerfile @navapbc/strata-foundations
+template/{{app_name}}/docker-compose* @navapbc/strata-foundations
+template/{{app_name}}/Makefile.jinja @navapbc/strata-foundations
