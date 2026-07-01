@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
   describe "access_token_expires_within_minutes?" do
     let(:user) { build(:user) }
     let(:access_token) {
-      JWT.encode({ exp: 5.minutes.from_now.to_i }, nil)
+      JWT.encode({ exp: 5.minutes.from_now.to_i }, nil, "none")
     }
 
     it "returns true if the access token expires within the designated minutes" do
