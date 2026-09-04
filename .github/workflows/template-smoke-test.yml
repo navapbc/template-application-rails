@@ -18,7 +18,7 @@ jobs:
       APP_NAME: testapp
     steps:
       - name: Checkout template repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set work directory
         run: echo "WORK_DIR=$RUNNER_TEMP/generated" >> "$GITHUB_ENV"
